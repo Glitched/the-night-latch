@@ -48,48 +48,61 @@ const drinks = [
 
 <Layout title="The Night Latch.">
   <main>
-    <h1>The Night Latch.</h1>
-    <ul role="list" class="drinks-grid">
-      {
-        drinks.map((drink) => (
-          <Drink title={drink.title} ingredients={drink.ingredients} />
-        ))
-      }
-    </ul>
-  </main>
-</Layout>
+    <nav>
+      <h1>The Night Latch.</h1>
+      <img src="/drink.svg" id="logo" alt="An illustration of a martini." />
+    </nav>
 
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: hsl(var(--foreground));
-    font-size: 20px;
-    line-height: 1.6;
-  }
-
-  h1 {
-    font-size: 4rem;
-    width: 250px;
-    color: hsl(var(--foreground));
-    line-height: 1;
-    font-weight: 100;
-    margin-bottom: 1em;
-    user-select: none;
-  }
-
-  .drinks-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-
-  @media (max-width: 600px) {
-    .drinks-grid {
-      grid-template-columns: 1fr;
+    {
+      drinks.map((drink) => (
+        <Drink title={drink.title} ingredients={drink.ingredients} />
+      ))
     }
-  }
-</style>
+  </main>
+
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    html.dark #logo {
+      filter: invert(1);
+    }
+
+    main {
+      margin: auto;
+      padding: 1rem;
+      width: 800px;
+      max-width: calc(100% - 2rem);
+      color: hsl(var(--foreground));
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 4rem;
+      width: 250px;
+      color: hsl(var(--foreground));
+      line-height: 1;
+      font-weight: 100;
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+      user-select: none;
+    }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(24ch, 1fr));
+      gap: 2rem;
+      padding: 0;
+    }
+
+    @media (max-width: 600px) {
+      .drinks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>
