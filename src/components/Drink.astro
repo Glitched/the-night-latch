@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  ingredients: string[];
+}
+
+const { title, ingredients } = Astro.props;
+---
+
+<li class="drink">
+  <h2>
+    {title}
+  </h2>
+  <p>
+    {ingredients.join(", ")}
+  </p>
+</li>
+<style>
+  .drink {
+    list-style: none;
+    padding: 1px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: hsl(var(--muted-foreground));
+  }
+</style>
