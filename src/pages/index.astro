@@ -53,11 +53,13 @@ const drinks = [
       <img src="/drink.svg" id="logo" alt="An illustration of a martini." />
     </nav>
 
-    {
-      drinks.map((drink) => (
-        <Drink title={drink.title} ingredients={drink.ingredients} />
-      ))
-    }
+    <section class="drinks">
+      {
+        drinks.map((drink) => (
+          <Drink title={drink.title} ingredients={drink.ingredients} />
+        ))
+      }
+    </section>
   </main>
 
   <style>
@@ -92,7 +94,7 @@ const drinks = [
       user-select: none;
     }
 
-    .drinks-grid {
+    .drinks {
       display: grid;
       grid-template-columns: repeat(2, minmax(24ch, 1fr));
       gap: 2rem;
