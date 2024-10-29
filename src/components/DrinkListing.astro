@@ -1,18 +1,17 @@
 ---
+import type { Drink } from "../types/drinks";
+
 interface Props {
-  title: string;
-  ingredients: string[];
+  drink: Drink;
 }
 
-const { title, ingredients } = Astro.props;
+const { drink } = Astro.props;
 ---
 
 <li class="drink">
-  <h2>
-    {title}
-  </h2>
+  <h2>{drink.title}</h2>
   <p>
-    {ingredients.join(", ")}
+    {drink.ingredients.map((d) => d.name).join(", ")}
   </p>
 </li>
 <style>

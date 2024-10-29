@@ -1,73 +1,8 @@
 ---
 import "@/styles/globals.css";
-import Drink from "../components/Drink.astro";
+import DrinkListing from "../components/DrinkListing.astro";
 import Layout from "../layouts/Layout.astro";
-const drinks = [
-  {
-    title: "Whisky Sour",
-    ingredients: ["Whisky", "Lemon Juice", "Egg White", "Sugar", "Bitters"],
-  },
-  {
-    title: "Negroni",
-    ingredients: ["Gin", "Campari", "Sweet Vermouth"],
-  },
-  {
-    title: "Manhattan",
-    ingredients: ["Rye", "Sweet Vermouth", "Bitters"],
-  },
-  {
-    title: "Old Fashioned",
-    ingredients: ["Whisky", "Simple Syrup", "Angostura Bitters"],
-  },
-  {
-    title: "Squeaky Wheel",
-    ingredients: ["Mezcal", "Coffee Liqueur", "Campari", "Amaretto"],
-  },
-  {
-    title: "Margarita",
-    ingredients: ["Tequila", "Lime", "Triple Sec"],
-  },
-  {
-    title: "Daiquiri",
-    ingredients: ["White Rum", "Lime", "Simple Syrup"],
-  },
-  {
-    title: "Mojito",
-    ingredients: ["White Rum", "Lime", "Mint", "Simple Syrup", "Angostura"],
-  },
-  {
-    title: "Elder Fashioned",
-    ingredients: ["Gin", "St. Germain", "Orange Bitters"],
-  },
-  {
-    title: "Tom Collins",
-    ingredients: ["Gin", "Lemon Juice", "Simple Syrup", "Soda"],
-  },
-  {
-    title: "Boulevardier",
-    ingredients: ["Whisky", "Campari", "Sweet Vermouth"],
-  },
-  {
-    title: "Fancy Free",
-    ingredients: ["Rye", "Luxardo Liqueur", "Angostura", "Orange Bitters"],
-  },
-  {
-    title: "Aviation",
-    ingredients: ["Gin", "Lemon", "Luxardo Liqueur", "Creme de Violette"],
-  },
-  {
-    title: "Fitzgerald",
-    ingredients: ["Gin", "Lemon", "Simple Syrup", "Angostura"],
-  },
-  {
-    title: "Last Word",
-    ingredients: ["Gin", "Green Chartreuse", "Luxardo Liqueur", "Lime"],
-  },
-  {
-    title: "Final Ward",
-    ingredients: ["Rye", "Lemon", "Green Chartreuse", "Luxardo Liqueur"],
-  },
-];
+import { menu } from "../menu";
 ---
 
 <Layout title="The Night Latch.">
@@ -81,11 +16,7 @@ const drinks = [
     </nav>
 
     <section class="drinks">
-      {
-        drinks.map((drink) => (
-          <Drink title={drink.title} ingredients={drink.ingredients} />
-        ))
-      }
+      {menu.map((drink) => <DrinkListing drink={drink} />)}
     </section>
     <footer>
       <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
