@@ -11,7 +11,7 @@ const { drink } = Astro.props;
 <li class="drink">
   <h2>{drink.title}</h2>
   <p>
-    {drink.ingredients.map((d) => d.name).join(", ")}
+    {drink.ingredients.map((d) => d.ingredient.name).join(", ")}
   </p>
 </li>
 <style>
