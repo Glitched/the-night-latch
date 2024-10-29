@@ -1,6 +1,6 @@
 ---
 import "@/styles/globals.css";
-import DrinkListing from "../components/DrinkListing.astro";
+import DrinkListing from "../components/DrinkListing";
 import Layout from "../layouts/Layout.astro";
 import { menu } from "../menu";
 ---
@@ -14,9 +14,8 @@ import { menu } from "../menu";
       <h1>The Night Latch.</h1>
       <img src="/drink.svg" id="logo" alt="An illustration of a martini." />
     </nav>
-
     <section class="drinks">
-      {menu.map((drink) => <DrinkListing drink={drink} />)}
+      {menu.map((drink) => <DrinkListing client:load drink={drink} />)}
     </section>
     <footer>
       <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
