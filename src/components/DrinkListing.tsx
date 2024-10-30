@@ -19,7 +19,7 @@ const DrinkListing = ({ drink }: { drink: Drink }) => (
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{drink.title}</DialogTitle>
+          <DialogTitle className="mb-1">{drink.title}</DialogTitle>
           <DialogDescription className="font-sans">
             {drink.instructions}
             <ul className="list-disc list-inside text-foreground mt-4 font-sans">
