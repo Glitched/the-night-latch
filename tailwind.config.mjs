@@ -51,6 +51,10 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      fontFamily: {
+        sans: ["Quattrocento Sans", "sans-serif"],
+        serif: ["Goudy Bookletter 1911", "serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -13,16 +13,16 @@ const DrinkListing = ({ drink }: { drink: Drink }) => (
     <Dialog>
       <DialogTrigger className="text-left">
         <h2 className="m-0 text-xl font-bold tracking-wide">{drink.title}</h2>
-        <p className="mt-2 mb-0 text-base text-muted-foreground font-light">
+        <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans">
           {drink.ingredients.map((d) => d.ingredient.name).join(", ")}
         </p>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{drink.title}</DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="font-sans">
             {drink.instructions}
-            <ul className="list-disc list-inside text-foreground mt-4">
+            <ul className="list-disc list-inside text-foreground mt-4 font-sans">
               {drink.ingredients.map((d) => (
                 <li key={d.ingredient.name}>
                   {d.ingredient.name}
