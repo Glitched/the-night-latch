@@ -31,7 +31,7 @@ export const menu: Drink[] = [
     ingredients: [
       { ingredient: Ingredient.RittenhouseRye, amount: "1 1/2 oz" },
       { ingredient: Ingredient.Campari, amount: "3/4 oz" },
-      { ingredient: Ingredient.Dolin, amount: "3/4 oz" },
+      { ingredient: Ingredient.DolinDry, amount: "3/4 oz" },
     ],
   },
   {
@@ -66,13 +66,22 @@ export const menu: Drink[] = [
     ],
   },
   {
-    title: "Martini",
+    title: "Gin Martini",
     instructions:
-      "Stir all the ingredients over ice, then strain into a martini glass. Garnish with the lemon twist.",
+      "Stir all the ingredients over ice, then strain into a martini glass. Garnish with a lemon twist.",
     ingredients: [
-      { ingredient: Ingredient.PlymouthGin, amount: "2 1/2 oz" },
-      { ingredient: Ingredient.Dolin, amount: "3/4 oz" },
+      { ingredient: Ingredient.PlymouthGin, amount: "2 oz" },
+      { ingredient: Ingredient.DolinDry, amount: "1 oz" },
       { ingredient: Ingredient.RegansOrangeBitters, amount: "1 dash" },
+    ],
+  },
+  {
+    title: "Vodka Martini",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a martini glass. Garnish with an olive.",
+    ingredients: [
+      { ingredient: Ingredient.TitosVodka, amount: "2 1/2 oz" },
+      { ingredient: Ingredient.DolinDry, amount: "1/2 oz" },
     ],
   },
   {

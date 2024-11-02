@@ -72,5 +72,5 @@ export const Ingredient = {
     type: IngredientType.SweetVermouth,
   },
   Soda: { name: "Soda", type: IngredientType.Soda },
-  Dolin: { name: "Dolin", type: IngredientType.DryVermouth },
+  DolinDry: { name: "Dolin Dry", type: IngredientType.DryVermouth },
 };
