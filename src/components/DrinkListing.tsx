@@ -19,8 +19,8 @@ const DrinkListing = ({ drink }: { drink: Drink }) => (
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-1">{drink.title}</DialogTitle>
-          <DialogDescription className="font-sans">
+          <DialogTitle>{drink.title}</DialogTitle>
+          <DialogDescription>
             {drink.instructions}
             <ul className="list-disc list-inside text-foreground mt-4 font-sans">
               {drink.ingredients.map((d) => (

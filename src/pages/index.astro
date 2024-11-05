@@ -1,8 +1,7 @@
 ---
 import "@/styles/globals.css";
-import DrinkListing from "../components/DrinkListing";
+import Menu from "../components/Menu";
 import Layout from "../layouts/Layout.astro";
-import { menu } from "../menu";
 ---
 
 <Layout title="The Night Latch.">
@@ -14,9 +13,7 @@ import { menu } from "../menu";
       <h1>The Night Latch.</h1>
       <img src="/drink.svg" id="logo" alt="An illustration of a martini." />
     </nav>
-    <section class="drinks">
-      {menu.map((drink) => <DrinkListing client:load drink={drink} />)}
-    </section>
+    <Menu client:load />
     <footer>
       <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
     </footer>
@@ -106,23 +103,10 @@ import { menu } from "../menu";
       user-select: none;
     }
 
-    .drinks {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(24ch, 1fr));
-      gap: 2rem;
-      padding: 0;
-    }
-
     footer {
       margin-top: 4rem;
       text-align: center;
       color: hsl(var(--muted-foreground));
-    }
-
-    @media (max-width: 600px) {
-      .drinks {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </Layout>
