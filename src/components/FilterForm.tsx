@@ -20,7 +20,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { DialogClose } from "./ui/dialog";
-import { DrawerClose, DrawerFooter } from "./ui/drawer";
 
 const formSchema = z.object({
   baseSpirit: z.string(),
@@ -31,11 +30,9 @@ export function FilterForm({
   className,
   setBaseSpirit,
   setRequiredIngredient,
-  isDrawer,
 }: React.ComponentProps<"form"> & {
   setBaseSpirit: (baseSpirit: IngredientType | null) => void;
   setRequiredIngredient: (ingredient: IngredientEntry | null) => void;
-  isDrawer?: boolean;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,25 +55,6 @@ export function FilterForm({
     setRequiredIngredient(null);
   };
 
-  const filterBtn = <Button type="submit">Filter</Button>;
-  const wrappedFilterBtn = isDrawer ? (
-    <DrawerClose asChild>{filterBtn}</DrawerClose>
-  ) : (
-    <DialogClose asChild>{filterBtn}</DialogClose>
-  );
-
-  const clearBtn = (
-    <Button variant="outline" onClick={onClear}>
-      Clear
-    </Button>
-  );
-  const wrappedClearBtn = isDrawer ? (
-    <DrawerFooter className="pt-2">
-      <DrawerClose asChild>{clearBtn}</DrawerClose>
-    </DrawerFooter>
-  ) : (
-    <DialogClose asChild>{clearBtn}</DialogClose>
-  );
   return (
     <Form {...form}>
       <form
@@ -124,8 +102,14 @@ export function FilterForm({
             </SelectContent>
           </Select>
         </div>
-        {wrappedFilterBtn}
-        {wrappedClearBtn}
+        <DialogClose asChild>
+          <Button type="submit">Filter</Button>
+        </DialogClose>
+        <DialogClose asChild>
+          <Button variant="outline" onClick={onClear}>
+            Clear
+          </Button>
+        </DialogClose>
       </form>
     </Form>
   );
