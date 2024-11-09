@@ -5,6 +5,7 @@ export type IngredientEntry = {
 };
 
 export const BaseSpirit = [
+  IngredientType.All,
   IngredientType.Whiskey,
   IngredientType.Gin,
   IngredientType.Tequila,
@@ -12,4 +13,13 @@ export const BaseSpirit = [
   IngredientType.WhiteRum,
   IngredientType.Mezcal,
   IngredientType.Vodka,
+];
+
+export const WhiskyTypes = [
+  IngredientType.Whiskey,
+  IngredientType.Bourbon,
+  IngredientType.Rye,
+  IngredientType.Scotch,
+  IngredientType.IrishWhiskey,
+  IngredientType.JapaneseWhisky,
 ];

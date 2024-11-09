@@ -11,10 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -23,6 +21,7 @@ import {
 import { useMediaQuery } from "@/hooks/use-media-query";
 import type { IngredientEntry } from "@/types/ingredient";
 import { IngredientType } from "@/types/ingredientType";
+import { Funnel } from "@phosphor-icons/react";
 import { FilterForm } from "./FilterForm";
 
 export function FilterModal({
@@ -35,7 +34,15 @@ export function FilterModal({
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const btn = <Button variant="ghost">Filter</Button>;
+  const btn = (
+    <Button
+      variant="ghost"
+      className="font-serif text-xl w-full mb-8 text-muted-foreground"
+    >
+      <Funnel size={32} />
+      Filter Drinks
+    </Button>
+  );
   const title = "Filter Menu";
   const description = "Select a base spirit or ingredient to filter the menu.";
   if (isDesktop) {
@@ -65,15 +72,11 @@ export function FilterModal({
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
         <FilterForm
+          isDrawer
           className="px-4"
           setBaseSpirit={setBaseSpirit}
           setRequiredIngredient={setRequiredIngredient}
         />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Clear</Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

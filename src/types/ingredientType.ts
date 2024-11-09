@@ -1,4 +1,7 @@
 export enum IngredientType {
+  // Pseudo-ingredient for filters
+  All = "All",
+
   Whiskey = "Whiskey",
   Gin = "Gin",
   Tequila = "Tequila",
@@ -34,4 +37,7 @@ export enum IngredientType {
   OrangeBitters = "Orange Bitters",
   JapaneseWhisky = "Japanese Whisky",
   Scotch = "Scotch",
+  Bourbon = "Bourbon",
+  IrishWhiskey = "Irish Whiskey",
+  DemeraraSyrup = "Demerara Syrup",
 }

@@ -50,7 +50,7 @@ export const menu: Drink[] = [
       "Stir all the ingredients over ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the orange and lemon twists.",
     ingredients: [
       { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
-      { ingredient: Ingredient.SimpleSyrup },
+      { ingredient: Ingredient.DemeraraSyrup, amount: "1/8 oz" },
       { ingredient: Ingredient.AngosturaBitters },
     ],
   },

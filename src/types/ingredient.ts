@@ -34,7 +34,7 @@ export const Ingredient = {
   PussersRum: { name: "Pusser's Rum", type: IngredientType.DarkRum },
   Plantation3StarRum: {
     name: "Plantation 3 Star Rum",
-    type: IngredientType.DarkRum,
+    type: IngredientType.WhiteRum,
   },
   Disaronno: { name: "Disaronno", type: IngredientType.Amaretto },
   AngosturaBitters: {
@@ -73,4 +73,12 @@ export const Ingredient = {
   },
   Soda: { name: "Soda", type: IngredientType.Soda },
   DolinDry: { name: "Dolin Dry", type: IngredientType.DryVermouth },
+  DemeraraSyrup: {
+    name: "Demerara Syrup",
+    type: IngredientType.DemeraraSyrup,
+  },
+  ElijahCraig: {
+    name: "Elijah Craig",
+    type: IngredientType.Bourbon,
+  },
 };
