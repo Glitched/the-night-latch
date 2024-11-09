@@ -3,7 +3,6 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 
 import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -13,17 +12,17 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { BaseSpirit } from "@/types/baseSpirit";
-import { type IngredientEntry } from "@/types/ingredient";
 import { IngredientType } from "@/types/ingredientType";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { IngredientComboBox } from "./IngredientCombobox";
 import { DialogClose } from "./ui/dialog";
 
 const formSchema = z.object({
   baseSpirit: z.string(),
-  ingredient: z.string(),
+  ingredient: z.string().or(z.null()),
 });
 
 export function FilterForm({
@@ -32,22 +31,20 @@ export function FilterForm({
   setRequiredIngredient,
 }: React.ComponentProps<"form"> & {
   setBaseSpirit: (baseSpirit: IngredientType | null) => void;
-  setRequiredIngredient: (ingredient: IngredientEntry | null) => void;
+  setRequiredIngredient: (ingredient: string | null) => void;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       baseSpirit: IngredientType.All,
-      ingredient: "None",
+      ingredient: null,
     },
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log(data);
     setBaseSpirit(data.baseSpirit as IngredientType);
-    // setRequiredIngredient(
-    //   Ingredient.find((entry) => entry.name === data.ingredient) || null
-    // );
+    setRequiredIngredient(data.ingredient);
   };
 
   const onClear = () => {
@@ -90,17 +87,19 @@ export function FilterForm({
           />
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="ingredient">Ingredient</Label>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Ingredient" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
+          <FormField
+            control={form.control}
+            name="ingredient"
+            render={({ field }) => (
+              <>
+                <FormLabel htmlFor="ingredient">Ingredient</FormLabel>
+                <IngredientComboBox
+                  onChange={field.onChange}
+                  value={field.value}
+                />
+              </>
+            )}
+          />
         </div>
         <DialogClose asChild>
           <Button type="submit">Filter</Button>

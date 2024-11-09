@@ -1,6 +1,5 @@
 import { menu } from "@/menu";
 import { WhiskyTypes } from "@/types/baseSpirit";
-import type { IngredientEntry } from "@/types/ingredient";
 import { IngredientType } from "@/types/ingredientType";
 import { useState } from "react";
 import DrinkListing from "./DrinkListing";
@@ -8,8 +7,9 @@ import { FilterModal } from "./FilterModal";
 
 const Menu = () => {
   const [baseSpirit, setBaseSpirit] = useState<IngredientType | null>(null);
-  const [requiredIngredient, setRequiredIngredient] =
-    useState<IngredientEntry | null>(null);
+  const [requiredIngredient, setRequiredIngredient] = useState<string | null>(
+    null
+  );
   return (
     <section>
       <FilterModal
@@ -37,7 +37,7 @@ const Menu = () => {
           .filter((drink) => {
             if (!requiredIngredient) return true;
             return drink.ingredients.some(
-              (i) => i.ingredient.name === requiredIngredient.name
+              (i) => i.ingredient.name === requiredIngredient
             );
           })
           .map((drink) => (

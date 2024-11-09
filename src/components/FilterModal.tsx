@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/drawer";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import type { IngredientEntry } from "@/types/ingredient";
 import { IngredientType } from "@/types/ingredientType";
 import { Funnel } from "@phosphor-icons/react";
 import { FilterForm } from "./FilterForm";
@@ -29,7 +28,7 @@ export function FilterModal({
   setRequiredIngredient,
 }: {
   setBaseSpirit: (baseSpirit: IngredientType | null) => void;
-  setRequiredIngredient: (ingredient: IngredientEntry | null) => void;
+  setRequiredIngredient: (ingredient: string | null) => void;
 }) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -72,7 +71,6 @@ export function FilterModal({
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
         <FilterForm
-          isDrawer
           className="px-4"
           setBaseSpirit={setBaseSpirit}
           setRequiredIngredient={setRequiredIngredient}
