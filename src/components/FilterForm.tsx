@@ -28,21 +28,24 @@ const formSchema = z.object({
 export function FilterForm({
   className,
   setBaseSpirit,
+  baseSpirit,
   setRequiredIngredient,
+  requiredIngredient,
 }: React.ComponentProps<"form"> & {
   setBaseSpirit: (baseSpirit: IngredientType | null) => void;
+  baseSpirit: IngredientType | null;
   setRequiredIngredient: (ingredient: string | null) => void;
+  requiredIngredient: string | null;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      baseSpirit: IngredientType.All,
-      ingredient: null,
+      baseSpirit: baseSpirit ?? IngredientType.All,
+      ingredient: requiredIngredient,
     },
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
     setBaseSpirit(data.baseSpirit as IngredientType);
     setRequiredIngredient(data.ingredient);
   };
@@ -52,6 +55,7 @@ export function FilterForm({
     setRequiredIngredient(null);
   };
 
+  console.log(requiredIngredient);
   return (
     <Form {...form}>
       <form

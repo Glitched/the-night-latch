@@ -14,7 +14,9 @@ const Menu = () => {
     <section>
       <FilterModal
         setBaseSpirit={setBaseSpirit}
+        baseSpirit={baseSpirit}
         setRequiredIngredient={setRequiredIngredient}
+        requiredIngredient={requiredIngredient}
       />
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
         {menu

@@ -25,10 +25,14 @@ import { FilterForm } from "./FilterForm";
 
 export function FilterModal({
   setBaseSpirit,
+  baseSpirit,
   setRequiredIngredient,
+  requiredIngredient,
 }: {
   setBaseSpirit: (baseSpirit: IngredientType | null) => void;
+  baseSpirit: IngredientType | null;
   setRequiredIngredient: (ingredient: string | null) => void;
+  requiredIngredient: string | null;
 }) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -55,7 +59,9 @@ export function FilterModal({
           </DialogHeader>
           <FilterForm
             setBaseSpirit={setBaseSpirit}
+            baseSpirit={baseSpirit}
             setRequiredIngredient={setRequiredIngredient}
+            requiredIngredient={requiredIngredient}
           />
         </DialogContent>
       </Dialog>
@@ -73,7 +79,9 @@ export function FilterModal({
         <FilterForm
           className="px-4"
           setBaseSpirit={setBaseSpirit}
+          baseSpirit={baseSpirit}
           setRequiredIngredient={setRequiredIngredient}
+          requiredIngredient={requiredIngredient}
         />
       </DrawerContent>
     </Drawer>
