@@ -9,11 +9,11 @@ import {
 } from "./ui/dialog";
 
 const DrinkListing = ({ drink }: { drink: Drink }) => (
-  <li className="list-none">
+  <li className="list-none group">
     <Dialog>
       <DialogTrigger className="text-left">
         <h2 className="m-0 text-xl font-bold tracking-wide">{drink.title}</h2>
-        <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans">
+        <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans group-hover:text-foreground">
           {drink.ingredients.map((d) => d.ingredient.name).join(", ")}
         </p>
       </DialogTrigger>
