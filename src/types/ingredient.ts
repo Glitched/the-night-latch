@@ -179,7 +179,7 @@ const YellowChartreuse = registerIngredient({
 });
 
 // Syrup
-const Syrup = registerIngredient({ name: "Syrup", parent: Liquid });
+const Syrup = registerIngredient({ name: "Syrup" });
 const SimpleSyrup = registerIngredient({ name: "Simple Syrup", parent: Syrup });
 const DemeraraSyrup = registerIngredient({
   name: "Demerara Syrup",
@@ -187,11 +187,11 @@ const DemeraraSyrup = registerIngredient({
 });
 
 // ETC
-const Soda = registerIngredient({ name: "Soda", parent: Liquid });
+const Soda = registerIngredient({ name: "Soda" });
 const EggWhite = registerIngredient({ name: "Egg White" });
 
 // Vermouth
-const Vermouth = registerIngredient({ name: "Vermouth", parent: Liquid });
+const Vermouth = registerIngredient({ name: "Vermouth" });
 const SweetVermouth = registerIngredient({
   name: "Sweet Vermouth",
   parent: Vermouth,
