@@ -1,5 +1,5 @@
 import type { Drink } from "./types/drinks";
-import { Ingredient } from "./types/ingredient";
+import * as Ingredient from "./types/ingredient";
 
 export const menu: Drink[] = [
   {
@@ -80,7 +80,7 @@ export const menu: Drink[] = [
     instructions:
       "Stir all the ingredients over ice, then strain into a martini glass. Garnish with an olive.",
     ingredients: [
-      { ingredient: Ingredient.TitosVodka, amount: "2 1/2 oz" },
+      { ingredient: Ingredient.Titos, amount: "2 1/2 oz" },
       { ingredient: Ingredient.DolinDry, amount: "1/2 oz" },
     ],
   },
@@ -89,7 +89,7 @@ export const menu: Drink[] = [
     instructions:
       "Rim half of a double rocks glass with salt. Shake all the ingredients with ice, then strain into the rimmed glass over ice cubes. Garnish with the lime wedge.",
     ingredients: [
-      { ingredient: Ingredient.AltosTequila, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Altos, amount: "1 1/2 oz" },
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
       { ingredient: Ingredient.Cointreau, amount: "1/2 oz" },
       { ingredient: Ingredient.SimpleSyrup },

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
+import type { Ingredient } from "@/types/ingredient";
 
 import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form";
 import {
@@ -11,8 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { BaseSpirit } from "@/types/baseSpirit";
-import { IngredientType } from "@/types/ingredientType";
+import { baseSpirits, getByName } from "@/types/ingredient";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,26 +32,26 @@ export function FilterForm({
   setRequiredIngredient,
   requiredIngredient,
 }: React.ComponentProps<"form"> & {
-  setBaseSpirit: (baseSpirit: IngredientType | null) => void;
-  baseSpirit: IngredientType | null;
+  setBaseSpirit: (baseSpirit: Ingredient | null) => void;
+  baseSpirit: Ingredient | null;
   setRequiredIngredient: (ingredient: string | null) => void;
   requiredIngredient: string | null;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      baseSpirit: baseSpirit ?? IngredientType.All,
+      baseSpirit: baseSpirit?.name ?? "",
       ingredient: requiredIngredient,
     },
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    setBaseSpirit(data.baseSpirit as IngredientType);
+    setBaseSpirit(getByName(data.baseSpirit));
     setRequiredIngredient(data.ingredient);
   };
 
   const onClear = () => {
-    setBaseSpirit(IngredientType.All);
+    setBaseSpirit(null);
     setRequiredIngredient(null);
   };
 
@@ -79,9 +79,9 @@ export function FilterForm({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {BaseSpirit.map((option) => (
-                      <SelectItem value={option} key={option}>
-                        {option}
+                    {baseSpirits.map((option) => (
+                      <SelectItem value={option.name} key={option.name}>
+                        {option.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

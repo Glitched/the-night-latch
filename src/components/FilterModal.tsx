@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/drawer";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { IngredientType } from "@/types/ingredientType";
+import type { Ingredient } from "@/types/ingredient";
 import { Funnel } from "@phosphor-icons/react";
 import { FilterForm } from "./FilterForm";
 
@@ -29,8 +29,8 @@ export function FilterModal({
   setRequiredIngredient,
   requiredIngredient,
 }: {
-  setBaseSpirit: (baseSpirit: IngredientType | null) => void;
-  baseSpirit: IngredientType | null;
+  setBaseSpirit: (baseSpirit: Ingredient | null) => void;
+  baseSpirit: Ingredient | null;
   setRequiredIngredient: (ingredient: string | null) => void;
   requiredIngredient: string | null;
 }) {

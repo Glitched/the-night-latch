@@ -1,12 +1,11 @@
 import { menu } from "@/menu";
-import { WhiskyTypes } from "@/types/baseSpirit";
-import { IngredientType } from "@/types/ingredientType";
+import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
 import { useState } from "react";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
 
 const Menu = () => {
-  const [baseSpirit, setBaseSpirit] = useState<IngredientType | null>(null);
+  const [baseSpirit, setBaseSpirit] = useState<Ingredient | null>(null);
   const [requiredIngredient, setRequiredIngredient] = useState<string | null>(
     null
   );
@@ -21,25 +20,22 @@ const Menu = () => {
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
         {menu
           .filter((drink) => {
-            if (!baseSpirit || baseSpirit === IngredientType.All) {
+            if (!baseSpirit) {
               return true;
             }
 
-            // Show all whisky drinks
-            if (baseSpirit === IngredientType.Whiskey) {
-              return drink.ingredients.some((i) =>
-                WhiskyTypes.includes(i.ingredient.type)
-              );
-            }
-
-            return drink.ingredients.some(
-              (i) => i.ingredient.type === baseSpirit
+            return drink.ingredients.some((i) =>
+              isDescendantOf(i.ingredient, baseSpirit)
             );
           })
           .filter((drink) => {
-            if (!requiredIngredient) return true;
-            return drink.ingredients.some(
-              (i) => i.ingredient.name === requiredIngredient
+            const ingredient = getByName(requiredIngredient ?? "");
+            if (!ingredient) {
+              return true;
+            }
+
+            return drink.ingredients.some((i) =>
+              isDescendantOf(i.ingredient, ingredient)
             );
           })
           .map((drink) => (
