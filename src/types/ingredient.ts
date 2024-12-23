@@ -238,7 +238,6 @@ export {
   Lemon,
   Lime,
   Liqueur,
-  Liquid,
   Liquor,
   LondonDry,
   Luxardo,
