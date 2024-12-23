@@ -3,18 +3,6 @@ import * as Ingredient from "./types/ingredient";
 
 export const menu: Drink[] = [
   {
-    title: "Whisky Sour",
-    instructions:
-      "Dry shake all the ingredients, then shake again with ice. Double strain into a double rocks glass over 1 large ice cube. Add a dash of bitters on top and garnish with the orange and cherry flag.",
-    ingredients: [
-      { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
-      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
-      { ingredient: Ingredient.EggWhite, amount: "1" },
-      { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
-      { ingredient: Ingredient.AngosturaBitters },
-    ],
-  },
-  {
     title: "Negroni",
     instructions:
       "Stir all the ingredients over ice, then strain into a double rocks glass. Garnish with the orange twist.",
@@ -32,6 +20,18 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.RittenhouseRye, amount: "1 1/2 oz" },
       { ingredient: Ingredient.Campari, amount: "3/4 oz" },
       { ingredient: Ingredient.DolinDry, amount: "3/4 oz" },
+    ],
+  },
+  {
+    title: "Whisky Sour",
+    instructions:
+      "Dry shake all the ingredients, then shake again with ice. Double strain into a double rocks glass over 1 large ice cube. Add a dash of bitters on top and garnish with the orange and cherry flag.",
+    ingredients: [
+      { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.EggWhite, amount: "1" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
+      { ingredient: Ingredient.AngosturaBitters },
     ],
   },
   {
@@ -202,6 +202,70 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
       { ingredient: Ingredient.GreenChartreuse, amount: "3/4 oz" },
       { ingredient: Ingredient.Luxardo, amount: "3/4 oz" },
+    ],
+  },
+  {
+    title: "Ferarri",
+    instructions: "Serve in a rocks glass over 1 large ice cube. No garnish.",
+    ingredients: [
+      { ingredient: Ingredient.FernetBranca, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Campari, amount: "1 1/2 oz" },
+    ],
+  },
+  {
+    title: "Aperol Spritz",
+    instructions:
+      "Fill a highball glass with ice, then add the Aperol and soda water. Garnish with the orange slice.",
+    ingredients: [
+      { ingredient: Ingredient.Prosecco, amount: "3 oz" },
+      { ingredient: Ingredient.Aperol, amount: "2 oz" },
+      { ingredient: Ingredient.Soda, amount: "1 oz" },
+    ],
+  },
+  {
+    title: "Paper Plane",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
+    ingredients: [
+      { ingredient: Ingredient.Bourbon, amount: "3/4 oz" },
+      { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
+      { ingredient: Ingredient.AmaroNonino, amount: "3/4 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+    ],
+  },
+  {
+    title: "Espresso Martini",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with three coffee beans.",
+    ingredients: [
+      { ingredient: Ingredient.Titos, amount: "2 oz" },
+      { ingredient: Ingredient.CaffeBorghetti, amount: "1/2 oz" },
+      { ingredient: Ingredient.ColdBrew, amount: "1 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "to taste" },
+    ],
+  },
+  {
+    title: "Black Tie Optional",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with three coffee beans.",
+    ingredients: [
+      { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
+      { ingredient: Ingredient.CaffeBorghetti, amount: "1/2 oz" },
+      { ingredient: Ingredient.ColdBrew, amount: "1 oz" },
+      { ingredient: Ingredient.AmaroNonino, amount: "1/4 oz" },
+      { ingredient: Ingredient.DemeraraSyrup, amount: "1/4 oz" },
+      { ingredient: Ingredient.MoleBitters },
+    ],
+  },
+  {
+    title: "Naked and Famous",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
+    ingredients: [
+      { ingredient: Ingredient.Mezcal, amount: "3/4 oz" },
+      { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
+      { ingredient: Ingredient.YellowChartreuse, amount: "3/4 oz" },
+      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
     ],
   },
 ];

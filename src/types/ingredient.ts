@@ -116,6 +116,7 @@ const Titos = registerIngredient({ name: "Titos Vodka", parent: Vodka });
 
 // Amaro
 const Amaro = registerIngredient({ name: "Amaro", parent: Liqueur });
+const Aperol = registerIngredient({ name: "Aperol", parent: Amaro });
 const Campari = registerIngredient({ name: "Campari", parent: Amaro });
 const FernetBranca = registerIngredient({
   name: "Fernet Branca",
@@ -123,6 +124,10 @@ const FernetBranca = registerIngredient({
 });
 const AmaroMeletti = registerIngredient({
   name: "Amaro Meletti",
+  parent: Amaro,
+});
+const AmaroNonino = registerIngredient({
+  name: "Amaro Nonino",
   parent: Amaro,
 });
 const FourthaveSpirits = registerIngredient({
@@ -168,6 +173,10 @@ const RegansOrangeBitters = registerIngredient({
   name: "Regan's Orange Bitters",
   parent: OrangeBitters,
 });
+const MoleBitters = registerIngredient({
+  name: "Mole Bitters",
+  parent: Bitters,
+});
 
 const GreenChartreuse = registerIngredient({
   name: "Green Chartreuse",
@@ -189,6 +198,7 @@ const DemeraraSyrup = registerIngredient({
 // ETC
 const Soda = registerIngredient({ name: "Soda" });
 const EggWhite = registerIngredient({ name: "Egg White" });
+const ColdBrew = registerIngredient({ name: "Cold Brew" });
 
 // Vermouth
 const Vermouth = registerIngredient({ name: "Vermouth" });
@@ -202,6 +212,12 @@ const CocchiAmericano = registerIngredient({
 });
 const DolinDry = registerIngredient({ name: "Dolin Dry", parent: Vermouth });
 
+// Wine
+const Wine = registerIngredient({ name: "Wine" });
+const WhiteWine = registerIngredient({ name: "White Wine", parent: Wine });
+const RedWine = registerIngredient({ name: "Red Wine", parent: Wine });
+const Prosecco = registerIngredient({ name: "Prosecco", parent: WhiteWine });
+
 export * as Ingredient from "./ingredient";
 
 export {
@@ -209,7 +225,9 @@ export {
   Amaretto,
   Amaro,
   AmaroMeletti,
+  AmaroNonino,
   AngosturaBitters,
+  Aperol,
   Bitters,
   Bourbon,
   CaffeBorghetti,
@@ -217,6 +235,7 @@ export {
   Citrus,
   CocchiAmericano,
   Cointreau,
+  ColdBrew,
   CremeDeCassis,
   CremeDeViolette,
   DarkRum,
@@ -243,6 +262,7 @@ export {
   Luxardo,
   Mezcal,
   Mint,
+  MoleBitters,
   MonkeyShoulder,
   OldTom,
   Orange,
@@ -250,7 +270,9 @@ export {
   PeychaudsBitters,
   Plantation3StarRum,
   PlymouthGin,
+  Prosecco,
   PussersRum,
+  RedWine,
   RegansOrangeBitters,
   RittenhouseRye,
   Rosemary,
@@ -273,6 +295,8 @@ export {
   Vodka,
   Whisky,
   WhiteRum,
+  WhiteWine,
+  Wine,
   YellowChartreuse,
   allIngredients,
   baseSpirits,
