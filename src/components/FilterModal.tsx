@@ -40,7 +40,7 @@ export function FilterModal({
   const btn = (
     <Button
       variant="ghost"
-      className="font-serif text-xl w-full mb-16 text-muted-foreground"
+      className="font-serif text-xl w-full mb-16 text-muted-foreground print:hidden"
     >
       <Funnel size={32} />
       Filter Drinks

@@ -11,10 +11,15 @@ import Layout from "../layouts/Layout.astro";
   <main>
     <nav>
       <h1>The Night Latch.</h1>
-      <img src="/drink.svg" id="logo" alt="An illustration of a martini." />
+      <img
+        src="/drink.svg"
+        id="logo"
+        alt="An illustration of a martini."
+        class="pr-4"
+      />
     </nav>
     <Menu client:load />
-    <footer>
+    <footer class="print:hidden">
       <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
     </footer>
   </main>
