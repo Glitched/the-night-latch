@@ -45,9 +45,8 @@ const Mint = registerIngredient({ name: "Mint", parent: Herb });
 const Rosemary = registerIngredient({ name: "Rosemary", parent: Herb });
 const Thyme = registerIngredient({ name: "Thyme", parent: Herb });
 
-const Liquid = registerIngredient({ name: "Liquid" });
-const Liquor = registerIngredient({ name: "Liquor", parent: Liquid });
-const Liqueur = registerIngredient({ name: "Liqueur", parent: Liquid });
+const Liquor = registerIngredient({ name: "Liquor" });
+const Liqueur = registerIngredient({ name: "Liqueur" });
 
 // Whisky
 const Whisky = registerIngredient({ name: "Whisky", parent: Liquor });

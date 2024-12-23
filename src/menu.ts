@@ -205,3 +205,12 @@ export const menu: Drink[] = [
     ],
   },
 ];
+
+export const ingredientsInAllDrinks = Ingredient.allIngredients.filter(
+  (ingredient) =>
+    menu.some((drink) =>
+      drink.ingredients.some((i) =>
+        Ingredient.isDescendantOf(i.ingredient, ingredient)
+      )
+    )
+);

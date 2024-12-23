@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { allIngredients } from "@/types/ingredient";
+import { ingredientsInAllDrinks } from "@/menu";
 
 import {
   Command,
@@ -74,7 +74,7 @@ function IngredientList({
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {Object.values(allIngredients).map((ingredient) => (
+          {Object.values(ingredientsInAllDrinks).map((ingredient) => (
             <CommandItem
               key={ingredient.name}
               value={ingredient.name}
