@@ -74,3 +74,13 @@ html,
 body {
   height: 100%;
 }
+
+@media print {
+  * {
+    color: black !important;
+  }
+  img {
+    filter: brightness(0);
+    opacity: 1;
+  }
+}
