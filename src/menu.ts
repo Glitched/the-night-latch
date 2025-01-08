@@ -279,6 +279,17 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Soda },
     ],
   },
+  {
+    title: "Haters got PhDs",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with the lime wedge.",
+    ingredients: [
+      { ingredient: Ingredient.NA },
+      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
+    ],
+  },
 ];
 
 export const ingredientsInAllDrinks = Ingredient.allIngredients.filter(
