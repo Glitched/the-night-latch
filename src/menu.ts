@@ -268,6 +268,17 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
     ],
   },
+  {
+    title: "Pathfinder Spritz",
+    instructions:
+      "Shake the Pathfinder and lemon juice with ice, then strain into a highball glass filled with ice. Top with soda water and garnish with the lemon wedge.",
+    ingredients: [
+      { ingredient: Ingredient.NA },
+      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "1/2 oz" },
+      { ingredient: Ingredient.Soda },
+    ],
+  },
 ];
 
 export const ingredientsInAllDrinks = Ingredient.allIngredients.filter(

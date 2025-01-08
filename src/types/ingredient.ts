@@ -8,7 +8,8 @@ const baseSpirits: Ingredient[] = [];
 
 function registerIngredient(ingredient: Ingredient): Ingredient {
   allIngredients.push(ingredient);
-  if (ingredient.parent && ingredient.parent.name === "Liquor") {
+  const isLiquor = ingredient.parent && ingredient.parent.name === "Liquor";
+  if (isLiquor || ingredient.name === "NA") {
     baseSpirits.push(ingredient);
   }
   return ingredient;
@@ -218,6 +219,10 @@ const WhiteWine = registerIngredient({ name: "White Wine", parent: Wine });
 const RedWine = registerIngredient({ name: "Red Wine", parent: Wine });
 const Prosecco = registerIngredient({ name: "Prosecco", parent: WhiteWine });
 
+// NA
+const NA = registerIngredient({ name: "NA" });
+const Pathfinder = registerIngredient({ name: "Pathfinder", parent: NA });
+
 export * as Ingredient from "./ingredient";
 
 export {
@@ -264,9 +269,11 @@ export {
   Mint,
   MoleBitters,
   MonkeyShoulder,
+  NA,
   OldTom,
   Orange,
   OrangeBitters,
+  Pathfinder,
   PeychaudsBitters,
   Plantation3StarRum,
   PlymouthGin,
