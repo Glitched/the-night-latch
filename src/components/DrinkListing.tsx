@@ -4,7 +4,7 @@ import {
   formatDrinkStrength,
 } from "../utils/drinkStrength";
 import { Wine } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -24,7 +24,7 @@ const DrinkListing = ({
   onOpenChange?: (open: boolean) => void;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
-  const [tapped, setTapped] = useState(false);
+  const isTouchDevice = useRef(false);
   const strength = formatDrinkStrength(drink);
   const dus = calculateDrinkUnits(drink);
 
@@ -58,12 +58,16 @@ const DrinkListing = ({
               {strength && (
                 <p
                   className="mt-4 text-sm text-muted-foreground flex items-center gap-1 cursor-pointer select-none"
-                  onMouseEnter={() => !tapped && setShowDUs(true)}
-                  onMouseLeave={() => !tapped && setShowDUs(false)}
-                  onClick={() => {
-                    setTapped((prev) => !prev);
-                    setShowDUs((prev) => !prev);
+                  onTouchStart={() => {
+                    isTouchDevice.current = true;
                   }}
+                  onMouseEnter={() =>
+                    !isTouchDevice.current && setShowDUs(true)
+                  }
+                  onMouseLeave={() =>
+                    !isTouchDevice.current && setShowDUs(false)
+                  }
+                  onClick={() => setShowDUs((prev) => !prev)}
                 >
                   <Wine size={16} />
                   {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
