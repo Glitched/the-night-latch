@@ -4,15 +4,32 @@ import { Shuffle, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
+import { SearchInput } from "./SearchInput";
 import { Button } from "./ui/button";
+
+// Fuzzy match: checks if all characters in query appear in order in target
+function fuzzyMatch(query: string, target: string): boolean {
+  const q = query.toLowerCase();
+  const t = target.toLowerCase();
+  let qi = 0;
+  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+    if (t[ti] === q[qi]) qi++;
+  }
+  return qi === q.length;
+}
 
 const Menu = () => {
   const [baseSpirit, setBaseSpirit] = useState<Ingredient | null>(null);
   const [requiredIngredient, setRequiredIngredient] = useState<string | null>(
     null
   );
+  const [searchQuery, setSearchQuery] = useState("");
   const [openDrink, setOpenDrink] = useState<string | null>(null);
   const drinks = menu
+    .filter((drink) => {
+      if (!searchQuery) return true;
+      return fuzzyMatch(searchQuery, drink.title);
+    })
     .filter((drink) => {
       if (!baseSpirit) {
         return true;
@@ -33,18 +50,21 @@ const Menu = () => {
       );
     });
 
-  const hasFilters = baseSpirit || requiredIngredient;
+  const hasFilters = baseSpirit || requiredIngredient || searchQuery;
   const totalDrinks = menu.length;
 
   return (
     <section className="flex-grow">
-      <FilterModal
-        setBaseSpirit={setBaseSpirit}
-        baseSpirit={baseSpirit}
-        setRequiredIngredient={setRequiredIngredient}
-        requiredIngredient={requiredIngredient}
-      />
-      {hasFilters && (
+      <div className="flex justify-center items-center gap-4 mb-16 print:hidden">
+        <SearchInput value={searchQuery} onChange={setSearchQuery} />
+        <FilterModal
+          setBaseSpirit={setBaseSpirit}
+          baseSpirit={baseSpirit}
+          setRequiredIngredient={setRequiredIngredient}
+          requiredIngredient={requiredIngredient}
+        />
+      </div>
+      {(baseSpirit || requiredIngredient) && (
         <div className="flex flex-wrap justify-center gap-2 mb-8 -mt-12 print:hidden">
           {baseSpirit && (
             <button
