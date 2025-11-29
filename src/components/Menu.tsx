@@ -83,7 +83,7 @@ const Menu = () => {
               variant="outline"
               onClick={() => {
                 const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
-                setOpenDrink(randomDrink.title);
+                if (randomDrink) setOpenDrink(randomDrink.title);
               }}
             >
               <Shuffle size={18} />

@@ -18,7 +18,7 @@ const DrinkListing = ({
   onOpenChange?: (open: boolean) => void;
 }) => (
   <li className="list-none group">
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog {...(open !== undefined ? { open, onOpenChange } : {})}>
       <DialogTrigger className="text-left">
         <h2 className="m-0 text-xl font-bold tracking-wide">{drink.title}</h2>
         <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans group-hover:text-foreground">
