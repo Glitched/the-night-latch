@@ -10,16 +10,20 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content="Cocktail menu for The Night Latch, a home bar in Brooklyn." />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="The Night Latch" />
-    <meta
-      property="og:description"
-      content="Cocktail menu for The Night Latch."
-    />
+    <meta property="og:description" content="Cocktail menu for The Night Latch, a home bar in Brooklyn." />
     <meta property="og:url" content="https://thenightlatch.com/" />
     <meta property="og:image" content="https://thenightlatch.com/og.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Night Latch" />
+    <meta name="twitter:description" content="Cocktail menu for The Night Latch, a home bar in Brooklyn." />
+    <meta name="twitter:image" content="https://thenightlatch.com/og.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script>

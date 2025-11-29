@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This website is for Ryan Slama's personal bar, hosted on https://thenightlatch.com. It's automatically deployed via Netlify on push. Ryan is a 27 year old guy who lives in Williamsburg, Brooklyn.
 
 ## Commands
 

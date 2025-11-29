@@ -269,28 +269,6 @@ export const menu: Drink[] = [
     ],
   },
   {
-    title: "Pathfinder Spritz",
-    instructions:
-      "Shake the Pathfinder and lemon juice with ice, then strain into a highball glass filled with ice. Top with soda water and garnish with the lemon wedge.",
-    ingredients: [
-      { ingredient: Ingredient.NA },
-      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
-      { ingredient: Ingredient.Lemon, amount: "1/2 oz" },
-      { ingredient: Ingredient.Soda },
-    ],
-  },
-  {
-    title: "Haters got PhDs",
-    instructions:
-      "Shake all the ingredients with ice, then strain into a coupe. Garnish with the lime wedge.",
-    ingredients: [
-      { ingredient: Ingredient.NA },
-      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
-      { ingredient: Ingredient.Lime, amount: "1 oz" },
-      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
-    ],
-  },
-  {
     title: "Gimlet",
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. Garnish with a lime wheel.",
@@ -373,6 +351,41 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
       { ingredient: Ingredient.Grapefruit, amount: "1/2 oz" },
       { ingredient: Ingredient.Luxardo, amount: "1/2 oz" },
+    ],
+  },
+  {
+    title: "Paloma",
+    instructions:
+      "Rim half of a highball glass with salt. Shake the tequila, grapefruit, lime, and simple syrup with ice, then strain into the glass over ice. Top with soda. Garnish with the grapefruit wedge.",
+    ingredients: [
+      { ingredient: Ingredient.Altos, amount: "2 oz" },
+      { ingredient: Ingredient.Grapefruit, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Lime, amount: "1/2 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
+      { ingredient: Ingredient.Soda },
+    ],
+  },
+  // NA drinks at the bottom
+  {
+    title: "Pathfinder Spritz",
+    instructions:
+      "Shake the Pathfinder and lemon juice with ice, then strain into a highball glass filled with ice. Top with soda water and garnish with the lemon wedge.",
+    ingredients: [
+      { ingredient: Ingredient.NA },
+      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "1/2 oz" },
+      { ingredient: Ingredient.Soda },
+    ],
+  },
+  {
+    title: "Haters got PhDs",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with the lime wedge.",
+    ingredients: [
+      { ingredient: Ingredient.NA },
+      { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
     ],
   },
 ];
