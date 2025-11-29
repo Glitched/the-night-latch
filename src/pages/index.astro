@@ -18,10 +18,12 @@ import Layout from "../layouts/Layout.astro";
         class="pr-4"
       />
     </nav>
-    <Menu client:load />
-    <footer class="print:hidden">
-      <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
-    </footer>
+    <div class="flex flex-col flex-grow min-h-screen">
+      <Menu client:load />
+      <footer class="print:hidden mt-auto">
+        <a href="https://RyanSlama.com" target="_blank">Made with ♥︎ by Ryan</a>.
+      </footer>
+    </div>
   </main>
 
   <style>
