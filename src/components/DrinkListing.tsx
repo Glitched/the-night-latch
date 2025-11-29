@@ -8,9 +8,17 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-const DrinkListing = ({ drink }: { drink: Drink }) => (
+const DrinkListing = ({
+  drink,
+  open,
+  onOpenChange,
+}: {
+  drink: Drink;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) => (
   <li className="list-none group">
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger className="text-left">
         <h2 className="m-0 text-xl font-bold tracking-wide">{drink.title}</h2>
         <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans group-hover:text-foreground">

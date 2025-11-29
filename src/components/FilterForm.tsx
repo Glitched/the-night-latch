@@ -55,7 +55,6 @@ export function FilterForm({
     setRequiredIngredient(null);
   };
 
-  console.log(requiredIngredient);
   return (
     <Form {...form}>
       <form

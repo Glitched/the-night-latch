@@ -9,7 +9,7 @@ export const menu: Drink[] = [
     ingredients: [
       { ingredient: Ingredient.Tanqueray, amount: "1 oz" },
       { ingredient: Ingredient.Campari, amount: "1 oz" },
-      { ingredient: Ingredient.CocchiAmericano, amount: "1 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 oz" },
     ],
   },
   {
@@ -40,7 +40,7 @@ export const menu: Drink[] = [
       "Stir all the ingredients over ice, then strain into a coupe. Garnish with the cherry.",
     ingredients: [
       { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
-      { ingredient: Ingredient.CocchiAmericano, amount: "1 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 oz" },
       { ingredient: Ingredient.AngosturaBitters },
     ],
   },
@@ -110,10 +110,10 @@ export const menu: Drink[] = [
     instructions:
       "In a shaker, gently muddle the mint and simple syrup. Add the remaining ingredients and whip (shake with a few pieces of crushed ice just until the ingredients are incorporated). Dump into and double rocks glass and fill the glass with crushed ice. Garnish with the mint bouquet in the center of the ice and serve with a straw.",
     ingredients: [
-      { ingredient: Ingredient.Plantation3StarRum },
-      { ingredient: Ingredient.Lime },
-      { ingredient: Ingredient.Mint },
-      { ingredient: Ingredient.SimpleSyrup },
+      { ingredient: Ingredient.Plantation3StarRum, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
+      { ingredient: Ingredient.Mint, amount: "6-8 leaves" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
       { ingredient: Ingredient.AngosturaBitters },
     ],
   },
@@ -145,7 +145,7 @@ export const menu: Drink[] = [
     ingredients: [
       { ingredient: Ingredient.RittenhouseRye, amount: "1 1/2 oz" },
       { ingredient: Ingredient.Campari, amount: "3/4 oz" },
-      { ingredient: Ingredient.CocchiAmericano, amount: "3/4 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "3/4 oz" },
     ],
   },
   {
@@ -205,7 +205,7 @@ export const menu: Drink[] = [
     ],
   },
   {
-    title: "Ferarri",
+    title: "Ferrari",
     instructions: "Serve in a rocks glass over 1 large ice cube. No garnish.",
     ingredients: [
       { ingredient: Ingredient.FernetBranca, amount: "1 1/2 oz" },
@@ -288,6 +288,91 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
       { ingredient: Ingredient.Lime, amount: "1 oz" },
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
+    ],
+  },
+  {
+    title: "Gimlet",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with a lime wheel.",
+    ingredients: [
+      { ingredient: Ingredient.PlymouthGin, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
+    ],
+  },
+  {
+    title: "French 75",
+    instructions:
+      "Shake the gin, lemon, and simple syrup with ice, then strain into a flute. Top with Prosecco. Garnish with the lemon twist.",
+    ingredients: [
+      { ingredient: Ingredient.Tanqueray, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
+      { ingredient: Ingredient.Prosecco, amount: "2 oz" },
+    ],
+  },
+  {
+    title: "Hanky Panky",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a coupe. Garnish with the orange twist.",
+    ingredients: [
+      { ingredient: Ingredient.PlymouthGin, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.FernetBranca, amount: "1 barspoon" },
+    ],
+  },
+  {
+    title: "Toronto",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a coupe. Garnish with the orange twist.",
+    ingredients: [
+      { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
+      { ingredient: Ingredient.FernetBranca, amount: "1/4 oz" },
+      { ingredient: Ingredient.DemeraraSyrup, amount: "1/4 oz" },
+      { ingredient: Ingredient.AngosturaBitters },
+    ],
+  },
+  {
+    title: "Bijou",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a coupe. Garnish with a cherry.",
+    ingredients: [
+      { ingredient: Ingredient.Tanqueray, amount: "1 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 oz" },
+      { ingredient: Ingredient.GreenChartreuse, amount: "1 oz" },
+      { ingredient: Ingredient.RegansOrangeBitters },
+    ],
+  },
+  {
+    title: "Rob Roy",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a coupe. Garnish with a cherry.",
+    ingredients: [
+      { ingredient: Ingredient.MonkeyShoulder, amount: "2 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 oz" },
+      { ingredient: Ingredient.AngosturaBitters },
+    ],
+  },
+  {
+    title: "Golden Gate",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with a lemon or orange twist.",
+    ingredients: [
+      { ingredient: Ingredient.VidaMezcal, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
+    ],
+  },
+  {
+    title: "Hemingway Daiquiri",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with a lime wheel.",
+    ingredients: [
+      { ingredient: Ingredient.Plantation3StarRum, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
+      { ingredient: Ingredient.Grapefruit, amount: "1/2 oz" },
+      { ingredient: Ingredient.Luxardo, amount: "1/2 oz" },
     ],
   },
 ];

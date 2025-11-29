@@ -207,8 +207,8 @@ const SweetVermouth = registerIngredient({
   name: "Sweet Vermouth",
   parent: Vermouth,
 });
-const CocchiAmericano = registerIngredient({
-  name: "Cocchi Americano",
+const CocchiDiTorino = registerIngredient({
+  name: "Cocchi di Torino",
   parent: SweetVermouth,
 });
 const DolinDry = registerIngredient({ name: "Dolin Dry", parent: Vermouth });
@@ -238,7 +238,7 @@ export {
   CaffeBorghetti,
   Campari,
   Citrus,
-  CocchiAmericano,
+  CocchiDiTorino,
   Cointreau,
   ColdBrew,
   CremeDeCassis,
