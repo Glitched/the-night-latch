@@ -7,7 +7,51 @@ import { FilterModal } from "./FilterModal";
 import { SearchInput } from "./SearchInput";
 import { Button } from "./ui/button";
 
-// Fuzzy match: checks if all characters in query appear in order in target
+/**
+ * RANKED SEARCH SYSTEM
+ *
+ * Searches drinks by name and ingredients using a 10-tier ranking system.
+ * Each drink appears only once, at its highest matching tier.
+ *
+ * Tier priority (highest to lowest):
+ *   1. Name starts with query         "neg" → "Negroni"
+ *   2. Name initials match            "op" → "Old Pal"
+ *   3. Word in name starts with       "pal" → "Old Pal"
+ *   4. Name contains query            "gro" → "Negroni"
+ *   5. Ingredient starts with         "camp" → drinks with "Campari"
+ *   6. Ingredient initials match      "fb" → drinks with "Fernet Branca"
+ *   7. Word in ingredient starts with "bra" → drinks with "Fernet Branca"
+ *   8. Ingredient contains            "ern" → drinks with "Fernet Branca"
+ *   9. Fuzzy name match               "ngi" → "Negroni" (n...g...i in order)
+ *  10. Fuzzy ingredient match         "fntb" → drinks with "Fernet Branca"
+ */
+
+// Tier 1/5: Target starts with query
+function startsWith(query: string, target: string): boolean {
+  return target.toLowerCase().startsWith(query.toLowerCase());
+}
+
+// Tier 2/6: Each query char matches first letter of each word
+// Query length must equal word count (e.g., "op" = 2 chars, "Old Pal" = 2 words)
+function initialsMatch(query: string, target: string): boolean {
+  const q = query.toLowerCase();
+  const words = target.toLowerCase().split(/\s+/);
+  if (q.length !== words.length) return false;
+  return words.every((word, i) => word[0] === q[i]);
+}
+
+// Tier 3/7: Any word in target starts with query
+function wordStartsWith(query: string, target: string): boolean {
+  const q = query.toLowerCase();
+  return target.toLowerCase().split(/\s+/).some((word) => word.startsWith(q));
+}
+
+// Tier 4/8: Query appears anywhere in target
+function contains(query: string, target: string): boolean {
+  return target.toLowerCase().includes(query.toLowerCase());
+}
+
+// Tier 9/10: All query chars appear in target in order (not necessarily consecutive)
 function fuzzyMatch(query: string, target: string): boolean {
   const q = query.toLowerCase();
   const t = target.toLowerCase();
@@ -18,6 +62,51 @@ function fuzzyMatch(query: string, target: string): boolean {
   return qi === q.length;
 }
 
+// Helper: returns true if any ingredient in the drink matches using the given matcher
+function anyIngredient(
+  drink: (typeof menu)[0],
+  matcher: (query: string, target: string) => boolean,
+  query: string
+): boolean {
+  return drink.ingredients.some((i) => matcher(query, i.ingredient.name));
+}
+
+// Main search function: returns drinks ordered by match quality
+function rankedSearch(query: string): typeof menu {
+  if (!query) return menu;
+
+  // Build tiers from highest to lowest priority
+  const tiers = [
+    // Tiers 1-4: Name matches
+    menu.filter((d) => startsWith(query, d.title)),
+    menu.filter((d) => initialsMatch(query, d.title)),
+    menu.filter((d) => wordStartsWith(query, d.title)),
+    menu.filter((d) => contains(query, d.title)),
+    // Tiers 5-8: Ingredient matches
+    menu.filter((d) => anyIngredient(d, startsWith, query)),
+    menu.filter((d) => anyIngredient(d, initialsMatch, query)),
+    menu.filter((d) => anyIngredient(d, wordStartsWith, query)),
+    menu.filter((d) => anyIngredient(d, contains, query)),
+    // Tiers 9-10: Fuzzy matches
+    menu.filter((d) => fuzzyMatch(query, d.title)),
+    menu.filter((d) => anyIngredient(d, fuzzyMatch, query)),
+  ];
+
+  // Merge and dedupe: each drink keeps its highest rank (first occurrence)
+  const seen = new Set<string>();
+  const result: typeof menu = [];
+  for (const tier of tiers) {
+    for (const drink of tier) {
+      if (!seen.has(drink.title)) {
+        seen.add(drink.title);
+        result.push(drink);
+      }
+    }
+  }
+
+  return result;
+}
+
 const Menu = () => {
   const [baseSpirit, setBaseSpirit] = useState<Ingredient | null>(null);
   const [requiredIngredient, setRequiredIngredient] = useState<string | null>(
@@ -25,11 +114,8 @@ const Menu = () => {
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [openDrink, setOpenDrink] = useState<string | null>(null);
-  const drinks = menu
-    .filter((drink) => {
-      if (!searchQuery) return true;
-      return fuzzyMatch(searchQuery, drink.title);
-    })
+
+  const drinks = rankedSearch(searchQuery)
     .filter((drink) => {
       if (!baseSpirit) {
         return true;
