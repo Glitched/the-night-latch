@@ -1,6 +1,7 @@
 export type Ingredient = {
   name: string;
   parent?: Ingredient;
+  abv?: number;
 };
 
 const allIngredients: Ingredient[] = [];
@@ -65,38 +66,59 @@ const JapaneseWhisky = registerIngredient({
 const RittenhouseRye = registerIngredient({
   name: "Rittenhouse Rye",
   parent: Rye,
+  abv: 50,
 });
 const Hatozaki = registerIngredient({
   name: "Hatozaki",
   parent: JapaneseWhisky,
+  abv: 40,
 });
 const MonkeyShoulder = registerIngredient({
   name: "Monkey Shoulder",
   parent: Scotch,
+  abv: 40,
 });
 const ElijahCraig = registerIngredient({
   name: "Elijah Craig",
   parent: Bourbon,
+  abv: 47,
 });
 
 // Gin
 const Gin = registerIngredient({ name: "Gin", parent: Liquor });
 const LondonDry = registerIngredient({ name: "London Dry", parent: Gin });
-const PlymouthGin = registerIngredient({ name: "Plymouth Gin", parent: Gin });
+const PlymouthGin = registerIngredient({
+  name: "Plymouth Gin",
+  parent: Gin,
+  abv: 41.2,
+});
 const OldTom = registerIngredient({ name: "Old Tom", parent: Gin });
-const Tanqueray = registerIngredient({ name: "Tanqueray", parent: LondonDry });
+const Tanqueray = registerIngredient({
+  name: "Tanqueray",
+  parent: LondonDry,
+  abv: 47.3,
+});
 const TanquerayNo10 = registerIngredient({
   name: "Tanqueray No. 10",
   parent: LondonDry,
+  abv: 47.3,
 });
 
 // Tequila
 const Tequila = registerIngredient({ name: "Tequila", parent: Liquor });
-const Altos = registerIngredient({ name: "Altos Tequila", parent: Tequila });
+const Altos = registerIngredient({
+  name: "Altos Tequila",
+  parent: Tequila,
+  abv: 40,
+});
 
 // Mezcal
 const Mezcal = registerIngredient({ name: "Mezcal", parent: Liquor });
-const VidaMezcal = registerIngredient({ name: "Vida Mezcal", parent: Mezcal });
+const VidaMezcal = registerIngredient({
+  name: "Vida Mezcal",
+  parent: Mezcal,
+  abv: 42,
+});
 
 // Rum
 const Rum = registerIngredient({ name: "Rum", parent: Liquor });
@@ -105,56 +127,89 @@ const DarkRum = registerIngredient({ name: "Dark Rum", parent: Rum });
 const PussersRum = registerIngredient({
   name: "Pusser's Rum",
   parent: DarkRum,
+  abv: 40,
 });
 const Plantation3StarRum = registerIngredient({
   name: "Plantation 3 Star Rum",
   parent: WhiteRum,
+  abv: 41.2,
 });
 
 // Vodka
 const Vodka = registerIngredient({ name: "Vodka", parent: Liquor });
-const Titos = registerIngredient({ name: "Titos Vodka", parent: Vodka });
+const Titos = registerIngredient({
+  name: "Titos Vodka",
+  parent: Vodka,
+  abv: 40,
+});
 
 // Amaro
 const Amaro = registerIngredient({ name: "Amaro", parent: Liqueur });
-const Aperol = registerIngredient({ name: "Aperol", parent: Amaro });
-const Campari = registerIngredient({ name: "Campari", parent: Amaro });
+const Aperol = registerIngredient({ name: "Aperol", parent: Amaro, abv: 11 });
+const Campari = registerIngredient({
+  name: "Campari",
+  parent: Amaro,
+  abv: 25,
+});
 const FernetBranca = registerIngredient({
   name: "Fernet Branca",
   parent: Amaro,
+  abv: 39,
 });
 const AmaroMeletti = registerIngredient({
   name: "Amaro Meletti",
   parent: Amaro,
+  abv: 32,
 });
 const AmaroNonino = registerIngredient({
   name: "Amaro Nonino",
   parent: Amaro,
+  abv: 35,
 });
 const FourthaveSpirits = registerIngredient({
   name: "Fourthave Spirits",
   parent: Amaro,
+  abv: 24,
 });
 
 // Liqueur
-const Luxardo = registerIngredient({ name: "Luxardo", parent: Liqueur });
-const StGermain = registerIngredient({ name: "St. Germain", parent: Liqueur });
+const Luxardo = registerIngredient({
+  name: "Luxardo",
+  parent: Liqueur,
+  abv: 32,
+});
+const StGermain = registerIngredient({
+  name: "St. Germain",
+  parent: Liqueur,
+  abv: 20,
+});
 const CremeDeViolette = registerIngredient({
   name: "Creme de Violette",
   parent: Liqueur,
+  abv: 20,
 });
 const CaffeBorghetti = registerIngredient({
   name: "Caffe Borghetti",
   parent: Liqueur,
+  abv: 25,
 });
 const TripleSec = registerIngredient({ name: "Triple Sec", parent: Liqueur });
-const Cointreau = registerIngredient({ name: "Cointreau", parent: TripleSec });
+const Cointreau = registerIngredient({
+  name: "Cointreau",
+  parent: TripleSec,
+  abv: 40,
+});
 const CremeDeCassis = registerIngredient({
   name: "Creme de Cassis",
   parent: Liqueur,
+  abv: 20,
 });
 const Amaretto = registerIngredient({ name: "Amaretto", parent: Liqueur });
-const Disaronno = registerIngredient({ name: "Disaronno", parent: Amaretto });
+const Disaronno = registerIngredient({
+  name: "Disaronno",
+  parent: Amaretto,
+  abv: 28,
+});
 
 // Bitters
 const Bitters = registerIngredient({ name: "Bitters" });
@@ -182,10 +237,12 @@ const MoleBitters = registerIngredient({
 const GreenChartreuse = registerIngredient({
   name: "Green Chartreuse",
   parent: Liqueur,
+  abv: 55,
 });
 const YellowChartreuse = registerIngredient({
   name: "Yellow Chartreuse",
   parent: Liqueur,
+  abv: 40,
 });
 
 // Syrup
@@ -210,18 +267,31 @@ const SweetVermouth = registerIngredient({
 const CocchiDiTorino = registerIngredient({
   name: "Cocchi di Torino",
   parent: SweetVermouth,
+  abv: 16,
 });
-const DolinDry = registerIngredient({ name: "Dolin Dry", parent: Vermouth });
+const DolinDry = registerIngredient({
+  name: "Dolin Dry",
+  parent: Vermouth,
+  abv: 17.5,
+});
 
 // Wine
 const Wine = registerIngredient({ name: "Wine" });
 const WhiteWine = registerIngredient({ name: "White Wine", parent: Wine });
 const RedWine = registerIngredient({ name: "Red Wine", parent: Wine });
-const Prosecco = registerIngredient({ name: "Prosecco", parent: WhiteWine });
+const Prosecco = registerIngredient({
+  name: "Prosecco",
+  parent: WhiteWine,
+  abv: 11,
+});
 
 // NA
 const NA = registerIngredient({ name: "NA" });
-const Pathfinder = registerIngredient({ name: "Pathfinder", parent: NA });
+const Pathfinder = registerIngredient({
+  name: "Pathfinder",
+  parent: NA,
+  abv: 0,
+});
 
 export * as Ingredient from "./ingredient";
 
