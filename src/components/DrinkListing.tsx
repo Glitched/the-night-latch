@@ -24,6 +24,7 @@ const DrinkListing = ({
   onOpenChange?: (open: boolean) => void;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
+  const [tapped, setTapped] = useState(false);
   const strength = formatDrinkStrength(drink);
   const dus = calculateDrinkUnits(drink);
 
@@ -57,9 +58,12 @@ const DrinkListing = ({
               {strength && (
                 <p
                   className="mt-4 text-sm text-muted-foreground flex items-center gap-1 cursor-pointer select-none"
-                  onMouseEnter={() => setShowDUs(true)}
-                  onMouseLeave={() => setShowDUs(false)}
-                  onClick={() => setShowDUs((prev) => !prev)}
+                  onMouseEnter={() => !tapped && setShowDUs(true)}
+                  onMouseLeave={() => !tapped && setShowDUs(false)}
+                  onClick={() => {
+                    setTapped((prev) => !prev);
+                    setShowDUs((prev) => !prev);
+                  }}
                 >
                   <Wine size={16} />
                   {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
