@@ -159,9 +159,9 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Tanqueray, amount: "2 oz" },
       { ingredient: Ingredient.Lemon, amount: "1 oz" },
       { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
-      { ingredient: Ingredient.Soda },
+      { ingredient: Ingredient.Soda, amount: "2 oz" },
     ],
-    notes: ["Refreshing", "Citrus", "Light", "Sessionable"],
+    notes: ["Refreshing", "Citrus", "Light", "Easy"],
     color: "#f0e68c",
   },
   {
@@ -428,10 +428,22 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Grapefruit, amount: "1 1/2 oz" },
       { ingredient: Ingredient.Lime, amount: "1/2 oz" },
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
-      { ingredient: Ingredient.Soda },
+      { ingredient: Ingredient.Soda, amount: "2 oz" },
     ],
     notes: ["Refreshing", "Citrus", "Tart", "Light"],
     color: "#ffc1cc",
+  },
+  {
+    title: "Americano",
+    instructions:
+      "Build in a highball glass over ice. Top with soda water and stir gently. Garnish with an orange slice.",
+    ingredients: [
+      { ingredient: Ingredient.Campari, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Soda, amount: "3 oz" },
+    ],
+    notes: ["Bitter", "Refreshing", "Light", "Herbal"],
+    color: "#c44536",
   },
   // NA drinks at the bottom
   {
@@ -442,7 +454,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.NA },
       { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
       { ingredient: Ingredient.Lemon, amount: "1/2 oz" },
-      { ingredient: Ingredient.Soda },
+      { ingredient: Ingredient.Soda, amount: "3 oz" },
     ],
     notes: ["Refreshing", "Herbal", "Citrus", "Light"],
     color: "#f0e68c",
