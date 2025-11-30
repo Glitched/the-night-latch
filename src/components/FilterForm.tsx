@@ -18,11 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { IngredientComboBox } from "./IngredientCombobox";
+import { NotesComboBox } from "./NotesCombobox";
 import { DialogClose } from "./ui/dialog";
 
 const formSchema = z.object({
   baseSpirit: z.string(),
   ingredient: z.string().or(z.null()),
+  note: z.string().or(z.null()),
 });
 
 export function FilterForm({
@@ -31,28 +33,35 @@ export function FilterForm({
   baseSpirit,
   setRequiredIngredient,
   requiredIngredient,
+  setRequiredNote,
+  requiredNote,
 }: React.ComponentProps<"form"> & {
   setBaseSpirit: (baseSpirit: Ingredient | null) => void;
   baseSpirit: Ingredient | null;
   setRequiredIngredient: (ingredient: string | null) => void;
   requiredIngredient: string | null;
+  setRequiredNote: (note: string | null) => void;
+  requiredNote: string | null;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       baseSpirit: baseSpirit?.name ?? "",
       ingredient: requiredIngredient,
+      note: requiredNote,
     },
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setBaseSpirit(getByName(data.baseSpirit));
     setRequiredIngredient(data.ingredient);
+    setRequiredNote(data.note);
   };
 
   const onClear = () => {
     setBaseSpirit(null);
     setRequiredIngredient(null);
+    setRequiredNote(null);
   };
 
   return (
@@ -97,6 +106,21 @@ export function FilterForm({
               <>
                 <FormLabel htmlFor="ingredient">Ingredient</FormLabel>
                 <IngredientComboBox
+                  onChange={field.onChange}
+                  value={field.value}
+                />
+              </>
+            )}
+          />
+        </div>
+        <div className="grid gap-2">
+          <FormField
+            control={form.control}
+            name="note"
+            render={({ field }) => (
+              <>
+                <FormLabel htmlFor="note">Taste</FormLabel>
+                <NotesComboBox
                   onChange={field.onChange}
                   value={field.value}
                 />

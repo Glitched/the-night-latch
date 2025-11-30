@@ -1,38 +1,18 @@
 import { menu } from "@/menu";
 import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
 import { Shuffle, X } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { findDrinkBySlug } from "@/utils/drinkSlug";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
 import { SearchInput } from "./SearchInput";
 import { Button } from "./ui/button";
 
-/**
- * RANKED SEARCH SYSTEM
- *
- * Searches drinks by name and ingredients using a 10-tier ranking system.
- * Each drink appears only once, at its highest matching tier.
- *
- * Tier priority (highest to lowest):
- *   1. Name starts with query         "neg" → "Negroni"
- *   2. Name initials match            "op" → "Old Pal"
- *   3. Word in name starts with       "pal" → "Old Pal"
- *   4. Name contains query            "gro" → "Negroni"
- *   5. Ingredient starts with         "camp" → drinks with "Campari"
- *   6. Ingredient initials match      "fb" → drinks with "Fernet Branca"
- *   7. Word in ingredient starts with "bra" → drinks with "Fernet Branca"
- *   8. Ingredient contains            "ern" → drinks with "Fernet Branca"
- *   9. Fuzzy name match               "ngi" → "Negroni" (n...g...i in order)
- *  10. Fuzzy ingredient match         "fntb" → drinks with "Fernet Branca"
- */
-
-// Tier 1/5: Target starts with query
+// String matchers for ranked search
 function startsWith(query: string, target: string): boolean {
   return target.toLowerCase().startsWith(query.toLowerCase());
 }
 
-// Tier 2/6: Each query char matches first letter of each word
-// Query length must equal word count (e.g., "op" = 2 chars, "Old Pal" = 2 words)
 function initialsMatch(query: string, target: string): boolean {
   const q = query.toLowerCase();
   const words = target.toLowerCase().split(/\s+/);
@@ -40,18 +20,15 @@ function initialsMatch(query: string, target: string): boolean {
   return words.every((word, i) => word[0] === q[i]);
 }
 
-// Tier 3/7: Any word in target starts with query
 function wordStartsWith(query: string, target: string): boolean {
   const q = query.toLowerCase();
   return target.toLowerCase().split(/\s+/).some((word) => word.startsWith(q));
 }
 
-// Tier 4/8: Query appears anywhere in target
 function contains(query: string, target: string): boolean {
   return target.toLowerCase().includes(query.toLowerCase());
 }
 
-// Tier 9/10: All query chars appear in target in order (not necessarily consecutive)
 function fuzzyMatch(query: string, target: string): boolean {
   const q = query.toLowerCase();
   const t = target.toLowerCase();
@@ -62,7 +39,6 @@ function fuzzyMatch(query: string, target: string): boolean {
   return qi === q.length;
 }
 
-// Helper: returns true if any ingredient in the drink matches using the given matcher
 function anyIngredient(
   drink: (typeof menu)[0],
   matcher: (query: string, target: string) => boolean,
@@ -71,28 +47,33 @@ function anyIngredient(
   return drink.ingredients.some((i) => matcher(query, i.ingredient.name));
 }
 
-// Main search function: returns drinks ordered by match quality
+function anyNote(
+  drink: (typeof menu)[0],
+  matcher: (query: string, target: string) => boolean,
+  query: string
+): boolean {
+  return drink.notes?.some((note) => matcher(query, note)) ?? false;
+}
+
+// Returns drinks ordered by match quality (name > ingredients > notes > fuzzy)
 function rankedSearch(query: string): typeof menu {
   if (!query) return menu;
 
-  // Build tiers from highest to lowest priority
   const tiers = [
-    // Tiers 1-4: Name matches
     menu.filter((d) => startsWith(query, d.title)),
     menu.filter((d) => initialsMatch(query, d.title)),
     menu.filter((d) => wordStartsWith(query, d.title)),
     menu.filter((d) => contains(query, d.title)),
-    // Tiers 5-8: Ingredient matches
     menu.filter((d) => anyIngredient(d, startsWith, query)),
     menu.filter((d) => anyIngredient(d, initialsMatch, query)),
     menu.filter((d) => anyIngredient(d, wordStartsWith, query)),
     menu.filter((d) => anyIngredient(d, contains, query)),
-    // Tiers 9-10: Fuzzy matches
+    menu.filter((d) => anyNote(d, startsWith, query)),
+    menu.filter((d) => anyNote(d, contains, query)),
     menu.filter((d) => fuzzyMatch(query, d.title)),
     menu.filter((d) => anyIngredient(d, fuzzyMatch, query)),
   ];
 
-  // Merge and dedupe: each drink keeps its highest rank (first occurrence)
   const seen = new Set<string>();
   const result: typeof menu = [];
   for (const tier of tiers) {
@@ -107,13 +88,38 @@ function rankedSearch(query: string): typeof menu {
   return result;
 }
 
-const Menu = () => {
+const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   const [baseSpirit, setBaseSpirit] = useState<Ingredient | null>(null);
   const [requiredIngredient, setRequiredIngredient] = useState<string | null>(
     null
   );
+  const [requiredNote, setRequiredNote] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [openDrink, setOpenDrink] = useState<string | null>(null);
+  const [openDrink, setOpenDrink] = useState<string | null>(initialDrink ?? null);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path === "/") {
+        setOpenDrink(null);
+      } else {
+        const drink = findDrinkBySlug(path.slice(1));
+        setOpenDrink(drink?.title ?? null);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const handleDrinkOpen = (drinkTitle: string | null) => {
+    setOpenDrink(drinkTitle);
+    if (drinkTitle) {
+      const slug = drinkTitle.toLowerCase().replace(/\s+/g, "-");
+      window.history.pushState({}, "", `/${slug}`);
+    } else if (window.location.pathname !== "/") {
+      window.history.pushState({}, "", "/");
+    }
+  };
 
   const drinks = rankedSearch(searchQuery)
     .filter((drink) => {
@@ -134,9 +140,18 @@ const Menu = () => {
       return drink.ingredients.some((i) =>
         isDescendantOf(i.ingredient, ingredient)
       );
+    })
+    .filter((drink) => {
+      if (!requiredNote) {
+        return true;
+      }
+
+      return drink.notes?.some(
+        (note) => note.toLowerCase() === requiredNote.toLowerCase()
+      );
     });
 
-  const hasFilters = baseSpirit || requiredIngredient || searchQuery;
+  const hasFilters = baseSpirit || requiredIngredient || requiredNote || searchQuery;
   const totalDrinks = menu.length;
 
   return (
@@ -148,9 +163,11 @@ const Menu = () => {
           baseSpirit={baseSpirit}
           setRequiredIngredient={setRequiredIngredient}
           requiredIngredient={requiredIngredient}
+          setRequiredNote={setRequiredNote}
+          requiredNote={requiredNote}
         />
       </div>
-      {(baseSpirit || requiredIngredient) && (
+      {(baseSpirit || requiredIngredient || requiredNote) && (
         <div className="flex flex-wrap justify-center gap-2 mb-8 -mt-12 print:hidden">
           {baseSpirit && (
             <button
@@ -170,6 +187,15 @@ const Menu = () => {
               <X size={14} />
             </button>
           )}
+          {requiredNote && (
+            <button
+              onClick={() => setRequiredNote(null)}
+              className="inline-flex items-center gap-1 px-3 py-1 text-sm bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80"
+            >
+              {requiredNote}
+              <X size={14} />
+            </button>
+          )}
         </div>
       )}
       {drinks.length > 0 ? (
@@ -180,7 +206,7 @@ const Menu = () => {
                 drink={drink}
                 key={drink.title}
                 open={openDrink === drink.title}
-                onOpenChange={(open) => setOpenDrink(open ? drink.title : null)}
+                onOpenChange={(open) => handleDrinkOpen(open ? drink.title : null)}
               />
             ))}
           </ul>
@@ -189,7 +215,7 @@ const Menu = () => {
               variant="outline"
               onClick={() => {
                 const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
-                if (randomDrink) setOpenDrink(randomDrink.title);
+                if (randomDrink) handleDrinkOpen(randomDrink.title);
               }}
             >
               <Shuffle size={18} />
@@ -211,6 +237,7 @@ const Menu = () => {
             onClick={() => {
               setBaseSpirit(null);
               setRequiredIngredient(null);
+              setRequiredNote(null);
             }}
           >
             Reset

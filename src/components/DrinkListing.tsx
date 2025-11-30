@@ -3,7 +3,6 @@ import {
   calculateDrinkUnits,
   formatDrinkStrength,
 } from "../utils/drinkStrength";
-import { Wine } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import {
   Dialog,
@@ -41,8 +40,29 @@ const DrinkListing = ({
           <DialogHeader>
             <DialogTitle>{drink.title}</DialogTitle>
             <DialogDescription>
-              {drink.instructions}
-              <ul className="list-disc list-inside text-foreground mt-4 font-sans">
+              {strength && (
+                <p className="mb-2 text-muted-foreground font-light flex items-center gap-1">
+                  <span
+                    className="flex items-center gap-1 cursor-pointer select-none"
+                    onTouchStart={() => {
+                      isTouchDevice.current = true;
+                    }}
+                    onMouseEnter={() =>
+                      !isTouchDevice.current && setShowDUs(true)
+                    }
+                    onMouseLeave={() =>
+                      !isTouchDevice.current && setShowDUs(false)
+                    }
+                    onClick={() => setShowDUs((prev) => !prev)}
+                  >
+                    {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
+                  </span>
+                  {drink.notes && drink.notes.length > 0 && (
+                    <span> • {drink.notes.join(" • ")}</span>
+                  )}
+                </p>
+              )}
+              <ul className="list-none text-foreground font-sans p-0">
                 {drink.ingredients.map((d) => (
                   <li key={d.ingredient.name}>
                     {d.ingredient.name}
@@ -55,24 +75,7 @@ const DrinkListing = ({
                   </li>
                 ))}
               </ul>
-              {strength && (
-                <p
-                  className="mt-4 text-sm text-muted-foreground flex items-center gap-1 cursor-pointer select-none"
-                  onTouchStart={() => {
-                    isTouchDevice.current = true;
-                  }}
-                  onMouseEnter={() =>
-                    !isTouchDevice.current && setShowDUs(true)
-                  }
-                  onMouseLeave={() =>
-                    !isTouchDevice.current && setShowDUs(false)
-                  }
-                  onClick={() => setShowDUs((prev) => !prev)}
-                >
-                  <Wine size={16} />
-                  {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
-                </p>
-              )}
+              <p className="mt-4">{drink.instructions}</p>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

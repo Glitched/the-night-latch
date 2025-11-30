@@ -28,11 +28,15 @@ export function FilterModal({
   baseSpirit,
   setRequiredIngredient,
   requiredIngredient,
+  setRequiredNote,
+  requiredNote,
 }: {
   setBaseSpirit: (baseSpirit: Ingredient | null) => void;
   baseSpirit: Ingredient | null;
   setRequiredIngredient: (ingredient: string | null) => void;
   requiredIngredient: string | null;
+  setRequiredNote: (note: string | null) => void;
+  requiredNote: string | null;
 }) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -62,6 +66,8 @@ export function FilterModal({
             baseSpirit={baseSpirit}
             setRequiredIngredient={setRequiredIngredient}
             requiredIngredient={requiredIngredient}
+            setRequiredNote={setRequiredNote}
+            requiredNote={requiredNote}
           />
         </DialogContent>
       </Dialog>
@@ -82,6 +88,8 @@ export function FilterModal({
           baseSpirit={baseSpirit}
           setRequiredIngredient={setRequiredIngredient}
           requiredIngredient={requiredIngredient}
+          setRequiredNote={setRequiredNote}
+          requiredNote={requiredNote}
         />
       </DrawerContent>
     </Drawer>
