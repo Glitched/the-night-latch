@@ -269,6 +269,10 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
                   setRequiredIngredient(ingredientName);
                   handleDrinkOpen(null);
                 }}
+                onNoteClick={(note) => {
+                  setRequiredNote(note);
+                  handleDrinkOpen(null);
+                }}
                 onDrinkClick={handleDrinkOpen}
                 allDrinks={menu}
               />

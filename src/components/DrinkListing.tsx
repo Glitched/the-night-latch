@@ -22,6 +22,7 @@ const DrinkListing = ({
   open,
   onOpenChange,
   onIngredientClick,
+  onNoteClick,
   onDrinkClick,
   allDrinks,
 }: {
@@ -29,6 +30,7 @@ const DrinkListing = ({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   onIngredientClick?: (ingredientName: string) => void;
+  onNoteClick?: (note: string) => void;
   onDrinkClick?: (drinkTitle: string) => void;
   allDrinks?: Drink[];
 }) => {
@@ -81,26 +83,35 @@ const DrinkListing = ({
             <DialogTitle>{drink.title}</DialogTitle>
             <DialogDescription asChild>
               <div>
-                {strength && (
-                  <div className="mb-2 text-muted-foreground font-light flex items-center gap-1">
-                    <span
-                      className="flex items-center gap-1 cursor-pointer select-none"
-                      onTouchStart={() => {
-                        isTouchDevice.current = true;
-                      }}
-                      onMouseEnter={() =>
-                        !isTouchDevice.current && setShowDUs(true)
-                      }
-                      onMouseLeave={() =>
-                        !isTouchDevice.current && setShowDUs(false)
-                      }
-                      onClick={() => setShowDUs((prev) => !prev)}
-                    >
-                      {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
-                    </span>
-                    {drink.notes && drink.notes.length > 0 && (
-                      <span> • {drink.notes.join(" • ")}</span>
+                {(strength || (drink.notes && drink.notes.length > 0)) && (
+                  <div className="mt-1 mb-3 flex flex-wrap gap-2">
+                    {strength && (
+                      <span
+                        className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none"
+                        onTouchStart={() => {
+                          isTouchDevice.current = true;
+                        }}
+                        onMouseEnter={() =>
+                          !isTouchDevice.current && setShowDUs(true)
+                        }
+                        onMouseLeave={() =>
+                          !isTouchDevice.current && setShowDUs(false)
+                        }
+                        onClick={() => setShowDUs((prev) => !prev)}
+                      >
+                        {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
+                      </span>
                     )}
+                    {drink.notes?.map((note) => (
+                      <button
+                        key={note}
+                        type="button"
+                        onClick={() => onNoteClick?.(note)}
+                        className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                      >
+                        {note}
+                      </button>
+                    ))}
                   </div>
                 )}
                 <ul className="list-none text-foreground font-sans p-0">
@@ -124,20 +135,18 @@ const DrinkListing = ({
                 </ul>
                 <p className="mt-4">{drink.instructions}</p>
                 {similarDrinks.length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-border">
-                    <p className="text-sm text-muted-foreground mb-2">Also try:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {similarDrinks.map((d) => (
-                        <button
-                          key={d.title}
-                          type="button"
-                          onClick={() => onDrinkClick?.(d.title)}
-                          className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                        >
-                          {d.title}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Also try:</span>
+                    {similarDrinks.map((d) => (
+                      <button
+                        key={d.title}
+                        type="button"
+                        onClick={() => onDrinkClick?.(d.title)}
+                        className="text-sm px-3 py-1 rounded-full border border-border text-muted-foreground hover:bg-secondary/50 transition-colors"
+                      >
+                        {d.title}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
