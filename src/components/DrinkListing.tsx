@@ -20,10 +20,12 @@ const DrinkListing = ({
   drink,
   open,
   onOpenChange,
+  onIngredientClick,
 }: {
   drink: Drink;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onIngredientClick?: (ingredientName: string) => void;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
   const isTouchDevice = useRef(false);
@@ -95,7 +97,13 @@ const DrinkListing = ({
                 <ul className="list-none text-foreground font-sans p-0">
                   {drink.ingredients.map((d) => (
                     <li key={d.ingredient.name}>
-                      {d.ingredient.name}
+                      <button
+                        type="button"
+                        onClick={() => onIngredientClick?.(d.ingredient.name)}
+                        className="hover:text-primary hover:underline underline-offset-2 transition-colors text-left"
+                      >
+                        {d.ingredient.name}
+                      </button>
                       {d.amount && (
                         <span className="text-muted-foreground">
                           {" "}

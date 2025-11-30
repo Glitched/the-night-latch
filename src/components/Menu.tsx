@@ -3,12 +3,15 @@ import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
 import { getConfettiColors } from "@/utils/confettiColors";
 import { Shuffle, X } from "@phosphor-icons/react";
 import confetti from "canvas-confetti";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { findDrinkBySlug } from "@/utils/drinkSlug";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
+import { PullIndicator } from "./PullIndicator";
 import { SearchInput, type SearchInputHandle } from "./SearchInput";
 import { Button } from "./ui/button";
+import { useShakeDetection } from "@/hooks/use-shake-detection";
+import { usePullToRandom } from "@/hooks/use-pull-to-random";
 
 // String matchers for ranked search
 function startsWith(query: string, target: string): boolean {
@@ -101,6 +104,38 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   const searchInputRef = useRef<SearchInputHandle>(null);
   const filteredDrinksRef = useRef<typeof menu>([]);
 
+  const handleDrinkOpen = useCallback((drinkTitle: string | null) => {
+    setOpenDrink(drinkTitle);
+    if (drinkTitle) {
+      const slug = drinkTitle.toLowerCase().replace(/\s+/g, "-");
+      window.history.pushState({}, "", `/${slug}`);
+    } else if (window.location.pathname !== "/") {
+      window.history.pushState({}, "", "/");
+    }
+  }, []);
+
+  const triggerSurprise = useCallback(() => {
+    const currentDrinks = filteredDrinksRef.current;
+    const randomDrink = currentDrinks[Math.floor(Math.random() * currentDrinks.length)];
+    if (randomDrink) {
+      confetti({
+        particleCount: 100,
+        spread: 120,
+        origin: { y: 0.6 },
+        ticks: 60,
+        colors: randomDrink.color ? getConfettiColors(randomDrink.color) : undefined,
+      });
+      handleDrinkOpen(randomDrink.title);
+    }
+  }, [handleDrinkOpen]);
+
+  // Mobile gesture hooks
+  useShakeDetection(triggerSurprise);
+  const { progress, isPulling, isReady } = usePullToRandom(triggerSurprise, {
+    threshold: 60,
+    resistance: 1.5,
+  });
+
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
@@ -131,18 +166,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
 
       if (e.key === "r" && !isInput) {
         e.preventDefault();
-        const currentDrinks = filteredDrinksRef.current;
-        const randomDrink = currentDrinks[Math.floor(Math.random() * currentDrinks.length)];
-        if (randomDrink) {
-          confetti({
-            particleCount: 100,
-            spread: 120,
-            origin: { y: 0.6 },
-            ticks: 60,
-            colors: randomDrink.color ? getConfettiColors(randomDrink.color) : undefined,
-          });
-          handleDrinkOpen(randomDrink.title);
-        }
+        triggerSurprise();
       }
 
       if (e.key === "Escape" && openDrink) {
@@ -152,17 +176,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [openDrink]);
-
-  const handleDrinkOpen = (drinkTitle: string | null) => {
-    setOpenDrink(drinkTitle);
-    if (drinkTitle) {
-      const slug = drinkTitle.toLowerCase().replace(/\s+/g, "-");
-      window.history.pushState({}, "", `/${slug}`);
-    } else if (window.location.pathname !== "/") {
-      window.history.pushState({}, "", "/");
-    }
-  };
+  }, [openDrink, triggerSurprise, handleDrinkOpen]);
 
   const drinks = rankedSearch(searchQuery)
     .filter((drink) => {
@@ -201,6 +215,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
 
   return (
     <section className="flex-grow">
+      <PullIndicator progress={progress} isPulling={isPulling} isReady={isReady} />
       <div className="flex justify-center items-center gap-4 mb-16 print:hidden">
         <SearchInput ref={searchInputRef} value={searchQuery} onChange={setSearchQuery} />
         <FilterModal
@@ -252,26 +267,15 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
                 key={drink.title}
                 open={openDrink === drink.title}
                 onOpenChange={(open) => handleDrinkOpen(open ? drink.title : null)}
+                onIngredientClick={(ingredientName) => {
+                  setRequiredIngredient(ingredientName);
+                  handleDrinkOpen(null);
+                }}
               />
             ))}
           </ul>
           <div className="flex flex-col items-center gap-4 mt-8 print:hidden">
-            <Button
-              variant="outline"
-              onClick={() => {
-                const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
-                if (randomDrink) {
-                  confetti({
-                    particleCount: 100,
-                    spread: 120,
-                    origin: { y: 0.6 },
-                    ticks: 60,
-                    colors: randomDrink.color ? getConfettiColors(randomDrink.color) : undefined,
-                  });
-                  handleDrinkOpen(randomDrink.title);
-                }
-              }}
-            >
+            <Button variant="outline" onClick={triggerSurprise}>
               <Shuffle size={18} />
               Surprise me
             </Button>
