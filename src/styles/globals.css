@@ -75,6 +75,10 @@ body {
   height: 100%;
 }
 
+body[data-scroll-locked][data-scroll-locked] {
+  margin-right: 0 !important;
+}
+
 @media print {
   * {
     color: black !important;
