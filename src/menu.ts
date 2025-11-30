@@ -12,6 +12,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.CocchiDiTorino, amount: "1 oz" },
     ],
     notes: ["Bitter", "Boozy", "Herbal"],
+    color: "#c44536",
   },
   {
     title: "Old Pal",
@@ -23,6 +24,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.DolinDry, amount: "3/4 oz" },
     ],
     notes: ["Bitter", "Dry", "Boozy"],
+    color: "#c44536",
   },
   {
     title: "Whisky Sour",
@@ -36,6 +38,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Tart", "Citrus", "Balanced", "Rich"],
+    color: "#f5deb3",
   },
   {
     title: "Manhattan",
@@ -47,6 +50,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Boozy", "Sweet", "Rich", "Spiced"],
+    color: "#c9a227",
   },
   {
     title: "Old Fashioned",
@@ -58,6 +62,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Boozy", "Sweet", "Spiced"],
+    color: "#c9a227",
   },
   {
     title: "Squeaky Wheel",
@@ -70,6 +75,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Disaronno, amount: "1/4 oz" },
     ],
     notes: ["Coffee", "Smoky", "Bitter", "Complex"],
+    color: "#3d2314",
   },
   {
     title: "Gin Martini",
@@ -81,6 +87,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.RegansOrangeBitters, amount: "1 dash" },
     ],
     notes: ["Boozy", "Dry", "Herbal"],
+    color: "#d4d4d4",
   },
   {
     title: "Vodka Martini",
@@ -91,6 +98,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.DolinDry, amount: "1/2 oz" },
     ],
     notes: ["Boozy", "Dry", "Strong"],
+    color: "#d4d4d4",
   },
   {
     title: "Margarita",
@@ -103,6 +111,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup },
     ],
     notes: ["Tart", "Citrus", "Refreshing"],
+    color: "#d4e157",
   },
   {
     title: "Daiquiri",
@@ -114,6 +123,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
     ],
     notes: ["Tart", "Citrus", "Balanced", "Refreshing"],
+    color: "#f0e68c",
   },
   {
     title: "Mojito",
@@ -127,6 +137,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Refreshing", "Herbal", "Sweet", "Citrus"],
+    color: "#f0e68c",
   },
   {
     title: "Elder Fashion",
@@ -138,6 +149,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.RegansOrangeBitters },
     ],
     notes: ["Floral", "Herbal", "Light"],
+    color: "#d4d4d4",
   },
   {
     title: "Tom Collins",
@@ -150,6 +162,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Soda },
     ],
     notes: ["Refreshing", "Citrus", "Light", "Sessionable"],
+    color: "#f0e68c",
   },
   {
     title: "Boulevardier",
@@ -161,6 +174,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.CocchiDiTorino, amount: "3/4 oz" },
     ],
     notes: ["Bitter", "Boozy", "Sweet", "Complex"],
+    color: "#c44536",
   },
   {
     title: "Fancy-Free",
@@ -173,6 +187,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.RegansOrangeBitters },
     ],
     notes: ["Boozy", "Fruity", "Spiced"],
+    color: "#c9a227",
   },
   {
     title: "Aviation",
@@ -186,6 +201,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
     ],
     notes: ["Floral", "Citrus", "Tart", "Balanced"],
+    color: "#c8b4d6",
   },
   {
     title: "Fitzgerald",
@@ -198,6 +214,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Tart", "Citrus", "Sweet", "Refreshing"],
+    color: "#e6b325",
   },
   {
     title: "Last Word",
@@ -210,6 +227,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
     ],
     notes: ["Herbal", "Complex", "Balanced", "Tart"],
+    color: "#6b8e23",
   },
   {
     title: "Final Ward",
@@ -222,6 +240,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Luxardo, amount: "3/4 oz" },
     ],
     notes: ["Herbal", "Tart", "Complex", "Balanced"],
+    color: "#6b8e23",
   },
   {
     title: "Ferrari",
@@ -231,6 +250,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Campari, amount: "1 1/2 oz" },
     ],
     notes: ["Bitter", "Herbal", "Strong", "Complex"],
+    color: "#8b4513",
   },
   {
     title: "Aperol Spritz",
@@ -242,6 +262,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Soda, amount: "1 oz" },
     ],
     notes: ["Refreshing", "Bitter", "Light", "Citrus"],
+    color: "#ff6b35",
   },
   {
     title: "Paper Plane",
@@ -254,6 +275,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
     ],
     notes: ["Balanced", "Bitter", "Citrus", "Complex"],
+    color: "#ff6b35",
   },
   {
     title: "Espresso Martini",
@@ -266,6 +288,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "to taste" },
     ],
     notes: ["Coffee", "Sweet", "Rich"],
+    color: "#3d2314",
   },
   {
     title: "Black Tie Optional",
@@ -280,6 +303,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.MoleBitters },
     ],
     notes: ["Coffee", "Spiced", "Complex", "Rich"],
+    color: "#3d2314",
   },
   {
     title: "Naked and Famous",
@@ -292,6 +316,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
     ],
     notes: ["Smoky", "Herbal", "Balanced", "Complex"],
+    color: "#e6b325",
   },
   {
     title: "Gimlet",
@@ -303,6 +328,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
     ],
     notes: ["Tart", "Citrus", "Herbal", "Refreshing"],
+    color: "#d4e157",
   },
   {
     title: "French 75",
@@ -315,6 +341,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Prosecco, amount: "2 oz" },
     ],
     notes: ["Refreshing", "Citrus", "Light", "Dry"],
+    color: "#e6b325",
   },
   {
     title: "Hanky Panky",
@@ -326,6 +353,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.FernetBranca, amount: "1 barspoon" },
     ],
     notes: ["Herbal", "Bitter", "Complex", "Boozy"],
+    color: "#8b4513",
   },
   {
     title: "Toronto",
@@ -338,6 +366,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Boozy", "Herbal", "Bitter", "Spiced"],
+    color: "#8b4513",
   },
   {
     title: "Bijou",
@@ -350,6 +379,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.RegansOrangeBitters },
     ],
     notes: ["Herbal", "Complex", "Sweet", "Boozy"],
+    color: "#6b8e23",
   },
   {
     title: "Rob Roy",
@@ -361,6 +391,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.AngosturaBitters },
     ],
     notes: ["Boozy", "Sweet", "Smoky", "Rich"],
+    color: "#c9a227",
   },
   {
     title: "Golden Gate",
@@ -373,6 +404,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
     ],
     notes: ["Smoky", "Citrus", "Bitter", "Refreshing"],
+    color: "#ff6b35",
   },
   {
     title: "Hemingway Daiquiri",
@@ -385,6 +417,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Luxardo, amount: "1/2 oz" },
     ],
     notes: ["Tart", "Citrus", "Dry", "Refreshing"],
+    color: "#f0e68c",
   },
   {
     title: "Paloma",
@@ -398,6 +431,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Soda },
     ],
     notes: ["Refreshing", "Citrus", "Tart", "Light"],
+    color: "#ffc1cc",
   },
   // NA drinks at the bottom
   {
@@ -411,6 +445,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.Soda },
     ],
     notes: ["Refreshing", "Herbal", "Citrus", "Light"],
+    color: "#f0e68c",
   },
   {
     title: "Haters got PhDs",
@@ -423,6 +458,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },
     ],
     notes: ["Herbal", "Tart", "Citrus", "Balanced"],
+    color: "#f0e68c",
   },
 ];
 
@@ -435,6 +471,37 @@ export const ingredientsInAllDrinks = Ingredient.allIngredients.filter(
     )
 );
 
+export const ingredientDrinkCounts = new Map(
+  ingredientsInAllDrinks.map((ingredient) => [
+    ingredient.name,
+    menu.filter((drink) =>
+      drink.ingredients.some((i) =>
+        Ingredient.isDescendantOf(i.ingredient, ingredient)
+      )
+    ).length,
+  ])
+);
+
+export const baseSpiritDrinkCounts = new Map(
+  Ingredient.baseSpirits.map((spirit) => [
+    spirit.name,
+    menu.filter((drink) =>
+      drink.ingredients.some((i) =>
+        Ingredient.isDescendantOf(i.ingredient, spirit)
+      )
+    ).length,
+  ])
+);
+
 export const allNotes = [
   ...new Set(menu.flatMap((drink) => drink.notes ?? [])),
 ].sort();
+
+export const noteDrinkCounts = new Map(
+  allNotes.map((note) => [
+    note,
+    menu.filter((drink) =>
+      drink.notes?.some((n) => n.toLowerCase() === note.toLowerCase())
+    ).length,
+  ])
+);

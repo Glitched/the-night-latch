@@ -1,9 +1,12 @@
+import { Share } from "@phosphor-icons/react";
+import confetti from "canvas-confetti";
+import { useRef, useState } from "react";
 import type { Drink } from "../types/drinks";
+import { getConfettiColors } from "../utils/confettiColors";
 import {
   calculateDrinkUnits,
   formatDrinkStrength,
 } from "../utils/drinkStrength";
-import { useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -42,6 +45,27 @@ const DrinkListing = ({
           </p>
         </DialogTrigger>
         <DialogContent>
+          <button
+            onClick={() => {
+              const slug = drink.title.toLowerCase().replace(/\s+/g, "-");
+              const url = `https://thenightlatch.com/${slug}`;
+              const text = `Try a ${drink.title} at The Night Latch! ${url}`;
+              navigator.clipboard.writeText(text);
+              if (drink.color) {
+                confetti({
+                  particleCount: 100,
+                  spread: 120,
+                  origin: { y: 0.6 },
+                  ticks: 60,
+                  colors: getConfettiColors(drink.color),
+                });
+              }
+            }}
+            className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            aria-label="Share drink"
+          >
+            <Share className="h-4 w-4" />
+          </button>
           <DialogHeader>
             <DialogTitle>{drink.title}</DialogTitle>
             <DialogDescription asChild>

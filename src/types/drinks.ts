@@ -5,4 +5,5 @@ export type Drink = {
   instructions: string;
   ingredients: { ingredient: Ingredient; amount?: string }[];
   notes?: string[];
+  color?: string;
 };

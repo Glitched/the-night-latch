@@ -1,6 +1,8 @@
 import { menu } from "@/menu";
 import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
+import { getConfettiColors } from "@/utils/confettiColors";
 import { Shuffle, X } from "@phosphor-icons/react";
+import confetti from "canvas-confetti";
 import { useEffect, useRef, useState } from "react";
 import { findDrinkBySlug } from "@/utils/drinkSlug";
 import DrinkListing from "./DrinkListing";
@@ -97,6 +99,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [openDrink, setOpenDrink] = useState<string | null>(initialDrink ?? null);
   const searchInputRef = useRef<SearchInputHandle>(null);
+  const filteredDrinksRef = useRef<typeof menu>([]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -117,15 +120,29 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
       const target = e.target as HTMLElement;
       const isInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA";
 
-      if (e.key === "/" && !isInput) {
+      const isSearchShortcut =
+        (e.key === "/" && !isInput) ||
+        ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "p"));
+
+      if (isSearchShortcut) {
         e.preventDefault();
         searchInputRef.current?.expand();
       }
 
       if (e.key === "r" && !isInput) {
         e.preventDefault();
-        const randomDrink = menu[Math.floor(Math.random() * menu.length)];
-        if (randomDrink) handleDrinkOpen(randomDrink.title);
+        const currentDrinks = filteredDrinksRef.current;
+        const randomDrink = currentDrinks[Math.floor(Math.random() * currentDrinks.length)];
+        if (randomDrink) {
+          confetti({
+            particleCount: 100,
+            spread: 120,
+            origin: { y: 0.6 },
+            ticks: 60,
+            colors: randomDrink.color ? getConfettiColors(randomDrink.color) : undefined,
+          });
+          handleDrinkOpen(randomDrink.title);
+        }
       }
 
       if (e.key === "Escape" && openDrink) {
@@ -176,6 +193,8 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
         (note) => note.toLowerCase() === requiredNote.toLowerCase()
       );
     });
+
+  filteredDrinksRef.current = drinks;
 
   const hasFilters = baseSpirit || requiredIngredient || requiredNote || searchQuery;
   const totalDrinks = menu.length;
@@ -241,7 +260,16 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
               variant="outline"
               onClick={() => {
                 const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
-                if (randomDrink) handleDrinkOpen(randomDrink.title);
+                if (randomDrink) {
+                  confetti({
+                    particleCount: 100,
+                    spread: 120,
+                    origin: { y: 0.6 },
+                    ticks: 60,
+                    colors: randomDrink.color ? getConfettiColors(randomDrink.color) : undefined,
+                  });
+                  handleDrinkOpen(randomDrink.title);
+                }
               }}
             >
               <Shuffle size={18} />

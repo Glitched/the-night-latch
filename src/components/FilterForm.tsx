@@ -3,22 +3,21 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import type { Ingredient } from "@/types/ingredient";
 
-import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Form, FormField, FormLabel } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import {
+  allNotes,
+  baseSpiritDrinkCounts,
+  ingredientDrinkCounts,
+  ingredientsInAllDrinks,
+  noteDrinkCounts,
+} from "@/menu";
 import { baseSpirits, getByName } from "@/types/ingredient";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { IngredientComboBox } from "./IngredientCombobox";
-import { NotesComboBox } from "./NotesCombobox";
+import { FilterCombobox } from "./FilterCombobox";
 import { DialogClose } from "./ui/dialog";
 
 const formSchema = z.object({
@@ -26,6 +25,21 @@ const formSchema = z.object({
   ingredient: z.string().or(z.null()),
   note: z.string().or(z.null()),
 });
+
+const spiritItems = baseSpirits.map((s) => ({
+  value: s.name,
+  count: baseSpiritDrinkCounts.get(s.name),
+}));
+
+const ingredientItems = ingredientsInAllDrinks.map((i) => ({
+  value: i.name,
+  count: ingredientDrinkCounts.get(i.name),
+}));
+
+const noteItems = allNotes.map((n) => ({
+  value: n,
+  count: noteDrinkCounts.get(n),
+}));
 
 export function FilterForm({
   className,
@@ -77,23 +91,13 @@ export function FilterForm({
             render={({ field }) => (
               <>
                 <FormLabel htmlFor="base">Base Spirit</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="All" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {baseSpirits.map((option) => (
-                      <SelectItem value={option.name} key={option.name}>
-                        {option.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FilterCombobox
+                  items={spiritItems}
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Select spirit"
+                  filterPlaceholder="Filter spirit..."
+                />
               </>
             )}
           />
@@ -105,9 +109,12 @@ export function FilterForm({
             render={({ field }) => (
               <>
                 <FormLabel htmlFor="ingredient">Ingredient</FormLabel>
-                <IngredientComboBox
-                  onChange={field.onChange}
+                <FilterCombobox
+                  items={ingredientItems}
                   value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Select ingredient"
+                  filterPlaceholder="Filter ingredient..."
                 />
               </>
             )}
@@ -120,9 +127,12 @@ export function FilterForm({
             render={({ field }) => (
               <>
                 <FormLabel htmlFor="note">Tasting Notes</FormLabel>
-                <NotesComboBox
-                  onChange={field.onChange}
+                <FilterCombobox
+                  items={noteItems}
                   value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Select note"
+                  filterPlaceholder="Filter notes..."
                 />
               </>
             )}
