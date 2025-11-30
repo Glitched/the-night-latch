@@ -10,7 +10,6 @@ import { FilterModal } from "./FilterModal";
 import { PullIndicator } from "./PullIndicator";
 import { SearchInput, type SearchInputHandle } from "./SearchInput";
 import { Button } from "./ui/button";
-import { useShakeDetection } from "@/hooks/use-shake-detection";
 import { usePullToRandom } from "@/hooks/use-pull-to-random";
 
 // String matchers for ranked search
@@ -129,8 +128,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
     }
   }, [handleDrinkOpen]);
 
-  // Mobile gesture hooks
-  useShakeDetection(triggerSurprise);
+  // Pull-to-random gesture
   const { progress, isPulling, isReady } = usePullToRandom(triggerSurprise, {
     threshold: 60,
     resistance: 1.5,
@@ -271,6 +269,8 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
                   setRequiredIngredient(ingredientName);
                   handleDrinkOpen(null);
                 }}
+                onDrinkClick={handleDrinkOpen}
+                allDrinks={menu}
               />
             ))}
           </ul>

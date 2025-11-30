@@ -1,8 +1,9 @@
 import { Share } from "@phosphor-icons/react";
 import confetti from "canvas-confetti";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { Drink } from "../types/drinks";
 import { getConfettiColors } from "../utils/confettiColors";
+import { getSimilarDrinks } from "../utils/drinkSimilarity";
 import {
   calculateDrinkUnits,
   formatDrinkStrength,
@@ -21,16 +22,24 @@ const DrinkListing = ({
   open,
   onOpenChange,
   onIngredientClick,
+  onDrinkClick,
+  allDrinks,
 }: {
   drink: Drink;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   onIngredientClick?: (ingredientName: string) => void;
+  onDrinkClick?: (drinkTitle: string) => void;
+  allDrinks?: Drink[];
 }) => {
   const [showDUs, setShowDUs] = useState(false);
   const isTouchDevice = useRef(false);
   const strength = formatDrinkStrength(drink);
   const dus = calculateDrinkUnits(drink);
+  const similarDrinks = useMemo(
+    () => (allDrinks ? getSimilarDrinks(drink, allDrinks, 3) : []),
+    [drink, allDrinks]
+  );
 
   return (
     <li className="list-none group">
@@ -114,6 +123,23 @@ const DrinkListing = ({
                   ))}
                 </ul>
                 <p className="mt-4">{drink.instructions}</p>
+                {similarDrinks.length > 0 && (
+                  <div className="mt-6 pt-4 border-t border-border">
+                    <p className="text-sm text-muted-foreground mb-2">Also try:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {similarDrinks.map((d) => (
+                        <button
+                          key={d.title}
+                          type="button"
+                          onClick={() => onDrinkClick?.(d.title)}
+                          className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                        >
+                          {d.title}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </DialogDescription>
           </DialogHeader>
