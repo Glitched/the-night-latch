@@ -17,6 +17,8 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
+const SWIPE_THRESHOLD = 50;
+
 const DrinkListing = ({
   drink,
   open,
@@ -24,7 +26,10 @@ const DrinkListing = ({
   onIngredientClick,
   onNoteClick,
   onDrinkClick,
+  onNavigate,
   allDrinks,
+  hasPrev,
+  hasNext,
 }: {
   drink: Drink;
   open?: boolean;
@@ -32,10 +37,15 @@ const DrinkListing = ({
   onIngredientClick?: (ingredientName: string) => void;
   onNoteClick?: (note: string) => void;
   onDrinkClick?: (drinkTitle: string) => void;
+  onNavigate?: (direction: "prev" | "next") => void;
   allDrinks?: Drink[];
+  hasPrev?: boolean;
+  hasNext?: boolean;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
   const isTouchDevice = useRef(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
   const strength = formatDrinkStrength(drink);
   const dus = calculateDrinkUnits(drink);
   const similarDrinks = useMemo(
@@ -57,7 +67,33 @@ const DrinkListing = ({
             {drink.ingredients.map((d) => d.ingredient.name).join(", ")}
           </p>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            if (!touch) return;
+            // Don't track if starting on a horizontally scrollable element
+            const target = e.target as HTMLElement;
+            if (target.closest(".scrollbar-hide")) return;
+            touchStartX.current = touch.clientX;
+            touchStartY.current = touch.clientY;
+          }}
+          onTouchEnd={(e) => {
+            const touch = e.changedTouches[0];
+            if (!touch || touchStartX.current === null || touchStartY.current === null) return;
+            const deltaX = touch.clientX - touchStartX.current;
+            const deltaY = touch.clientY - touchStartY.current;
+            // Only trigger if horizontal swipe is dominant
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+              if (deltaX > 0 && hasPrev) {
+                onNavigate?.("prev");
+              } else if (deltaX < 0 && hasNext) {
+                onNavigate?.("next");
+              }
+            }
+            touchStartX.current = null;
+            touchStartY.current = null;
+          }}
+        >
           <button
             onClick={() => {
               const slug = drink.title.toLowerCase().replace(/\s+/g, "-");
@@ -84,10 +120,10 @@ const DrinkListing = ({
             <DialogDescription asChild>
               <div>
                 {(strength || (drink.notes && drink.notes.length > 0)) && (
-                  <div className="mt-1 mb-3 flex flex-wrap gap-2">
+                  <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
                     {strength && (
                       <span
-                        className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none"
+                        className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none"
                         onTouchStart={() => {
                           isTouchDevice.current = true;
                         }}
@@ -107,7 +143,7 @@ const DrinkListing = ({
                         key={note}
                         type="button"
                         onClick={() => onNoteClick?.(note)}
-                        className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                        className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
                       >
                         {note}
                       </button>
@@ -135,14 +171,14 @@ const DrinkListing = ({
                 </ul>
                 <p className="mt-4">{drink.instructions}</p>
                 {similarDrinks.length > 0 && (
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Also try:</span>
+                  <div className="mt-4 -mx-6 px-6 flex items-center gap-2 overflow-x-auto scrollbar-hide">
+                    <span className="shrink-0 text-sm text-muted-foreground">Also try:</span>
                     {similarDrinks.map((d) => (
                       <button
                         key={d.title}
                         type="button"
                         onClick={() => onDrinkClick?.(d.title)}
-                        className="text-sm px-3 py-1 rounded-full border border-border text-muted-foreground hover:bg-secondary/50 transition-colors"
+                        className="shrink-0 text-sm px-3 py-1 rounded-full border border-border text-muted-foreground hover:bg-secondary/50 transition-colors"
                       >
                         {d.title}
                       </button>

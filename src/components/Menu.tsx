@@ -170,6 +170,22 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
       if (e.key === "Escape" && openDrink) {
         handleDrinkOpen(null);
       }
+
+      const isPrev = e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "h" || e.key === "k";
+      const isNext = e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "l" || e.key === "j";
+
+      if (openDrink && (isPrev || isNext)) {
+        e.preventDefault();
+        const currentDrinks = filteredDrinksRef.current;
+        const currentIndex = currentDrinks.findIndex((d) => d.title === openDrink);
+        if (currentIndex === -1) return;
+
+        if (isPrev && currentIndex > 0) {
+          handleDrinkOpen(currentDrinks[currentIndex - 1]!.title);
+        } else if (isNext && currentIndex < currentDrinks.length - 1) {
+          handleDrinkOpen(currentDrinks[currentIndex + 1]!.title);
+        }
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -274,6 +290,16 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
                   handleDrinkOpen(null);
                 }}
                 onDrinkClick={handleDrinkOpen}
+                onNavigate={(direction) => {
+                  const currentIndex = drinks.findIndex((d) => d.title === drink.title);
+                  if (direction === "prev" && currentIndex > 0) {
+                    handleDrinkOpen(drinks[currentIndex - 1]!.title);
+                  } else if (direction === "next" && currentIndex < drinks.length - 1) {
+                    handleDrinkOpen(drinks[currentIndex + 1]!.title);
+                  }
+                }}
+                hasPrev={drinks.findIndex((d) => d.title === drink.title) > 0}
+                hasNext={drinks.findIndex((d) => d.title === drink.title) < drinks.length - 1}
                 allDrinks={menu}
               />
             ))}
