@@ -35,7 +35,7 @@ export function NotesComboBox({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-full justify-start">
-            {value ? <>{value}</> : <>Select taste</>}
+            {value ? <>{value}</> : <>Select note</>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0" align="start">
@@ -49,7 +49,7 @@ export function NotesComboBox({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline" className="w-full justify-start">
-          {value ? <>{value}</> : <>Select taste</>}
+          {value ? <>{value}</> : <>Select note</>}
         </Button>
       </DrawerTrigger>
       <DrawerContent>

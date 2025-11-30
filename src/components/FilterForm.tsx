@@ -119,7 +119,7 @@ export function FilterForm({
             name="note"
             render={({ field }) => (
               <>
-                <FormLabel htmlFor="note">Taste</FormLabel>
+                <FormLabel htmlFor="note">Tasting Notes</FormLabel>
                 <NotesComboBox
                   onChange={field.onChange}
                   value={field.value}
