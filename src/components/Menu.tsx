@@ -1,11 +1,11 @@
 import { menu } from "@/menu";
 import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
 import { Shuffle, X } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { findDrinkBySlug } from "@/utils/drinkSlug";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
-import { SearchInput } from "./SearchInput";
+import { SearchInput, type SearchInputHandle } from "./SearchInput";
 import { Button } from "./ui/button";
 
 // String matchers for ranked search
@@ -96,6 +96,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   const [requiredNote, setRequiredNote] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [openDrink, setOpenDrink] = useState<string | null>(initialDrink ?? null);
+  const searchInputRef = useRef<SearchInputHandle>(null);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -110,6 +111,31 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      const isInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA";
+
+      if (e.key === "/" && !isInput) {
+        e.preventDefault();
+        searchInputRef.current?.expand();
+      }
+
+      if (e.key === "r" && !isInput) {
+        e.preventDefault();
+        const randomDrink = menu[Math.floor(Math.random() * menu.length)];
+        if (randomDrink) handleDrinkOpen(randomDrink.title);
+      }
+
+      if (e.key === "Escape" && openDrink) {
+        handleDrinkOpen(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [openDrink]);
 
   const handleDrinkOpen = (drinkTitle: string | null) => {
     setOpenDrink(drinkTitle);
@@ -157,7 +183,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   return (
     <section className="flex-grow">
       <div className="flex justify-center items-center gap-4 mb-16 print:hidden">
-        <SearchInput value={searchQuery} onChange={setSearchQuery} />
+        <SearchInput ref={searchInputRef} value={searchQuery} onChange={setSearchQuery} />
         <FilterModal
           setBaseSpirit={setBaseSpirit}
           baseSpirit={baseSpirit}

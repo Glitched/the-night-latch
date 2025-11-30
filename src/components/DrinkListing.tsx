@@ -44,43 +44,45 @@ const DrinkListing = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{drink.title}</DialogTitle>
-            <DialogDescription>
-              {strength && (
-                <p className="mb-2 text-muted-foreground font-light flex items-center gap-1">
-                  <span
-                    className="flex items-center gap-1 cursor-pointer select-none"
-                    onTouchStart={() => {
-                      isTouchDevice.current = true;
-                    }}
-                    onMouseEnter={() =>
-                      !isTouchDevice.current && setShowDUs(true)
-                    }
-                    onMouseLeave={() =>
-                      !isTouchDevice.current && setShowDUs(false)
-                    }
-                    onClick={() => setShowDUs((prev) => !prev)}
-                  >
-                    {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
-                  </span>
-                  {drink.notes && drink.notes.length > 0 && (
-                    <span> • {drink.notes.join(" • ")}</span>
-                  )}
-                </p>
-              )}
-              <ul className="list-none text-foreground font-sans p-0">
-                {drink.ingredients.map((d) => (
-                  <li key={d.ingredient.name}>
-                    {d.ingredient.name}
-                    {d.amount && (
-                      <span className="text-muted-foreground">
-                        {" "}
-                        • {d.amount}
-                      </span>
+            <DialogDescription asChild>
+              <div>
+                {strength && (
+                  <div className="mb-2 text-muted-foreground font-light flex items-center gap-1">
+                    <span
+                      className="flex items-center gap-1 cursor-pointer select-none"
+                      onTouchStart={() => {
+                        isTouchDevice.current = true;
+                      }}
+                      onMouseEnter={() =>
+                        !isTouchDevice.current && setShowDUs(true)
+                      }
+                      onMouseLeave={() =>
+                        !isTouchDevice.current && setShowDUs(false)
+                      }
+                      onClick={() => setShowDUs((prev) => !prev)}
+                    >
+                      {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
+                    </span>
+                    {drink.notes && drink.notes.length > 0 && (
+                      <span> • {drink.notes.join(" • ")}</span>
                     )}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4">{drink.instructions}</p>
+                  </div>
+                )}
+                <ul className="list-none text-foreground font-sans p-0">
+                  {drink.ingredients.map((d) => (
+                    <li key={d.ingredient.name}>
+                      {d.ingredient.name}
+                      {d.amount && (
+                        <span className="text-muted-foreground">
+                          {" "}
+                          • {d.amount}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4">{drink.instructions}</p>
+              </div>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

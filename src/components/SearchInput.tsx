@@ -1,20 +1,30 @@
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { Button } from "./ui/button";
 
-export function SearchInput({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-}) {
+export interface SearchInputHandle {
+  expand: () => void;
+}
+
+export const SearchInput = forwardRef<
+  SearchInputHandle,
+  { value: string; onChange: (value: string) => void }
+>(function SearchInput({ value, onChange }, ref) {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const expand = useCallback(() => {
     setExpanded(true);
   }, []);
+
+  useImperativeHandle(ref, () => ({ expand }), [expand]);
 
   const collapse = useCallback(() => {
     onChange("");
@@ -76,4 +86,4 @@ export function SearchInput({
       </div>
     </div>
   );
-}
+});
