@@ -253,6 +253,19 @@ export const menu: Drink[] = [
     color: "#8b4513",
   },
   {
+    title: "Bitter Giuseppe",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a rocks glass over 1 large ice cube. Garnish with the lemon peel.",
+    ingredients: [
+      { ingredient: Ingredient.Cynar, amount: "2 oz" },
+      { ingredient: Ingredient.CarpanoAntica, amount: "1 oz" },
+      { ingredient: Ingredient.Lemon, amount: "1/4 oz" },
+      { ingredient: Ingredient.OrangeBitters, amount: "6 dashes" },
+    ],
+    notes: ["Bitter", "Herbal", "Complex", "Earthy"],
+    color: "#5c4033",
+  },
+  {
     title: "Aperol Spritz",
     instructions:
       "Fill a highball glass with ice, then add the Aperol and soda water. Garnish with the orange slice.",

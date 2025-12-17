@@ -171,6 +171,11 @@ const FourthaveSpirits = registerIngredient({
   parent: Amaro,
   abv: 24,
 });
+const Cynar = registerIngredient({
+  name: "Cynar",
+  parent: Amaro,
+  abv: 16.5,
+});
 
 // Liqueur
 const Luxardo = registerIngredient({
@@ -269,6 +274,11 @@ const CocchiDiTorino = registerIngredient({
   parent: SweetVermouth,
   abv: 16,
 });
+const CarpanoAntica = registerIngredient({
+  name: "Carpano Antica Formula",
+  parent: SweetVermouth,
+  abv: 16.5,
+});
 const DolinDry = registerIngredient({
   name: "Dolin Dry",
   parent: Vermouth,
@@ -307,9 +317,11 @@ export {
   Bourbon,
   CaffeBorghetti,
   Campari,
+  CarpanoAntica,
   Citrus,
   CocchiDiTorino,
   Cointreau,
+  Cynar,
   ColdBrew,
   CremeDeCassis,
   CremeDeViolette,
