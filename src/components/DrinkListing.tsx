@@ -95,11 +95,23 @@ const DrinkListing = ({
           }}
         >
           <button
-            onClick={() => {
+            onClick={async () => {
               const slug = drink.title.toLowerCase().replace(/\s+/g, "-");
               const url = `https://thenightlatch.com/${slug}`;
-              const text = `Try a ${drink.title} at The Night Latch! ${url}`;
-              navigator.clipboard.writeText(text);
+              const text = `Try a ${drink.title} at The Night Latch!`;
+
+              // Try native share sheet first (mobile)
+              if (navigator.share) {
+                try {
+                  await navigator.share({ title: drink.title, text, url });
+                } catch {
+                  // User cancelled or share failed - silently ignore
+                }
+              } else {
+                // Fallback to clipboard copy (desktop)
+                navigator.clipboard.writeText(`${text} ${url}`);
+              }
+
               if (drink.color) {
                 confetti({
                   particleCount: 100,
