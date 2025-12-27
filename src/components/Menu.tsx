@@ -160,6 +160,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
       if (isSearchShortcut) {
         e.preventDefault();
         searchInputRef.current?.expand();
+        searchInputRef.current?.focus();
       }
 
       if (e.key === "r" && !isInput && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -233,7 +234,16 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
     <section className="flex-grow">
       <PullIndicator progress={progress} isPulling={isPulling} isReady={isReady} />
       <div className="flex justify-center items-center gap-4 mb-16 print:hidden">
-        <SearchInput ref={searchInputRef} value={searchQuery} onChange={setSearchQuery} />
+        <SearchInput
+          ref={searchInputRef}
+          value={searchQuery}
+          onChange={setSearchQuery}
+          onSubmit={() => {
+            if (drinks.length > 0) {
+              handleDrinkOpen(drinks[0]!.title);
+            }
+          }}
+        />
         <FilterModal
           setBaseSpirit={setBaseSpirit}
           baseSpirit={baseSpirit}
@@ -303,6 +313,12 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
                 hasPrev={drinks.findIndex((d) => d.title === drink.title) > 0}
                 hasNext={drinks.findIndex((d) => d.title === drink.title) < drinks.length - 1}
                 allDrinks={menu}
+                onCloseAutoFocus={(e) => {
+                  if (searchQuery) {
+                    e.preventDefault();
+                    searchInputRef.current?.focus();
+                  }
+                }}
               />
             ))}
           </ul>

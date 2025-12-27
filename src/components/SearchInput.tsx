@@ -11,12 +11,13 @@ import { Button } from "./ui/button";
 
 export interface SearchInputHandle {
   expand: () => void;
+  focus: () => void;
 }
 
 export const SearchInput = forwardRef<
   SearchInputHandle,
-  { value: string; onChange: (value: string) => void }
->(function SearchInput({ value, onChange }, ref) {
+  { value: string; onChange: (value: string) => void; onSubmit?: () => void }
+>(function SearchInput({ value, onChange, onSubmit }, ref) {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +25,11 @@ export const SearchInput = forwardRef<
     setExpanded(true);
   }, []);
 
-  useImperativeHandle(ref, () => ({ expand }), [expand]);
+  const focus = useCallback(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useImperativeHandle(ref, () => ({ expand, focus }), [expand, focus]);
 
   const collapse = useCallback(() => {
     onChange("");
@@ -72,6 +77,11 @@ export const SearchInput = forwardRef<
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Escape") collapse();
+            if (e.key === "Enter" && value) {
+              e.preventDefault();
+              onSubmit?.();
+              inputRef.current?.blur();
+            }
           }}
           placeholder="Search drinks..."
           className="h-10 w-48 sm:w-64 pl-10 pr-10 rounded-md border border-input bg-background text-base font-sans placeholder:text-muted-foreground focus:outline-none focus:border-foreground/50"

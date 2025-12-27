@@ -30,6 +30,7 @@ const DrinkListing = ({
   allDrinks,
   hasPrev,
   hasNext,
+  onCloseAutoFocus,
 }: {
   drink: Drink;
   open?: boolean;
@@ -41,6 +42,7 @@ const DrinkListing = ({
   allDrinks?: Drink[];
   hasPrev?: boolean;
   hasNext?: boolean;
+  onCloseAutoFocus?: (e: Event) => void;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
   const isTouchDevice = useRef(false);
@@ -68,6 +70,7 @@ const DrinkListing = ({
           </p>
         </DialogTrigger>
         <DialogContent
+          onCloseAutoFocus={onCloseAutoFocus}
           onTouchStart={(e) => {
             const touch = e.touches[0];
             if (!touch) return;
@@ -100,7 +103,18 @@ const DrinkListing = ({
               const url = `https://thenightlatch.com/${slug}`;
               const text = `Try a ${drink.title} at The Night Latch!`;
 
-              // Try native share sheet first (mobile)
+              // Fire confetti first
+              if (drink.color) {
+                confetti({
+                  particleCount: 100,
+                  spread: 120,
+                  origin: { y: 0.6 },
+                  ticks: 60,
+                  colors: getConfettiColors(drink.color),
+                });
+              }
+
+              // Try native share sheet (mobile)
               if (navigator.share) {
                 try {
                   await navigator.share({ title: drink.title, text, url });
@@ -110,16 +124,6 @@ const DrinkListing = ({
               } else {
                 // Fallback to clipboard copy (desktop)
                 navigator.clipboard.writeText(`${text} ${url}`);
-              }
-
-              if (drink.color) {
-                confetti({
-                  particleCount: 100,
-                  spread: 120,
-                  origin: { y: 0.6 },
-                  ticks: 60,
-                  colors: getConfettiColors(drink.color),
-                });
               }
             }}
             className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
