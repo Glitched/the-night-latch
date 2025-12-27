@@ -21,7 +21,7 @@ const defaultOgDescription = "Cocktail menu for The Night Latch, a home bar in B
     <meta property="og:type" content="website" />
     <meta property="og:title" content={ogTitle || defaultOgTitle} />
     <meta property="og:description" content={ogDescription || defaultOgDescription} />
-    <meta property="og:url" content="https://thenightlatch.com/" />
+    <meta property="og:url" content={Astro.url.href} />
     <meta property="og:image" content="https://thenightlatch.com/og.png" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
