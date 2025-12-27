@@ -155,7 +155,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
 
       const isSearchShortcut =
         (e.key === "/" && !isInput) ||
-        ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "p"));
+        ((e.metaKey || e.ctrlKey) && e.key === "k");
 
       if (isSearchShortcut) {
         e.preventDefault();

@@ -458,6 +458,30 @@ export const menu: Drink[] = [
     notes: ["Bitter", "Refreshing", "Light", "Herbal"],
     color: "#c44536",
   },
+  {
+    title: "Gold Rush",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the lemon wheel.",
+    ingredients: [
+      { ingredient: Ingredient.Bourbon, amount: "2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.HoneySyrup, amount: "3/4 oz" },
+    ],
+    notes: ["Citrus", "Sweet", "Smooth", "Balanced"],
+    color: "#d4a017",
+  },
+  {
+    title: "Bee's Knees",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. Garnish with the lemon twist.",
+    ingredients: [
+      { ingredient: Ingredient.PlymouthGin, amount: "2 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.HoneySyrup, amount: "3/4 oz" },
+    ],
+    notes: ["Citrus", "Floral", "Sweet", "Refreshing"],
+    color: "#d4a017",
+  },
   // NA drinks at the bottom
   {
     title: "Pathfinder Spritz",

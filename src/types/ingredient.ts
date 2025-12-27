@@ -257,6 +257,10 @@ const DemeraraSyrup = registerIngredient({
   name: "Demerara Syrup",
   parent: Syrup,
 });
+const HoneySyrup = registerIngredient({
+  name: "Honey Syrup",
+  parent: Syrup,
+});
 
 // ETC
 const Soda = registerIngredient({ name: "Soda" });
@@ -339,6 +343,7 @@ export {
   GreenChartreuse,
   Hatozaki,
   Herb,
+  HoneySyrup,
   IrishWhisky,
   JapaneseWhisky,
   Lemon,
