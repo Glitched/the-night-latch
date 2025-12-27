@@ -27,9 +27,11 @@ const { slug } = Astro.params;
 const drink = findDrinkBySlug(slug || "");
 const drinkTitle = drink?.title || null;
 const pageTitle = drink ? `${drink.title} | The Night Latch` : "The Night Latch";
+const ogTitle = drink ? `${drink.title} | The Night Latch` : undefined;
+const ogDescription = drink ? `Recipe for ${drink.title} at The Night Latch, a home bar in Brooklyn.` : undefined;
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} ogTitle={ogTitle} ogDescription={ogDescription}>
   <div id="cover">
     <span id="latch">L</span>
   </div>
