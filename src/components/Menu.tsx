@@ -162,7 +162,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
         searchInputRef.current?.expand();
       }
 
-      if (e.key === "r" && !isInput) {
+      if (e.key === "r" && !isInput && !e.metaKey && !e.ctrlKey && !e.altKey) {
         e.preventDefault();
         triggerSurprise();
       }
@@ -171,10 +171,12 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
         handleDrinkOpen(null);
       }
 
+      // Skip navigation if modifier keys are pressed (allows CMD+L, etc.)
+      const hasModifier = e.metaKey || e.ctrlKey || e.altKey;
       const isPrev = e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "h" || e.key === "k";
       const isNext = e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "l" || e.key === "j";
 
-      if (openDrink && (isPrev || isNext)) {
+      if (openDrink && (isPrev || isNext) && !hasModifier) {
         e.preventDefault();
         const currentDrinks = filteredDrinksRef.current;
         const currentIndex = currentDrinks.findIndex((d) => d.title === openDrink);
