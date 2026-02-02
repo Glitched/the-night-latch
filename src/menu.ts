@@ -323,7 +323,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
     ingredients: [
-      { ingredient: Ingredient.Mezcal, amount: "3/4 oz" },
+      { ingredient: Ingredient.VidaMezcal, amount: "3/4 oz" },
       { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
       { ingredient: Ingredient.YellowChartreuse, amount: "3/4 oz" },
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
