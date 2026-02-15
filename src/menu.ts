@@ -101,16 +101,27 @@ export const menu: Drink[] = [
     color: "#d4d4d4",
   },
   {
-    title: "Margarita",
+    title: "Margarita & Co.",
     instructions:
       "Rim half of a double rocks glass with salt. Shake all the ingredients with ice, then strain into the rimmed glass over ice cubes. Garnish with the lime wedge.",
     ingredients: [
-      { ingredient: Ingredient.Altos, amount: "1 1/2 oz" },
-      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
-      { ingredient: Ingredient.Cointreau, amount: "1/2 oz" },
-      { ingredient: Ingredient.SimpleSyrup },
+      { ingredient: Ingredient.Altos, amount: "2 oz" },
+      { ingredient: Ingredient.Cointreau, amount: "1 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
     ],
     notes: ["Tart", "Citrus", "Refreshing"],
+    color: "#d4e157",
+  },
+  {
+    title: "Tommy's Margarita",
+    instructions:
+      "Rim half of a double rocks glass with salt. Shake all the ingredients with ice, then strain into the rimmed glass over ice cubes. Garnish with the lime wedge.",
+    ingredients: [
+      { ingredient: Ingredient.Altos, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
+      { ingredient: Ingredient.AgaveSyrup, amount: "1/2 oz" },
+    ],
+    notes: ["Tart", "Citrus", "Agave", "Refreshing"],
     color: "#d4e157",
   },
   {
