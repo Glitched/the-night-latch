@@ -65,6 +65,19 @@ export const menu: Drink[] = [
     color: "#c9a227",
   },
   {
+    title: "Oaxacan Old Fashioned",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the orange twist.",
+    ingredients: [
+      { ingredient: Ingredient.VidaMezcal, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Altos, amount: "1/2 oz" },
+      { ingredient: Ingredient.AgaveSyrup, amount: "1 barspoon" },
+      { ingredient: Ingredient.AngosturaBitters, amount: "2 dashes" },
+    ],
+    notes: ["Smoky", "Boozy", "Agave", "Complex"],
+    color: "#c9a227",
+  },
+  {
     title: "Squeaky Wheel",
     instructions:
       "Stir all the ingredients over ice, then strain into a rocks glass over 1 large ice cube. Express the oils of an orange twist over the drink and use as a garnish.",
