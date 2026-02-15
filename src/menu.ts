@@ -65,6 +65,19 @@ export const menu: Drink[] = [
     color: "#c9a227",
   },
   {
+    title: "Oaxacan Old Fashioned",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the orange twist.",
+    ingredients: [
+      { ingredient: Ingredient.VidaMezcal, amount: "1 1/2 oz" },
+      { ingredient: Ingredient.Altos, amount: "1/2 oz" },
+      { ingredient: Ingredient.AgaveSyrup, amount: "1 barspoon" },
+      { ingredient: Ingredient.AngosturaBitters, amount: "2 dashes" },
+    ],
+    notes: ["Smoky", "Boozy", "Agave", "Complex"],
+    color: "#c9a227",
+  },
+  {
     title: "Squeaky Wheel",
     instructions:
       "Stir all the ingredients over ice, then strain into a rocks glass over 1 large ice cube. Express the oils of an orange twist over the drink and use as a garnish.",
@@ -101,16 +114,27 @@ export const menu: Drink[] = [
     color: "#d4d4d4",
   },
   {
-    title: "Margarita",
+    title: "Margarita & Co.",
     instructions:
       "Rim half of a double rocks glass with salt. Shake all the ingredients with ice, then strain into the rimmed glass over ice cubes. Garnish with the lime wedge.",
     ingredients: [
-      { ingredient: Ingredient.Altos, amount: "1 1/2 oz" },
-      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
-      { ingredient: Ingredient.Cointreau, amount: "1/2 oz" },
-      { ingredient: Ingredient.SimpleSyrup },
+      { ingredient: Ingredient.Altos, amount: "2 oz" },
+      { ingredient: Ingredient.Cointreau, amount: "1 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
     ],
     notes: ["Tart", "Citrus", "Refreshing"],
+    color: "#d4e157",
+  },
+  {
+    title: "Tommy's Margarita",
+    instructions:
+      "Rim half of a double rocks glass with salt. Shake all the ingredients with ice, then strain into the rimmed glass over ice cubes. Garnish with the lime wedge.",
+    ingredients: [
+      { ingredient: Ingredient.Altos, amount: "2 oz" },
+      { ingredient: Ingredient.Lime, amount: "1 oz" },
+      { ingredient: Ingredient.AgaveSyrup, amount: "1/2 oz" },
+    ],
+    notes: ["Tart", "Citrus", "Agave", "Refreshing"],
     color: "#d4e157",
   },
   {

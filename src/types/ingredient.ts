@@ -261,6 +261,10 @@ const HoneySyrup = registerIngredient({
   name: "Honey Syrup",
   parent: Syrup,
 });
+const AgaveSyrup = registerIngredient({
+  name: "Agave Syrup",
+  parent: Syrup,
+});
 
 // ETC
 const Soda = registerIngredient({ name: "Soda" });
@@ -310,6 +314,7 @@ const Pathfinder = registerIngredient({
 export * as Ingredient from "./ingredient";
 
 export {
+  AgaveSyrup,
   Altos,
   Amaretto,
   Amaro,
