@@ -506,6 +506,19 @@ export const menu: Drink[] = [
     notes: ["Citrus", "Floral", "Sweet", "Refreshing"],
     color: "#d4a017",
   },
+  {
+    title: "L'industrie Sour",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
+    ingredients: [
+      { ingredient: Ingredient.FernetBranca, amount: "3/4 oz" },
+      { ingredient: Ingredient.GreenChartreuse, amount: "3/4 oz" },
+      { ingredient: Ingredient.Lime, amount: "3/4 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "3/4 oz" },
+    ],
+    notes: ["Bitter", "Herbal", "Tart", "Complex"],
+    color: "#8b4513",
+  },
   // NA drinks at the bottom
   {
     title: "Pathfinder Spritz",
