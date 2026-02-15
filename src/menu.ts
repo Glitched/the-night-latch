@@ -53,6 +53,20 @@ export const menu: Drink[] = [
     color: "#c9a227",
   },
   {
+    title: "Greenpoint",
+    instructions:
+      "Stir all the ingredients over ice, then strain into a coupe. Garnish with the lemon twist.",
+    ingredients: [
+      { ingredient: Ingredient.RittenhouseRye, amount: "2 oz" },
+      { ingredient: Ingredient.YellowChartreuse, amount: "1/2 oz" },
+      { ingredient: Ingredient.CocchiDiTorino, amount: "1/2 oz" },
+      { ingredient: Ingredient.AngosturaBitters, amount: "1 dash" },
+      { ingredient: Ingredient.RegansOrangeBitters, amount: "1 dash" },
+    ],
+    notes: ["Boozy", "Herbal", "Complex", "Spiced"],
+    color: "#c9a227",
+  },
+  {
     title: "Old Fashioned",
     instructions:
       "Stir all the ingredients over ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the orange and lemon twists.",
