@@ -306,7 +306,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
     ingredients: [
-      { ingredient: Ingredient.Bourbon, amount: "3/4 oz" },
+      { ingredient: Ingredient.ElijahCraig, amount: "3/4 oz" },
       { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
       { ingredient: Ingredient.AmaroNonino, amount: "3/4 oz" },
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
@@ -347,7 +347,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
     ingredients: [
-      { ingredient: Ingredient.Mezcal, amount: "3/4 oz" },
+      { ingredient: Ingredient.VidaMezcal, amount: "3/4 oz" },
       { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
       { ingredient: Ingredient.YellowChartreuse, amount: "3/4 oz" },
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
@@ -487,7 +487,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the lemon wheel.",
     ingredients: [
-      { ingredient: Ingredient.Bourbon, amount: "2 oz" },
+      { ingredient: Ingredient.ElijahCraig, amount: "2 oz" },
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
       { ingredient: Ingredient.HoneySyrup, amount: "3/4 oz" },
     ],
