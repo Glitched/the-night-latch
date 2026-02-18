@@ -336,7 +336,7 @@ export const menu: Drink[] = [
       { ingredient: Ingredient.CaffeBorghetti, amount: "1/2 oz" },
       { ingredient: Ingredient.ColdBrew, amount: "1 oz" },
       { ingredient: Ingredient.AmaroNonino, amount: "1/4 oz" },
-      { ingredient: Ingredient.DemeraraSyrup, amount: "1/4 oz" },
+      { ingredient: Ingredient.DemeraraSyrup, amount: "1/8 oz" },
       { ingredient: Ingredient.MoleBitters },
     ],
     notes: ["Coffee", "Spiced", "Complex", "Rich"],
