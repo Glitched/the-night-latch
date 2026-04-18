@@ -306,7 +306,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
     ingredients: [
-      { ingredient: Ingredient.Bourbon, amount: "3/4 oz" },
+      { ingredient: Ingredient.ElijahCraig, amount: "3/4 oz" },
       { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
       { ingredient: Ingredient.AmaroNonino, amount: "3/4 oz" },
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
