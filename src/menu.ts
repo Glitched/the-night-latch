@@ -487,7 +487,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a double rocks glass over 1 large ice cube. Garnish with the lemon wheel.",
     ingredients: [
-      { ingredient: Ingredient.Bourbon, amount: "2 oz" },
+      { ingredient: Ingredient.ElijahCraig, amount: "2 oz" },
       { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
       { ingredient: Ingredient.HoneySyrup, amount: "3/4 oz" },
     ],
