@@ -290,6 +290,21 @@ export const menu: Drink[] = [
     color: "#5c4033",
   },
   {
+    title: "Art of Choke",
+    instructions:
+      "In a mixing glass, gently muddle the mint with the simple syrup and Green Chartreuse. Add the rum, Cynar, and lime juice, then stir over ice. Strain into a rocks glass over 1 large ice cube. Garnish with a mint sprig.",
+    ingredients: [
+      { ingredient: Ingredient.Plantation3StarRum, amount: "1 oz" },
+      { ingredient: Ingredient.Cynar, amount: "1 oz" },
+      { ingredient: Ingredient.GreenChartreuse, amount: "1/4 oz" },
+      { ingredient: Ingredient.Lime, amount: "1/2 oz" },
+      { ingredient: Ingredient.SimpleSyrup, amount: "1 barspoon" },
+      { ingredient: Ingredient.Mint, amount: "6-8 leaves" },
+    ],
+    notes: ["Herbal", "Bitter", "Complex", "Refreshing"],
+    color: "#556b2f",
+  },
+  {
     title: "Aperol Spritz",
     instructions:
       "Fill a highball glass with ice, then add the Aperol and soda water. Garnish with the orange slice.",
