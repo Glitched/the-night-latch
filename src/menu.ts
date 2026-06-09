@@ -1,5 +1,6 @@
 import type { Drink } from "./types/drinks";
 import * as Ingredient from "./types/ingredient";
+import { hasUnknownAbv } from "./utils/drinkStrength";
 
 export const menu: Drink[] = [
   {
@@ -547,6 +548,20 @@ export const menu: Drink[] = [
     color: "#f0e68c",
   },
 ];
+
+// Fails the build if a recipe uses an alcoholic category (e.g. generic
+// "Mezcal") instead of a bottle with a known ABV, which would silently
+// corrupt strength calculations.
+for (const drink of menu) {
+  for (const { ingredient } of drink.ingredients) {
+    if (hasUnknownAbv(ingredient)) {
+      throw new Error(
+        `"${drink.title}" uses "${ingredient.name}", an alcoholic ingredient ` +
+          `with no ABV. Reference a specific bottle, or add an abv to it.`
+      );
+    }
+  }
+}
 
 export const ingredientsInAllDrinks = Ingredient.allIngredients.filter(
   (ingredient) =>
