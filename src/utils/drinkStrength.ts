@@ -109,20 +109,27 @@ export function formatDrinkStrength(drink: Drink): string | null {
 
 const alcoholicCategories = [Liquor, Liqueur, Wine, Vermouth];
 
+// US labeling standard: "non-alcoholic" means below 0.5% ABV
+const NA_ABV_THRESHOLD = 0.5;
+
 /**
- * A drink is non-alcoholic if none of its ingredients have an ABV or
- * belong to an alcoholic category. Checking categories (not just abv)
- * keeps this from misfiring on generic ingredients like "Gin" that
- * don't carry a bottle-specific ABV.
+ * A drink is non-alcoholic if its calculated strength is below the
+ * 0.5% ABV labeling standard. Ingredients from an alcoholic category
+ * with unknown ABV would be counted as 0% by the strength calculation,
+ * so their presence disqualifies the drink instead.
  */
 export function isNonAlcoholic(drink: Drink): boolean {
-  return drink.ingredients.every(
+  const hasUnknownAlcohol = drink.ingredients.some(
     ({ ingredient }) =>
-      !(ingredient.abv && ingredient.abv > 0) &&
-      !alcoholicCategories.some((category) =>
+      ingredient.abv === undefined &&
+      alcoholicCategories.some((category) =>
         isDescendantOf(ingredient, category)
       )
   );
+  if (hasUnknownAlcohol) return false;
+
+  const abv = calculateDrinkStrength(drink);
+  return abv !== null && abv < NA_ABV_THRESHOLD;
 }
 
 /**
