@@ -4,10 +4,17 @@ export type Ingredient = {
   abv?: number;
 };
 
+/**
+ * An ingredient concrete enough to appear in a recipe: its ABV is
+ * documented (0 for non-alcoholic ones). Category nodes like generic
+ * "Mezcal" carry no abv, so the Drink type rejects them at compile time.
+ */
+export type RecipeIngredient = Ingredient & { abv: number };
+
 const allIngredients: Ingredient[] = [];
 const baseSpirits: Ingredient[] = [];
 
-function registerIngredient(ingredient: Ingredient): Ingredient {
+function registerIngredient<T extends Ingredient>(ingredient: T): T {
   allIngredients.push(ingredient);
   const isLiquor = ingredient.parent && ingredient.parent.name === "Liquor";
   if (isLiquor || ingredient.name === "NA") {
@@ -37,15 +44,19 @@ function isDescendantOf(ingredient: Ingredient, parent: Ingredient): boolean {
 
 const Fruit = registerIngredient({ name: "Fruit" });
 const Citrus = registerIngredient({ name: "Citrus", parent: Fruit });
-const Lime = registerIngredient({ name: "Lime", parent: Citrus });
-const Lemon = registerIngredient({ name: "Lemon", parent: Citrus });
-const Orange = registerIngredient({ name: "Orange", parent: Citrus });
-const Grapefruit = registerIngredient({ name: "Grapefruit", parent: Citrus });
+const Lime = registerIngredient({ name: "Lime", parent: Citrus, abv: 0 });
+const Lemon = registerIngredient({ name: "Lemon", parent: Citrus, abv: 0 });
+const Orange = registerIngredient({ name: "Orange", parent: Citrus, abv: 0 });
+const Grapefruit = registerIngredient({
+  name: "Grapefruit",
+  parent: Citrus,
+  abv: 0,
+});
 
 const Herb = registerIngredient({ name: "Herb" });
-const Mint = registerIngredient({ name: "Mint", parent: Herb });
-const Rosemary = registerIngredient({ name: "Rosemary", parent: Herb });
-const Thyme = registerIngredient({ name: "Thyme", parent: Herb });
+const Mint = registerIngredient({ name: "Mint", parent: Herb, abv: 0 });
+const Rosemary = registerIngredient({ name: "Rosemary", parent: Herb, abv: 0 });
+const Thyme = registerIngredient({ name: "Thyme", parent: Herb, abv: 0 });
 
 const Liquor = registerIngredient({ name: "Liquor" });
 const Liqueur = registerIngredient({ name: "Liqueur" });
@@ -221,22 +232,27 @@ const Bitters = registerIngredient({ name: "Bitters" });
 const AngosturaBitters = registerIngredient({
   name: "Angostura Bitters",
   parent: Bitters,
+  abv: 44.7,
 });
 const PeychaudsBitters = registerIngredient({
   name: "Peychaud's Bitters",
   parent: Bitters,
+  abv: 35,
 });
 const OrangeBitters = registerIngredient({
   name: "Orange Bitters",
   parent: Bitters,
+  abv: 45,
 });
 const RegansOrangeBitters = registerIngredient({
   name: "Regan's Orange Bitters",
   parent: OrangeBitters,
+  abv: 45,
 });
 const MoleBitters = registerIngredient({
   name: "Mole Bitters",
   parent: Bitters,
+  abv: 45,
 });
 
 const GreenChartreuse = registerIngredient({
@@ -252,24 +268,31 @@ const YellowChartreuse = registerIngredient({
 
 // Syrup
 const Syrup = registerIngredient({ name: "Syrup" });
-const SimpleSyrup = registerIngredient({ name: "Simple Syrup", parent: Syrup });
+const SimpleSyrup = registerIngredient({
+  name: "Simple Syrup",
+  parent: Syrup,
+  abv: 0,
+});
 const DemeraraSyrup = registerIngredient({
   name: "Demerara Syrup",
   parent: Syrup,
+  abv: 0,
 });
 const HoneySyrup = registerIngredient({
   name: "Honey Syrup",
   parent: Syrup,
+  abv: 0,
 });
 const AgaveSyrup = registerIngredient({
   name: "Agave Syrup",
   parent: Syrup,
+  abv: 0,
 });
 
 // ETC
-const Soda = registerIngredient({ name: "Soda" });
-const EggWhite = registerIngredient({ name: "Egg White" });
-const ColdBrew = registerIngredient({ name: "Cold Brew" });
+const Soda = registerIngredient({ name: "Soda", abv: 0 });
+const EggWhite = registerIngredient({ name: "Egg White", abv: 0 });
+const ColdBrew = registerIngredient({ name: "Cold Brew", abv: 0 });
 
 // Vermouth
 const Vermouth = registerIngredient({ name: "Vermouth" });

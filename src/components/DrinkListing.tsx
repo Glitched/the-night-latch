@@ -8,6 +8,7 @@ import { slugify } from "../utils/drinkSlug";
 import {
   calculateDrinkUnits,
   formatDrinkStrength,
+  isNonAlcoholic,
 } from "../utils/drinkStrength";
 import {
   Dialog,
@@ -49,6 +50,7 @@ const DrinkListing = ({
   const isTouchDevice = useRef(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+  const nonAlcoholic = isNonAlcoholic(drink);
   const strength = formatDrinkStrength(drink);
   const dus = calculateDrinkUnits(drink);
   const similarDrinks = useMemo(
@@ -60,7 +62,14 @@ const DrinkListing = ({
     <li className="list-none group">
       <Dialog {...(open !== undefined ? { open, onOpenChange } : {})}>
         <DialogTrigger className="text-left">
-          <h2 className="m-0 text-xl font-bold tracking-wide">{drink.title}</h2>
+          <h2 className="m-0 text-xl font-bold tracking-wide">
+            {drink.title}
+            {nonAlcoholic && (
+              <span className="ml-2 align-middle text-xs font-normal tracking-wider border border-border rounded-full px-2 py-0.5 text-muted-foreground">
+                NA
+              </span>
+            )}
+          </h2>
           {drink.notes && drink.notes.length > 0 && (
             <p className="mt-1 mb-0 text-sm font-light tracking-wide" style={{ color: "hsl(var(--notes-foreground))" }}>
               {[...drink.notes].sort().slice(0, 3).join(" · ")}
@@ -135,24 +144,32 @@ const DrinkListing = ({
             <DialogTitle>{drink.title}</DialogTitle>
             <DialogDescription asChild>
               <div>
-                {(strength || (drink.notes && drink.notes.length > 0)) && (
+                {(nonAlcoholic ||
+                  strength ||
+                  (drink.notes && drink.notes.length > 0)) && (
                   <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
-                    {strength && (
-                      <span
-                        className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none"
-                        onTouchStart={() => {
-                          isTouchDevice.current = true;
-                        }}
-                        onMouseEnter={() =>
-                          !isTouchDevice.current && setShowDUs(true)
-                        }
-                        onMouseLeave={() =>
-                          !isTouchDevice.current && setShowDUs(false)
-                        }
-                        onClick={() => setShowDUs((prev) => !prev)}
-                      >
-                        {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
+                    {nonAlcoholic ? (
+                      <span className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground select-none">
+                        Non-Alcoholic
                       </span>
+                    ) : (
+                      strength && (
+                        <span
+                          className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none"
+                          onTouchStart={() => {
+                            isTouchDevice.current = true;
+                          }}
+                          onMouseEnter={() =>
+                            !isTouchDevice.current && setShowDUs(true)
+                          }
+                          onMouseLeave={() =>
+                            !isTouchDevice.current && setShowDUs(false)
+                          }
+                          onClick={() => setShowDUs((prev) => !prev)}
+                        >
+                          {showDUs && dus ? `${Math.round(dus)} DUs` : strength}
+                        </span>
+                      )
                     )}
                     {drink.notes?.map((note) => (
                       <button

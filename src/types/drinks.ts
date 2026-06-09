@@ -1,9 +1,9 @@
-import type { Ingredient } from "./ingredient";
+import type { RecipeIngredient } from "./ingredient";
 
 export type Drink = {
   title: string;
   instructions: string;
-  ingredients: { ingredient: Ingredient; amount?: string }[];
+  ingredients: { ingredient: RecipeIngredient; amount?: string }[];
   notes?: string[];
   color?: string;
 };

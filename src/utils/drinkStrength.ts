@@ -75,9 +75,8 @@ export function calculateDrinkStrength(drink: Drink): number | null {
 
   for (const { ingredient, amount } of drink.ingredients) {
     const oz = parseOz(amount);
-    const abv = ingredient.abv ?? 0;
 
-    totalAlcoholOz += oz * (abv / 100);
+    totalAlcoholOz += oz * (ingredient.abv / 100);
     totalOz += oz;
   }
 
@@ -98,6 +97,19 @@ export function formatDrinkStrength(drink: Drink): string | null {
 
   // Round to nearest whole number
   return `${Math.round(abv)}% ABV`;
+}
+
+// US labeling standard: "non-alcoholic" means below 0.5% ABV
+const NA_ABV_THRESHOLD = 0.5;
+
+/**
+ * A drink is non-alcoholic if its calculated strength is below the
+ * 0.5% ABV labeling standard. The RecipeIngredient type guarantees
+ * every ingredient's ABV is documented, so the calculation is reliable.
+ */
+export function isNonAlcoholic(drink: Drink): boolean {
+  const abv = calculateDrinkStrength(drink);
+  return abv !== null && abv < NA_ABV_THRESHOLD;
 }
 
 /**
