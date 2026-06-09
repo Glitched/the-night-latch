@@ -1,12 +1,5 @@
 import type { Drink } from "@/types/drinks";
-import {
-  isDescendantOf,
-  Liqueur,
-  Liquor,
-  Vermouth,
-  Wine,
-  type Ingredient,
-} from "@/types/ingredient";
+import type { Ingredient } from "@/types/ingredient";
 
 /**
  * Parses an amount string like "1 1/2 oz" into a numeric oz value.
@@ -108,30 +101,23 @@ export function formatDrinkStrength(drink: Drink): string | null {
   return `${Math.round(abv)}% ABV`;
 }
 
-const alcoholicCategories = [Liquor, Liqueur, Wine, Vermouth];
-
 // US labeling standard: "non-alcoholic" means below 0.5% ABV
 const NA_ABV_THRESHOLD = 0.5;
 
 /**
  * True for ingredients the strength calculation can't be trusted on:
- * members of an alcoholic category (e.g. generic "Mezcal") with no
- * bottle-specific ABV, which would silently be counted as 0%.
+ * those with no documented ABV (e.g. category ingredients like generic
+ * "Mezcal"), which would silently be counted as 0%.
  */
 export function hasUnknownAbv(ingredient: Ingredient): boolean {
-  return (
-    ingredient.abv === undefined &&
-    alcoholicCategories.some((category) =>
-      isDescendantOf(ingredient, category)
-    )
-  );
+  return ingredient.abv === undefined;
 }
 
 /**
  * A drink is non-alcoholic if its calculated strength is below the
- * 0.5% ABV labeling standard. Ingredients from an alcoholic category
- * with unknown ABV would be counted as 0% by the strength calculation,
- * so their presence disqualifies the drink instead.
+ * 0.5% ABV labeling standard. Ingredients with an unknown ABV would be
+ * counted as 0% by the strength calculation, so their presence
+ * disqualifies the drink instead.
  */
 export function isNonAlcoholic(drink: Drink): boolean {
   if (drink.ingredients.some(({ ingredient }) => hasUnknownAbv(ingredient))) {

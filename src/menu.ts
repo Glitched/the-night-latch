@@ -549,15 +549,15 @@ export const menu: Drink[] = [
   },
 ];
 
-// Fails the build if a recipe uses an alcoholic category (e.g. generic
-// "Mezcal") instead of a bottle with a known ABV, which would silently
-// corrupt strength calculations.
+// Fails the build if a recipe uses an ingredient without a documented
+// ABV (e.g. a category like generic "Mezcal"), which would silently be
+// counted as 0% in strength calculations.
 for (const drink of menu) {
   for (const { ingredient } of drink.ingredients) {
     if (hasUnknownAbv(ingredient)) {
       throw new Error(
-        `"${drink.title}" uses "${ingredient.name}", an alcoholic ingredient ` +
-          `with no ABV. Reference a specific bottle, or add an abv to it.`
+        `"${drink.title}" uses "${ingredient.name}", which has no documented ` +
+          `ABV. Add an abv to the ingredient (0 for non-alcoholic ones).`
       );
     }
   }
