@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import type { Drink } from "../types/drinks";
 import { getConfettiColors } from "../utils/confettiColors";
 import { getSimilarDrinks } from "../utils/drinkSimilarity";
+import { slugify } from "../utils/drinkSlug";
 import {
   calculateDrinkUnits,
   formatDrinkStrength,
@@ -99,8 +100,7 @@ const DrinkListing = ({
         >
           <button
             onClick={async () => {
-              const slug = drink.title.toLowerCase().replace(/\s+/g, "-");
-              const url = `https://thenightlatch.com/${slug}`;
+              const url = `https://thenightlatch.com/${slugify(drink.title)}`;
               const text = `Try a ${drink.title} at The Night Latch!`;
 
               // Fire confetti first

@@ -4,7 +4,7 @@ import { getConfettiColors } from "@/utils/confettiColors";
 import { Shuffle, X } from "@phosphor-icons/react";
 import confetti from "canvas-confetti";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { findDrinkBySlug } from "@/utils/drinkSlug";
+import { findDrinkBySlug, slugify } from "@/utils/drinkSlug";
 import DrinkListing from "./DrinkListing";
 import { FilterModal } from "./FilterModal";
 import { PullIndicator } from "./PullIndicator";
@@ -106,8 +106,7 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   const handleDrinkOpen = useCallback((drinkTitle: string | null) => {
     setOpenDrink(drinkTitle);
     if (drinkTitle) {
-      const slug = drinkTitle.toLowerCase().replace(/\s+/g, "-");
-      window.history.pushState({}, "", `/${slug}`);
+      window.history.pushState({}, "", `/${slugify(drinkTitle)}`);
     } else if (window.location.pathname !== "/") {
       window.history.pushState({}, "", "/");
     }
