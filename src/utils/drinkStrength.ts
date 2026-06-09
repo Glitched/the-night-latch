@@ -1,4 +1,11 @@
 import type { Drink } from "@/types/drinks";
+import {
+  isDescendantOf,
+  Liqueur,
+  Liquor,
+  Vermouth,
+  Wine,
+} from "@/types/ingredient";
 
 /**
  * Parses an amount string like "1 1/2 oz" into a numeric oz value.
@@ -98,6 +105,24 @@ export function formatDrinkStrength(drink: Drink): string | null {
 
   // Round to nearest whole number
   return `${Math.round(abv)}% ABV`;
+}
+
+const alcoholicCategories = [Liquor, Liqueur, Wine, Vermouth];
+
+/**
+ * A drink is non-alcoholic if none of its ingredients have an ABV or
+ * belong to an alcoholic category. Checking categories (not just abv)
+ * keeps this from misfiring on generic ingredients like "Gin" that
+ * don't carry a bottle-specific ABV.
+ */
+export function isNonAlcoholic(drink: Drink): boolean {
+  return drink.ingredients.every(
+    ({ ingredient }) =>
+      !(ingredient.abv && ingredient.abv > 0) &&
+      !alcoholicCategories.some((category) =>
+        isDescendantOf(ingredient, category)
+      )
+  );
 }
 
 /**
