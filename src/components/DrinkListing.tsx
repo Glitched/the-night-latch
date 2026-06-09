@@ -203,6 +203,13 @@ const DrinkListing = ({
                   ))}
                 </ul>
                 <p className="mt-4">{drink.instructions}</p>
+                {drink.source && (
+                  <p className="mt-3 text-sm text-muted-foreground italic">
+                    {[drink.source.creator, drink.source.bar, drink.source.year]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                )}
                 {similarDrinks.length > 0 && (
                   <div className="mt-4 -mx-6 px-6 flex items-center gap-2 overflow-x-auto scrollbar-hide">
                     <span className="shrink-0 text-sm text-muted-foreground">Also try:</span>
