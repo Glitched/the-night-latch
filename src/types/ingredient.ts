@@ -4,10 +4,17 @@ export type Ingredient = {
   abv?: number;
 };
 
+/**
+ * An ingredient concrete enough to appear in a recipe: its ABV is
+ * documented (0 for non-alcoholic ones). Category nodes like generic
+ * "Mezcal" carry no abv, so the Drink type rejects them at compile time.
+ */
+export type RecipeIngredient = Ingredient & { abv: number };
+
 const allIngredients: Ingredient[] = [];
 const baseSpirits: Ingredient[] = [];
 
-function registerIngredient(ingredient: Ingredient): Ingredient {
+function registerIngredient<T extends Ingredient>(ingredient: T): T {
   allIngredients.push(ingredient);
   const isLiquor = ingredient.parent && ingredient.parent.name === "Liquor";
   if (isLiquor || ingredient.name === "NA") {

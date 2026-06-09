@@ -1,5 +1,4 @@
 import type { Drink } from "@/types/drinks";
-import type { Ingredient } from "@/types/ingredient";
 
 /**
  * Parses an amount string like "1 1/2 oz" into a numeric oz value.
@@ -76,9 +75,8 @@ export function calculateDrinkStrength(drink: Drink): number | null {
 
   for (const { ingredient, amount } of drink.ingredients) {
     const oz = parseOz(amount);
-    const abv = ingredient.abv ?? 0;
 
-    totalAlcoholOz += oz * (abv / 100);
+    totalAlcoholOz += oz * (ingredient.abv / 100);
     totalOz += oz;
   }
 
@@ -105,25 +103,11 @@ export function formatDrinkStrength(drink: Drink): string | null {
 const NA_ABV_THRESHOLD = 0.5;
 
 /**
- * True for ingredients the strength calculation can't be trusted on:
- * those with no documented ABV (e.g. category ingredients like generic
- * "Mezcal"), which would silently be counted as 0%.
- */
-export function hasUnknownAbv(ingredient: Ingredient): boolean {
-  return ingredient.abv === undefined;
-}
-
-/**
  * A drink is non-alcoholic if its calculated strength is below the
- * 0.5% ABV labeling standard. Ingredients with an unknown ABV would be
- * counted as 0% by the strength calculation, so their presence
- * disqualifies the drink instead.
+ * 0.5% ABV labeling standard. The RecipeIngredient type guarantees
+ * every ingredient's ABV is documented, so the calculation is reliable.
  */
 export function isNonAlcoholic(drink: Drink): boolean {
-  if (drink.ingredients.some(({ ingredient }) => hasUnknownAbv(ingredient))) {
-    return false;
-  }
-
   const abv = calculateDrinkStrength(drink);
   return abv !== null && abv < NA_ABV_THRESHOLD;
 }
