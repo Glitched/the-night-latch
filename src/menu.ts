@@ -527,7 +527,6 @@ export const menu: Drink[] = [
     instructions:
       "Shake the Pathfinder and lemon juice with ice, then strain into a highball glass filled with ice. Top with soda water and garnish with the lemon wedge.",
     ingredients: [
-      { ingredient: Ingredient.NA },
       { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
       { ingredient: Ingredient.Lemon, amount: "1/2 oz" },
       { ingredient: Ingredient.Soda, amount: "3 oz" },
@@ -540,7 +539,6 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. Garnish with the lime wedge.",
     ingredients: [
-      { ingredient: Ingredient.NA },
       { ingredient: Ingredient.Pathfinder, amount: "2 oz" },
       { ingredient: Ingredient.Lime, amount: "1 oz" },
       { ingredient: Ingredient.SimpleSyrup, amount: "1/2 oz" },

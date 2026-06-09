@@ -1,5 +1,11 @@
-import { menu } from "@/menu";
-import { getByName, Ingredient, isDescendantOf } from "@/types/ingredient";
+import { allNotes, menu } from "@/menu";
+import {
+  allIngredients,
+  baseSpirits,
+  getByName,
+  Ingredient,
+  isDescendantOf,
+} from "@/types/ingredient";
 import { getConfettiColors } from "@/utils/confettiColors";
 import { Shuffle, X } from "@phosphor-icons/react";
 import confetti from "canvas-confetti";
@@ -41,6 +47,33 @@ function fuzzyMatch(query: string, target: string): boolean {
     if (t[ti] === q[qi]) qi++;
   }
   return qi === q.length;
+}
+
+// Reads filter state from the URL query string, resolving names
+// case-insensitively to their canonical forms
+function readFiltersFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+
+  const spiritParam = params.get("spirit");
+  const spirit = spiritParam
+    ? baseSpirits.find(
+        (s) => s.name.toLowerCase() === spiritParam.toLowerCase()
+      ) ?? null
+    : null;
+
+  const ingredientParam = params.get("ingredient");
+  const ingredient = ingredientParam
+    ? allIngredients.find(
+        (i) => i.name.toLowerCase() === ingredientParam.toLowerCase()
+      )?.name ?? null
+    : null;
+
+  const noteParam = params.get("note");
+  const note = noteParam
+    ? allNotes.find((n) => n.toLowerCase() === noteParam.toLowerCase()) ?? null
+    : null;
+
+  return { spirit, ingredient, note, query: params.get("q") ?? "" };
 }
 
 function anyIngredient(
@@ -99,16 +132,47 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
   );
   const [requiredNote, setRequiredNote] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filtersInitialized, setFiltersInitialized] = useState(false);
   const [openDrink, setOpenDrink] = useState<string | null>(initialDrink ?? null);
   const searchInputRef = useRef<SearchInputHandle>(null);
   const filteredDrinksRef = useRef<typeof menu>([]);
 
+  const applyFiltersFromUrl = useCallback(() => {
+    const { spirit, ingredient, note, query } = readFiltersFromUrl();
+    setBaseSpirit(spirit);
+    setRequiredIngredient(ingredient);
+    setRequiredNote(note);
+    setSearchQuery(query);
+  }, []);
+
+  useEffect(() => {
+    applyFiltersFromUrl();
+    setFiltersInitialized(true);
+  }, [applyFiltersFromUrl]);
+
+  // Keep the URL in sync with the active filters so they can be shared
+  useEffect(() => {
+    if (!filtersInitialized) return;
+    const params = new URLSearchParams();
+    if (baseSpirit) params.set("spirit", baseSpirit.name);
+    if (requiredIngredient) params.set("ingredient", requiredIngredient);
+    if (requiredNote) params.set("note", requiredNote);
+    if (searchQuery) params.set("q", searchQuery);
+    const search = params.toString();
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}${search ? `?${search}` : ""}`
+    );
+  }, [filtersInitialized, baseSpirit, requiredIngredient, requiredNote, searchQuery]);
+
   const handleDrinkOpen = useCallback((drinkTitle: string | null) => {
     setOpenDrink(drinkTitle);
+    const search = window.location.search;
     if (drinkTitle) {
-      window.history.pushState({}, "", `/${slugify(drinkTitle)}`);
+      window.history.pushState({}, "", `/${slugify(drinkTitle)}${search}`);
     } else if (window.location.pathname !== "/") {
-      window.history.pushState({}, "", "/");
+      window.history.pushState({}, "", `/${search}`);
     }
   }, []);
 
@@ -142,10 +206,11 @@ const Menu = ({ initialDrink }: { initialDrink?: string | null }) => {
         const drink = findDrinkBySlug(path.slice(1));
         setOpenDrink(drink?.title ?? null);
       }
+      applyFiltersFromUrl();
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+  }, [applyFiltersFromUrl]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
