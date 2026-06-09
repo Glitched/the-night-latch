@@ -13,6 +13,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Bitter", "Boozy", "Herbal"],
     color: "#c44536",
+    source: { creator: "Fosco Scarselli", bar: "Caffè Casoni, Florence", year: "1919" },
   },
   {
     title: "Old Pal",
@@ -25,6 +26,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Bitter", "Dry", "Boozy"],
     color: "#c44536",
+    source: { creator: "Harry MacElhone", bar: "Harry's New York Bar, Paris", year: "1920s" },
   },
   {
     title: "Whisky Sour",
@@ -39,6 +41,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Tart", "Citrus", "Balanced", "Rich"],
     color: "#f5deb3",
+    source: { year: "1862" },
   },
   {
     title: "Manhattan",
@@ -51,6 +54,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Boozy", "Sweet", "Rich", "Spiced"],
     color: "#c9a227",
+    source: { bar: "Manhattan Club, New York", year: "c. 1880" },
   },
   {
     title: "Old Fashioned",
@@ -63,6 +67,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Boozy", "Sweet", "Spiced"],
     color: "#c9a227",
+    source: { year: "1880s" },
   },
   {
     title: "Oaxacan Old Fashioned",
@@ -76,6 +81,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Smoky", "Boozy", "Agave", "Complex"],
     color: "#c9a227",
+    source: { creator: "Phil Ward", bar: "Death & Co, New York", year: "2007" },
   },
   {
     title: "Squeaky Wheel",
@@ -136,6 +142,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Tart", "Citrus", "Agave", "Refreshing"],
     color: "#d4e157",
+    source: { creator: "Julio Bermejo", bar: "Tommy's Mexican Restaurant, San Francisco", year: "c. 1990" },
   },
   {
     title: "Daiquiri",
@@ -148,6 +155,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Tart", "Citrus", "Balanced", "Refreshing"],
     color: "#f0e68c",
+    source: { creator: "Jennings Cox", year: "c. 1898" },
   },
   {
     title: "Mojito",
@@ -174,6 +182,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Floral", "Herbal", "Light"],
     color: "#d4d4d4",
+    source: { creator: "Phil Ward", bar: "Death & Co, New York", year: "2008" },
   },
   {
     title: "Tom Collins",
@@ -187,6 +196,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Refreshing", "Citrus", "Light", "Easy"],
     color: "#f0e68c",
+    source: { year: "1876" },
   },
   {
     title: "Boulevardier",
@@ -199,6 +209,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Bitter", "Boozy", "Sweet", "Complex"],
     color: "#c44536",
+    source: { creator: "Erskine Gwynne", bar: "Harry's New York Bar, Paris", year: "1927" },
   },
   {
     title: "Fancy-Free",
@@ -212,6 +223,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Boozy", "Fruity", "Spiced"],
     color: "#c9a227",
+    source: { year: "1941" },
   },
   {
     title: "Aviation",
@@ -226,6 +238,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Floral", "Citrus", "Tart", "Balanced"],
     color: "#c8b4d6",
+    source: { creator: "Hugo Ensslin", bar: "Hotel Wallick, New York", year: "1916" },
   },
   {
     title: "Fitzgerald",
@@ -239,6 +252,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Tart", "Citrus", "Sweet", "Refreshing"],
     color: "#e6b325",
+    source: { creator: "Dale DeGroff", bar: "Rainbow Room, New York", year: "1990s" },
   },
   {
     title: "Last Word",
@@ -252,6 +266,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Herbal", "Complex", "Balanced", "Tart"],
     color: "#6b8e23",
+    source: { bar: "Detroit Athletic Club", year: "c. 1916" },
   },
   {
     title: "Final Ward",
@@ -265,6 +280,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Herbal", "Tart", "Complex", "Balanced"],
     color: "#6b8e23",
+    source: { creator: "Phil Ward", bar: "Death & Co, New York", year: "2008" },
   },
   {
     title: "Ferrari",
@@ -288,6 +304,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Bitter", "Herbal", "Complex", "Earthy"],
     color: "#5c4033",
+    source: { creator: "Stephen Cole", bar: "The Violet Hour, Chicago", year: "2008" },
   },
   {
     title: "Art of Choke",
@@ -303,6 +320,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Herbal", "Bitter", "Complex", "Refreshing"],
     color: "#556b2f",
+    source: { creator: "Kyle Davidson", bar: "The Violet Hour, Chicago", year: "2008" },
   },
   {
     title: "Aperol Spritz",
@@ -328,6 +346,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Balanced", "Bitter", "Citrus", "Complex"],
     color: "#ff6b35",
+    source: { creator: "Sam Ross", bar: "Milk & Honey, New York", year: "2008" },
   },
   {
     title: "Espresso Martini",
@@ -341,6 +360,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Coffee", "Sweet", "Rich"],
     color: "#3d2314",
+    source: { creator: "Dick Bradsell", bar: "Soho Brasserie, London", year: "1983" },
   },
   {
     title: "Black Tie Optional",
@@ -369,6 +389,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Smoky", "Herbal", "Balanced", "Complex"],
     color: "#e6b325",
+    source: { creator: "Joaquín Simó", bar: "Death & Co, New York", year: "2011" },
   },
   {
     title: "Gimlet",
@@ -394,6 +415,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Refreshing", "Citrus", "Light", "Dry"],
     color: "#e6b325",
+    source: { creator: "Harry MacElhone", bar: "Harry's New York Bar, Paris", year: "c. 1915" },
   },
   {
     title: "Hanky Panky",
@@ -406,6 +428,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Herbal", "Bitter", "Complex", "Boozy"],
     color: "#8b4513",
+    source: { creator: "Ada Coleman", bar: "American Bar, The Savoy, London" },
   },
   {
     title: "Toronto",
@@ -419,6 +442,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Boozy", "Herbal", "Bitter", "Spiced"],
     color: "#8b4513",
+    source: { year: "c. 1922" },
   },
   {
     title: "Bijou",
@@ -432,6 +456,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Herbal", "Complex", "Sweet", "Boozy"],
     color: "#6b8e23",
+    source: { creator: "Harry Johnson", year: "c. 1890" },
   },
   {
     title: "Rob Roy",
@@ -444,6 +469,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Boozy", "Sweet", "Smoky", "Rich"],
     color: "#c9a227",
+    source: { bar: "Waldorf Hotel, New York", year: "1894" },
   },
   {
     title: "Golden Gate",
@@ -470,6 +496,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Tart", "Citrus", "Dry", "Refreshing"],
     color: "#f0e68c",
+    source: { creator: "Constantino Ribalaigua", bar: "El Floridita, Havana", year: "1930s" },
   },
   {
     title: "Paloma",
@@ -496,6 +523,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Bitter", "Refreshing", "Light", "Herbal"],
     color: "#c44536",
+    source: { bar: "Caffè Campari, Milan", year: "1860s" },
   },
   {
     title: "Gold Rush",
@@ -508,6 +536,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Citrus", "Sweet", "Smooth", "Balanced"],
     color: "#d4a017",
+    source: { creator: "T.J. Siegal", bar: "Milk & Honey, New York", year: "2001" },
   },
   {
     title: "Bee's Knees",
@@ -520,6 +549,7 @@ export const menu: Drink[] = [
     ],
     notes: ["Citrus", "Floral", "Sweet", "Refreshing"],
     color: "#d4a017",
+    source: { year: "1920s" },
   },
   // NA drinks at the bottom
   {
