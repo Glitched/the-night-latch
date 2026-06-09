@@ -2,25 +2,10 @@
 import "@/styles/globals.css";
 import Menu from "../components/Menu";
 import Layout from "../layouts/Layout.astro";
-import { menu } from "@/menu";
-import { findDrinkBySlug, normalizeSlug } from "@/utils/drinkSlug";
+import { findDrinkBySlug, getAllDrinkSlugs } from "@/utils/drinkSlug";
 
 export function getStaticPaths() {
-  const paths = [];
-
-  for (const drink of menu) {
-    // Add hyphenated version: "Rob Roy" -> "rob-roy"
-    const hyphenated = drink.title.toLowerCase().replace(/\s+/g, "-");
-    paths.push({ params: { slug: hyphenated } });
-
-    // Add compact version: "Rob Roy" -> "robroy"
-    const compact = normalizeSlug(drink.title);
-    if (compact !== hyphenated.replace(/-/g, "")) {
-      paths.push({ params: { slug: compact } });
-    }
-  }
-
-  return paths;
+  return getAllDrinkSlugs().map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;

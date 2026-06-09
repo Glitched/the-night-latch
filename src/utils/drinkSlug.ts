@@ -1,6 +1,18 @@
 import { menu } from "@/menu";
 
 /**
+ * Converts a drink title into a URL-safe slug.
+ * "Margarita & Co." -> "margarita-co"
+ * "Rob Roy" -> "rob-roy"
+ */
+export function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
  * Normalizes a string for slug matching.
  * Removes non-alpha characters and lowercases.
  * "Rob Roy" -> "robroy"
@@ -21,20 +33,20 @@ export function findDrinkBySlug(slug: string): (typeof menu)[0] | undefined {
 
 /**
  * Generates all valid slugs for static path generation.
- * Returns both hyphenated and non-hyphenated versions.
+ * Returns hyphenated and non-hyphenated versions, plus legacy
+ * space-replaced slugs so previously shared links keep working.
  */
 export function getAllDrinkSlugs(): string[] {
-  const slugs: string[] = [];
+  const slugs = new Set<string>();
   for (const drink of menu) {
-    // Add lowercase hyphenated version: "Rob Roy" -> "rob-roy"
-    const hyphenated = drink.title.toLowerCase().replace(/\s+/g, "-");
-    slugs.push(hyphenated);
+    // Hyphenated version: "Rob Roy" -> "rob-roy"
+    slugs.add(slugify(drink.title));
 
-    // Add non-hyphenated version: "Rob Roy" -> "robroy"
-    const compact = normalizeSlug(drink.title);
-    if (compact !== hyphenated.replace(/-/g, "")) {
-      slugs.push(compact);
-    }
+    // Non-hyphenated version: "Rob Roy" -> "robroy"
+    slugs.add(normalizeSlug(drink.title));
+
+    // Legacy version with punctuation: "Margarita & Co." -> "margarita-&-co."
+    slugs.add(drink.title.toLowerCase().replace(/\s+/g, "-"));
   }
-  return slugs;
+  return [...slugs];
 }

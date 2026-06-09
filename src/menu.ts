@@ -152,7 +152,7 @@ export const menu: Drink[] = [
   {
     title: "Mojito",
     instructions:
-      "In a shaker, gently muddle the mint and simple syrup. Add the remaining ingredients and whip (shake with a few pieces of crushed ice just until the ingredients are incorporated). Dump into and double rocks glass and fill the glass with crushed ice. Garnish with the mint bouquet in the center of the ice and serve with a straw.",
+      "In a shaker, gently muddle the mint and simple syrup. Add the remaining ingredients and whip (shake with a few pieces of crushed ice just until the ingredients are incorporated). Dump into a double rocks glass and fill the glass with crushed ice. Garnish with the mint bouquet in the center of the ice and serve with a straw.",
     ingredients: [
       { ingredient: Ingredient.Plantation3StarRum, amount: "2 oz" },
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
@@ -307,7 +307,7 @@ export const menu: Drink[] = [
   {
     title: "Aperol Spritz",
     instructions:
-      "Fill a highball glass with ice, then add the Aperol and soda water. Garnish with the orange slice.",
+      "Fill a highball glass with ice, then add the Prosecco, Aperol, and soda water. Garnish with the orange slice.",
     ingredients: [
       { ingredient: Ingredient.Prosecco, amount: "3 oz" },
       { ingredient: Ingredient.Aperol, amount: "2 oz" },
@@ -362,7 +362,7 @@ export const menu: Drink[] = [
     instructions:
       "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
     ingredients: [
-      { ingredient: Ingredient.Mezcal, amount: "3/4 oz" },
+      { ingredient: Ingredient.VidaMezcal, amount: "3/4 oz" },
       { ingredient: Ingredient.Aperol, amount: "3/4 oz" },
       { ingredient: Ingredient.YellowChartreuse, amount: "3/4 oz" },
       { ingredient: Ingredient.Lime, amount: "3/4 oz" },
