@@ -1,7 +1,9 @@
 import { Share } from "@phosphor-icons/react";
 import confetti from "canvas-confetti";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import type { Drink } from "../types/drinks";
+import { scaleAmount } from "../utils/scaleAmount";
 import { getConfettiColors } from "../utils/confettiColors";
 import { getSimilarDrinks } from "../utils/drinkSimilarity";
 import { slugify } from "../utils/drinkSlug";
@@ -47,6 +49,8 @@ const DrinkListing = ({
   onCloseAutoFocus?: (e: Event) => void;
 }) => {
   const [showDUs, setShowDUs] = useState(false);
+  const [batchFactor, setBatchFactor] = useState(1);
+  const [batchOpen, setBatchOpen] = useState(false);
   const isTouchDevice = useRef(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -57,6 +61,14 @@ const DrinkListing = ({
     () => (allDrinks ? getSimilarDrinks(drink, allDrinks, 3) : []),
     [drink, allDrinks]
   );
+
+  // Batch size is per-opening: reset whenever this drink's dialog opens
+  useEffect(() => {
+    if (open) {
+      setBatchFactor(1);
+      setBatchOpen(false);
+    }
+  }, [open]);
 
   return (
     <li className="list-none group">
@@ -144,10 +156,43 @@ const DrinkListing = ({
             <DialogTitle>{drink.title}</DialogTitle>
             <DialogDescription asChild>
               <div>
-                {(nonAlcoholic ||
-                  strength ||
-                  (drink.notes && drink.notes.length > 0)) && (
-                  <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
+                <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
+                    {batchOpen ? (
+                      <div className="shrink-0 flex items-center gap-0.5 rounded-full bg-secondary p-0.5">
+                        {[1, 2, 3, 4].map((factor) => (
+                          <button
+                            key={factor}
+                            type="button"
+                            onClick={() => {
+                              setBatchFactor(factor);
+                              setBatchOpen(false);
+                            }}
+                            className={cn(
+                              "px-2 py-0.5 text-sm rounded-full transition-colors",
+                              factor === batchFactor
+                                ? "bg-foreground text-background"
+                                : "text-secondary-foreground hover:bg-secondary-foreground/10"
+                            )}
+                          >
+                            {factor}×
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setBatchOpen(true)}
+                        aria-label="Batch size"
+                        className={cn(
+                          "shrink-0 text-sm px-3 py-1 rounded-full transition-colors",
+                          batchFactor > 1
+                            ? "bg-foreground text-background"
+                            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        )}
+                      >
+                        {batchFactor}×
+                      </button>
+                    )}
                     {nonAlcoholic ? (
                       <span className="shrink-0 text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground select-none">
                         Non-Alcoholic
@@ -181,8 +226,7 @@ const DrinkListing = ({
                         {note}
                       </button>
                     ))}
-                  </div>
-                )}
+                </div>
                 <ul className="list-none text-foreground font-sans p-0">
                   {drink.ingredients.map((d) => (
                     <li key={d.ingredient.name}>
@@ -196,7 +240,7 @@ const DrinkListing = ({
                       {d.amount && (
                         <span className="text-muted-foreground">
                           {" "}
-                          • {d.amount}
+                          • {scaleAmount(d.amount, batchFactor)}
                         </span>
                       )}
                     </li>

@@ -36,7 +36,7 @@ export function parseOz(amount: string | undefined): number {
  * Parses a mixed number string like "1 1/2" into a decimal.
  * Also handles plain integers "2" and plain fractions "3/4".
  */
-function parseMixedNumber(s: string): number {
+export function parseMixedNumber(s: string): number {
   const parts = s.split(/\s+/);
 
   if (parts.length === 2 && parts[0] && parts[1]) {
