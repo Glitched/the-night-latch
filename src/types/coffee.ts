@@ -92,8 +92,12 @@ export type CoffeeDrink = {
   blurb: string;
   /** Fuller story, shown when the drink is opened. */
   description: string;
-  /** Short stats rendered as chips: dose, ratio, temperature, time… */
-  params: { label: string; value: string }[];
+  /**
+   * Short stats rendered as chips: dose, ratio, temperature, time…
+   * Temperature params carry tempC instead of value — they render in
+   * Fahrenheit by default and toggle to Celsius on tap.
+   */
+  params: { label: string; value?: string; tempC?: number }[];
   /** Espresso drinks: the GaggiMate profile they're pulled with. */
   profile?: GaggiMateProfile;
   /** A representative real pull of that profile, for the chart. */

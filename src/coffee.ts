@@ -127,7 +127,7 @@ export const coffeeDrinks: CoffeeDrink[] = [
     params: [
       { label: "Dose", value: "18 g in / 39.6 g out" },
       { label: "Ratio", value: "1:2.2" },
-      { label: "Water", value: "90.5°C" },
+      { label: "Water", tempC: 90.5 },
       { label: "Time", value: "≈15 s" },
     ],
     profile: seyTurbo,
@@ -141,13 +141,12 @@ export const coffeeDrinks: CoffeeDrink[] = [
     params: [
       { label: "Dose", value: "20 g / 320 g" },
       { label: "Ratio", value: "1:16" },
-      { label: "Water", value: "99°C" },
+      { label: "Water", tempC: 93 },
       { label: "Time", value: "≈3 min" },
     ],
     recipeSteps: [
-      "Bloom with 60 g of water, swirl, and rest 45 seconds.",
-      "Pour to 160 g in slow circles.",
-      "Two more pours of 80 g each as the bed drains.",
+      "Bloom to about 50 g and rest around 30 seconds.",
+      "Two pours to 320 g, letting the bed drain between them.",
       "Swirl gently and let it draw down flat.",
     ],
   },
@@ -158,7 +157,7 @@ export const coffeeDrinks: CoffeeDrink[] = [
       "The turbo shot stretched with hot water. Everything the espresso is, at a friendlier volume. Not the Campari one — that's a tab over.",
     params: [
       { label: "Build", value: "1 shot + 90 g water" },
-      { label: "Water", value: "90.5°C" },
+      { label: "Water", tempC: 90.5 },
     ],
   },
 ];
@@ -202,6 +201,7 @@ export const gear: GearItem[] = [
   },
   {
     name: "Hario V60",
-    detail: "Plastic, because the coffee people are right about thermal mass.",
+    detail:
+      "Glass, even though the plastic people are probably right about thermal mass. Lined with CAFEC Abaca filters.",
   },
 ];

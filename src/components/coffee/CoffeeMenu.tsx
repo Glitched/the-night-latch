@@ -1,5 +1,5 @@
 import { coffeeDrinks, currentBean, gear, teas } from "@/coffee";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -28,6 +28,21 @@ const Chip = ({ children }: { children: ReactNode }) => (
     {children}
   </span>
 );
+
+/** Fahrenheit by default; tap for the Celsius the machine actually speaks. */
+const TempChip = ({ label, celsius }: { label: string; celsius: number }) => {
+  const [showCelsius, setShowCelsius] = useState(false);
+  const fahrenheit = Math.round((celsius * 9) / 5 + 32);
+  return (
+    <button
+      type="button"
+      onClick={() => setShowCelsius((prev) => !prev)}
+      className="shrink-0 text-sm font-sans px-3 py-1 rounded-full bg-secondary text-secondary-foreground cursor-pointer select-none hover:bg-secondary/80 transition-colors"
+    >
+      {label} · {showCelsius ? `${celsius}°C` : `${fahrenheit}°F`}
+    </button>
+  );
+};
 
 const ProudlyBrewSign = () => (
   <div className="mx-auto mb-16 max-w-sm -rotate-1 rounded-lg border-4 border-double border-emerald-800 px-8 py-5 text-center font-sans dark:border-emerald-500">
@@ -85,17 +100,26 @@ const Drinks = () => (
                 <DialogDescription asChild>
                   <div>
                     <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
-                      {drink.params.map((param) => (
-                        <Chip key={param.label}>
-                          {param.label} · {param.value}
-                        </Chip>
-                      ))}
+                      {drink.params.map((param) =>
+                        param.tempC !== undefined ? (
+                          <TempChip key={param.label} label={param.label} celsius={param.tempC} />
+                        ) : (
+                          <Chip key={param.label}>
+                            {param.label} · {param.value}
+                          </Chip>
+                        )
+                      )}
                     </div>
                     <p className="m-0 text-foreground">{drink.description}</p>
                     {drink.recipeSteps && (
-                      <ol className="mt-3 mb-0 pl-5 font-sans text-base text-muted-foreground">
-                        {drink.recipeSteps.map((step) => (
-                          <li key={step}>{step}</li>
+                      <ol className="mt-3 mb-0 list-none p-0 font-sans text-base text-muted-foreground">
+                        {drink.recipeSteps.map((step, i) => (
+                          <li key={step}>
+                            <span className="text-muted-foreground/60 tabular-nums">
+                              {i + 1}.
+                            </span>{" "}
+                            {step}
+                          </li>
                         ))}
                       </ol>
                     )}
