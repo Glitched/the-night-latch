@@ -19,6 +19,8 @@ export const currentBean: Bean = {
   varietal: "74158",
   elevation: "2,130–2,300 masl",
   tastingNotes: ["Blueberry", "Bergamot", "Honeysuckle"],
+  description:
+    "A natural — the cherry dries whole in the sun before milling, which is where the blueberry comes from. 74158 is an Ethiopian landrace varietal, and at 2,200 meters these trees grow about as high as coffee grows anywhere.",
 };
 
 // ── Shot profiles ────────────────────────────────────────────────────────────
@@ -119,6 +121,7 @@ export const seyTurboShot = shotSeyTurbo as SlimShot;
 export const coffeeDrinks: CoffeeDrink[] = [
   {
     title: "Espresso",
+    blurb: "The bean on bar, pulled fast and gentle at low pressure.",
     description:
       "An ultra-light, high-clarity turbo shot: low pressure, coarse grind, fast pull. Ground on pour-over burrs with a paper basket filter — an unreasonable combination that works. The machine brews by weight and cuts the pump early so the last drips land exactly on target.",
     params: [
@@ -132,6 +135,7 @@ export const coffeeDrinks: CoffeeDrink[] = [
   },
   {
     title: "Pour Over",
+    blurb: "The same bean, slower — a V60 with nothing to hide behind.",
     description:
       "A Hario V60 on the burrs it was ground for. Slow, sweet, and the clearest look at what the bean actually tastes like.",
     params: [
@@ -149,6 +153,7 @@ export const coffeeDrinks: CoffeeDrink[] = [
   },
   {
     title: "Americano",
+    blurb: "The turbo shot, stretched with hot water.",
     description:
       "The turbo shot stretched with hot water. Everything the espresso is, at a friendlier volume. Not the Campari one — that's a tab over.",
     params: [
@@ -159,13 +164,21 @@ export const coffeeDrinks: CoffeeDrink[] = [
 ];
 
 // ── Tea ──────────────────────────────────────────────────────────────────────
-// Deliberately a short list. Edit freely.
+// Deliberately a short list.
 
 export const teas: Tea[] = [
-  { name: "Jasmine Pearls", type: "Green", note: "Floral, rolled, patient." },
-  { name: "Sencha", type: "Green", note: "Grassy and brisk." },
-  { name: "English Breakfast", type: "Black", note: "For guests who want coffee without coffee." },
-  { name: "Chamomile", type: "Herbal", note: "The closing-time option." },
+  {
+    name: "Nagano Soba Cha",
+    type: "Roasted Buckwheat",
+    tastingNotes: ["Toasted grain", "Cooked sugar", "Sesame"],
+    caffeineFree: true,
+    producer: "Tamaya",
+    cultivar: "Shinano Natsusoba",
+    region: "Nagano, Japan",
+    description:
+      "Roasted buckwheat from the city famous for its soba noodles. The kernels caramelize as they're fired, so the cup lands naturally sweet, golden, and toasty — and there's no caffeine at all, which makes it the closing-time order.",
+    brew: "6 g / 200 ml at 200°F / 2 minutes",
+  },
 ];
 
 // ── The setup ────────────────────────────────────────────────────────────────

@@ -82,10 +82,15 @@ export type Bean = {
   varietal: string;
   elevation: string;
   tastingNotes: string[];
+  /** A plain-language line explaining the process/varietal/elevation jargon. */
+  description?: string;
 };
 
 export type CoffeeDrink = {
   title: string;
+  /** One line shown on the card, like a cocktail's ingredient list. */
+  blurb: string;
+  /** Fuller story, shown when the drink is opened. */
   description: string;
   /** Short stats rendered as chips: dose, ratio, temperature, time… */
   params: { label: string; value: string }[];
@@ -100,7 +105,14 @@ export type CoffeeDrink = {
 export type Tea = {
   name: string;
   type: string;
-  note: string;
+  tastingNotes: string[];
+  caffeineFree?: boolean;
+  producer?: string;
+  cultivar?: string;
+  region?: string;
+  description?: string;
+  /** e.g. "6 g / 200 ml at 200°F / 2 minutes" */
+  brew?: string;
 };
 
 export type GearItem = {
