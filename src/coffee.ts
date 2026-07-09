@@ -121,7 +121,7 @@ export const seyTurboShot = shotSeyTurbo as SlimShot;
 export const coffeeDrinks: CoffeeDrink[] = [
   {
     title: "Espresso",
-    blurb: "The bean on bar, pulled fast and gentle at low pressure.",
+    blurb: "A fast, gentle turbo shot — clarity over crema.",
     description:
       "An ultra-light, high-clarity turbo shot: low pressure, coarse grind, fast pull. Ground on pour-over burrs with a paper basket filter — an unreasonable combination that works. The machine brews by weight and cuts the pump early so the last drips land exactly on target.",
     params: [
@@ -135,9 +135,9 @@ export const coffeeDrinks: CoffeeDrink[] = [
   },
   {
     title: "Pour Over",
-    blurb: "The same bean, slower — a V60 with nothing to hide behind.",
+    blurb: "A V60, slow and sweet, with nothing to hide behind.",
     description:
-      "A Hario V60 on the burrs it was ground for. Slow, sweet, and the clearest look at what the bean actually tastes like.",
+      "A Hario V60 on the burrs it was ground for. The slowest, gentlest brew in the house — nothing to hide behind and nothing to fix.",
     params: [
       { label: "Dose", value: "20 g / 320 g" },
       { label: "Ratio", value: "1:16" },
@@ -178,6 +178,7 @@ export const teas: Tea[] = [
     description:
       "Roasted buckwheat from the city famous for its soba noodles. The kernels caramelize as they're fired, so the cup lands naturally sweet, golden, and toasty — and there's no caffeine at all, which makes it the closing-time order.",
     brew: "6 g / 200 ml at 200°F / 2 minutes",
+    source: "Kettl, Greenpoint",
   },
 ];
 

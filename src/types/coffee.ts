@@ -113,6 +113,8 @@ export type Tea = {
   description?: string;
   /** e.g. "6 g / 200 ml at 200°F / 2 minutes" */
   brew?: string;
+  /** Who it's from, e.g. "Kettl, Greenpoint" */
+  source?: string;
 };
 
 export type GearItem = {

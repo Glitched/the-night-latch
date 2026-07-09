@@ -145,15 +145,8 @@ const TeaList = () => (
                   </span>
                 )}
               </h3>
-              <p
-                className="mt-1 mb-0 text-sm font-light tracking-wide"
-                style={{ color: "hsl(var(--notes-foreground))" }}
-              >
-                {tea.tastingNotes.join(" · ")}
-              </p>
               <p className="mt-1 mb-0 text-base text-muted-foreground font-light font-sans group-hover:text-foreground">
-                {tea.type}
-                {tea.region ? ` · ${tea.region}` : ""}
+                {tea.tastingNotes.join(" · ")}
               </p>
             </DialogTrigger>
             <DialogContent>
@@ -163,6 +156,7 @@ const TeaList = () => (
                   <div>
                     <div className="mt-1 mb-3 -mx-6 px-6 flex gap-2 overflow-x-auto scrollbar-hide">
                       <Chip>{tea.type}</Chip>
+                      {tea.caffeineFree && <Chip>No caffeine</Chip>}
                       {tea.producer && <Chip>Producer · {tea.producer}</Chip>}
                       {tea.cultivar && <Chip>Cultivar · {tea.cultivar}</Chip>}
                       {tea.region && <Chip>Region · {tea.region}</Chip>}
@@ -173,6 +167,11 @@ const TeaList = () => (
                         Brew · {tea.brew}
                       </p>
                     )}
+                    {tea.source && (
+                      <p className="mt-3 mb-0 text-sm text-muted-foreground italic">
+                        {tea.source}
+                      </p>
+                    )}
                   </div>
                 </DialogDescription>
               </DialogHeader>
@@ -181,9 +180,6 @@ const TeaList = () => (
         </li>
       ))}
     </ul>
-    <p className="mt-6 mb-0 text-sm font-sans text-muted-foreground italic">
-      Loose leaf from Kettl, Greenpoint.
-    </p>
   </section>
 );
 
