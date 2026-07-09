@@ -1,0 +1,34 @@
+---
+interface Props {
+  active: "cocktails" | "coffee";
+}
+
+const { active } = Astro.props;
+
+const base =
+  "px-5 py-1.5 rounded-full no-underline transition-colors";
+const activeClass = "bg-secondary text-secondary-foreground";
+const inactiveClass = "text-muted-foreground hover:text-foreground";
+---
+
+<div class="flex justify-center mb-12 print:hidden">
+  <nav
+    aria-label="Menu sections"
+    class="inline-flex gap-1 rounded-full border border-border p-1 font-sans text-base"
+  >
+    <a
+      href="/"
+      class={`${base} ${active === "cocktails" ? activeClass : inactiveClass}`}
+      aria-current={active === "cocktails" ? "page" : undefined}
+    >
+      Cocktails
+    </a>
+    <a
+      href="/coffee"
+      class={`${base} ${active === "coffee" ? activeClass : inactiveClass}`}
+      aria-current={active === "coffee" ? "page" : undefined}
+    >
+      Coffee & Tea
+    </a>
+  </nav>
+</div>

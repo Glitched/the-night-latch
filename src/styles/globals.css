@@ -8,6 +8,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --background: 0, 0%, 96.86%;
     --foreground: 0, 0%, 9.8%;
     --card: 0 0% 100%;
@@ -34,8 +35,12 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    /* Espresso shot chart series (validated for contrast + CVD on both surfaces) */
+    --shot-pressure: #b45309;
+    --shot-weight: #0891b2;
   }
   .dark {
+    color-scheme: dark;
     --background: 0, 0%, 9.8%;
     --foreground: 240, 46.15%, 94.9%;
     --card: 240 10% 3.9%;
@@ -61,6 +66,8 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --shot-pressure: #d97706;
+    --shot-weight: #0ea5c4;
   }
 }
 @layer base {
