@@ -187,12 +187,12 @@ const TeaList = () => (
                     </div>
                     {tea.description && <p className="m-0 text-foreground">{tea.description}</p>}
                     {tea.brew && (
-                      <p className="mt-3 mb-0 text-sm font-sans text-muted-foreground">
+                      <p className="mt-3 mb-0 text-base font-sans text-muted-foreground">
                         Brew · {tea.brew}
                       </p>
                     )}
                     {tea.source && (
-                      <p className="mt-3 mb-0 text-sm text-muted-foreground italic">
+                      <p className="mt-3 mb-0 text-base text-muted-foreground italic">
                         {tea.source}
                       </p>
                     )}
