@@ -288,6 +288,11 @@ const AgaveSyrup = registerIngredient({
   parent: Syrup,
   abv: 0,
 });
+const Orgeat = registerIngredient({
+  name: "Orgeat",
+  parent: Syrup,
+  abv: 0,
+});
 
 // ETC
 const Soda = registerIngredient({ name: "Soda", abv: 0 });
@@ -388,6 +393,7 @@ export {
   OldTom,
   Orange,
   OrangeBitters,
+  Orgeat,
   Pathfinder,
   PeychaudsBitters,
   Plantation3StarRum,

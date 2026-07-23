@@ -551,6 +551,20 @@ export const menu: Drink[] = [
     color: "#d4a017",
     source: { year: "1920s" },
   },
+  {
+    title: "Trinidad Sour",
+    instructions:
+      "Shake all the ingredients with ice, then strain into a coupe. No garnish.",
+    ingredients: [
+      { ingredient: Ingredient.AngosturaBitters, amount: "1 oz" },
+      { ingredient: Ingredient.Orgeat, amount: "1 oz" },
+      { ingredient: Ingredient.Lemon, amount: "3/4 oz" },
+      { ingredient: Ingredient.RittenhouseRye, amount: "1/2 oz" },
+    ],
+    notes: ["Bitter", "Spiced", "Nutty", "Complex"],
+    color: "#a0522d",
+    source: { creator: "Giuseppe González", bar: "Clover Club, Brooklyn", year: "2009" },
+  },
   // NA drinks at the bottom
   {
     title: "Pathfinder Spritz",
